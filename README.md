@@ -4,7 +4,8 @@ Class hubs for Jafar's classes, published with GitHub Pages.
 
 - `8scic/` · Year 8 SEAL Science
 - `11che2/` · Year 11 Chemistry
+- `11che2/exam-revision/` · Unit 2 exam revision page, with its practice PDFs in `files/` (hand-maintained, not built from the class file)
 
 Each folder's `index.html` is built from the class-site template (School | Work project, `claude/class-site/`). Don't edit these files by hand; rebuild from the class file instead.
 
-No student data, tests or unreleased solutions go in this repository: it is public.
+No student data, real tests/SACs/exams or their marking guides go in this repository: it is public. Student practice material released for revision (worksheets, practice exams, topic tests and their solutions) is fine.
