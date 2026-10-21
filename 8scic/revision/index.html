@@ -28,6 +28,33 @@ h2 span{color:var(--accent);margin-right:6px}
 .gate{flex-basis:100%;background:var(--warmwash);border-left:4px solid var(--warm);border-radius:0 8px 8px 0;padding:10px 14px}
 .gate p{margin:0 0 8px;font-size:15px}
 .gate[hidden]{display:none}
+.hero{margin:22px 0 8px;border:2px solid var(--accent);border-radius:14px;padding:18px 16px 16px;background:var(--bg)}
+.hero .tag{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent)}
+.hero h2{margin:4px 0 6px;font-size:clamp(21px,4vw,25px)}
+.hero .intro{margin:0 0 14px;max-width:62ch}
+.prob{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:0 0 12px}
+.prob b{display:block;font-size:14px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.steps{display:grid;gap:8px;margin:0 0 12px;padding:0;list-style:none;counter-reset:s}
+.steps li{display:grid;grid-template-columns:30px 1fr;gap:4px 10px;align-items:start;counter-increment:s}
+.steps li::before{content:counter(s);display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:15px}
+.steps .w{font-variant-numeric:tabular-nums}
+.steps .w strong{display:block}
+.steps .why{grid-column:2;color:var(--muted);font-size:15px}
+.ans{display:inline-block;font-weight:700;border:2px solid var(--ink);border-radius:6px;padding:0 8px;margin-left:2px}
+.slip{background:var(--warmwash);border-left:4px solid var(--warm);border-radius:0 8px 8px 0;padding:10px 14px;margin:0 0 12px}
+.slip p{margin:0}
+.which{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin:0 0 4px}
+.which div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:15px}
+.which strong{display:block;font-size:16px}
+.try{margin-top:18px}
+.try h3{font-size:18px;margin:0 0 4px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:8px}
+.q .lvl{font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.q p{margin:2px 0 10px}
+.q .sol{margin-top:10px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.q .sol[hidden]{display:none}
+.q .sol ol{margin:0;padding-left:20px}
+.q .sol li{margin:2px 0;font-variant-numeric:tabular-nums}
 footer{margin-top:36px;color:var(--muted);font-size:14px;border-top:1px solid var(--line);padding-top:14px}
 </style>
 </head>
@@ -38,6 +65,64 @@ footer{margin-top:36px;color:var(--muted);font-size:14px;border-top:1px solid va
 <h1>Energy revision pack</h1>
 <p class="lede">Everything for revising before the Energy post-test. Work through the four sets in order. Every file opens as a PDF you can print or write on.</p>
 <p class="when"><b>Post-test: Tuesday 27 October.</b> Revision lessons are Friday 23 and Monday 26 October.</p>
+
+<section class="hero" aria-labelledby="we-title">
+<span class="tag">Worked example</span>
+<h2 id="we-title">Working backwards from efficiency</h2>
+<p class="intro">Sometimes you know the useful energy out and the efficiency. Then you work backwards to find the total energy in.</p>
+
+<div class="prob"><b>The problem</b>A phone charger is 80% efficient. To charge a phone, 36,000&nbsp;J of useful energy must be stored in its battery. How much electrical energy does the charger take from the wall?</div>
+
+<ol class="steps">
+<li><div class="w"><strong>Write what you know.</strong>Useful energy out = 36,000&nbsp;J. Efficiency = 80% = 0.80</div><div class="why">Change the percentage to a decimal by dividing by 100.</div></li>
+<li><div class="w"><strong>Rearrange the formula.</strong>Total energy in = useful energy out ÷ efficiency</div><div class="why">Useful out = efficiency × energy in. To undo the ×, divide by the efficiency.</div></li>
+<li><div class="w"><strong>Substitute.</strong>Total energy in = 36,000 ÷ 0.80</div></li>
+<li><div class="w"><strong>Answer with a unit.</strong>Total energy in = <span class="ans">45,000&nbsp;J</span></div></li>
+<li><div class="w"><strong>Check it makes sense.</strong>45,000&nbsp;J is bigger than 36,000&nbsp;J, so it passes.</div><div class="why">Some energy is always wasted. So the energy in is always bigger than the useful energy out.</div></li>
+</ol>
+
+<div class="slip"><p><b>Common slip:</b> 36,000 × 0.80 = 28,800&nbsp;J. That is smaller than the useful energy, which is impossible. If your energy in comes out smaller, you multiplied instead of divided.</p></div>
+
+<div class="which">
+<div><strong>You know the energy in.</strong>Find the useful energy out by multiplying: energy in × efficiency.</div>
+<div><strong>You know the useful energy out.</strong>Find the energy in by dividing: useful out ÷ efficiency.</div>
+</div>
+
+<div class="try">
+<h3>Now try three yourself</h3>
+<p class="hint">Write your working on paper first. Then check it one question at a time.</p>
+
+<div class="q"><span class="lvl">Easy</span>
+<p>An electric scooter's motor is 90% efficient. To get up to speed, the scooter needs 5,400&nbsp;J of kinetic energy. How much electrical energy does the battery give the motor?</p>
+<button class="btn ghost" data-gate="t1">Check my answer</button>
+<div class="sol" id="t1" hidden><ol>
+<li>Useful energy out = 5,400&nbsp;J. Efficiency = 90% = 0.90</li>
+<li>Energy in = useful out ÷ efficiency = 5,400 ÷ 0.90</li>
+<li>Energy in = <b>6,000&nbsp;J</b></li>
+<li>Check: 6,000&nbsp;J is bigger than 5,400&nbsp;J.</li>
+</ol></div></div>
+
+<div class="q"><span class="lvl">Medium: multiply or divide?</span>
+<p>A small hydro power station is 85% efficient. Each second, falling water gives it 4,000,000&nbsp;J of kinetic energy. How much electrical energy does it produce each second?</p>
+<button class="btn ghost" data-gate="t2">Check my answer</button>
+<div class="sol" id="t2" hidden><ol>
+<li>This time you know the energy in (4,000,000&nbsp;J), so multiply.</li>
+<li>Useful energy out = energy in × efficiency = 4,000,000 × 0.85</li>
+<li>Useful energy out = <b>3,400,000&nbsp;J</b> each second</li>
+<li>Check: 3,400,000&nbsp;J is smaller than 4,000,000&nbsp;J. Useful energy out is always smaller than energy in.</li>
+</ol></div></div>
+
+<div class="q"><span class="lvl">Hard</span>
+<p>A blender is 70% efficient. In one use, it loses 2,700&nbsp;J to heat and sound. How much electrical energy did it take in?</p>
+<button class="btn ghost" data-gate="t3">Check my answer</button>
+<div class="sol" id="t3" hidden><ol>
+<li>70% is useful, so 100% − 70% = 30% is wasted. 30% = 0.30</li>
+<li>The wasted energy is 30% of the energy in, so energy in = 2,700 ÷ 0.30</li>
+<li>Energy in = <b>9,000&nbsp;J</b></li>
+<li>Check: useful out = 9,000 × 0.70 = 6,300&nbsp;J, and 6,300 + 2,700 = 9,000&nbsp;J.</li>
+</ol></div></div>
+</div>
+</section>
 
 <h2><span>1</span>Start here: what do I need to know?</h2>
 <p class="hint">Tick the checklist honestly first. It shows you which topics to spend time on.</p>
