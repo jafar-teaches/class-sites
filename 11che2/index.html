@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head><meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>11CHE2 Class Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Class-site template: shared look for hub and unit pages. Unit colours are slots c1–c6. */
+:root{
+  --bg:#f3f4f1; --surface:#ffffff; --ink:#1b2430; --muted:#5d6672; --faint:#9aa3ad; --line:#d9ddd6; --tint:#eceeea;
+  --accent:#2c56c9; --accent-soft:#e3e9fa;
+  --a31:#c2571a; --a31-bg:#fbe9dc; --a32:#0f7a6c; --a32-bg:#ddf1ec; --a41:#4a47b8; --a41-bg:#e8e7fa; --a42:#8a3f86; --a42-bg:#f4e4f2; --a43:#6b5a2e; --a43-bg:#f1ecda;
+  --c1:#c2571a; --c1-bg:#fbe9dc; --c2:#0f7a6c; --c2-bg:#ddf1ec; --c3:#4a47b8; --c3-bg:#e8e7fa; --c4:#8a3f86; --c4-bg:#f4e4f2; --c5:#6b5a2e; --c5-bg:#f1ecda; --c6:#46525e; --c6-bg:#e7eaec;
+  --rev:#46525e; --rev-bg:#e7eaec;
+  --sac:#9a5a00; --sac-bg:#ffe7bd; --exam:#b3261e; --exam-bg:#fbe1de;
+  --net:#0d7c86; --net-bg:#dcf1f2; --ms:#5b5fc7; --ms-bg:#e8e8fa; --you:#1b2430; --you-bg:#eceeea;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12161c; --surface:#1a2028; --ink:#e7ebf0; --muted:#9aa4b0; --faint:#6b7580; --line:#2c3440; --tint:#222830; --accent:#86a5ff; --accent-soft:#25304a;
+  --a31:#ff9d63; --a31-bg:#3a2416; --a32:#5fd1bf; --a32-bg:#15302c; --a41:#a7a4ff; --a41-bg:#24233f; --a42:#e29be0; --a42-bg:#3a2238; --a43:#d9c48a; --a43-bg:#2f2a1a;
+  --rev:#b9c3cd; --rev-bg:#262d35; --sac:#ffc46b; --sac-bg:#3d2c10; --exam:#ff9a92; --exam-bg:#3f1d1b;
+  --net:#5fd0da; --net-bg:#123236; --ms:#a9abff; --ms-bg:#25264a; --you:#e7ebf0; --you-bg:#222830; --c1:#ff9d63; --c1-bg:#3a2416; --c2:#5fd1bf; --c2-bg:#15302c; --c3:#a7a4ff; --c3-bg:#24233f; --c4:#e29be0; --c4-bg:#3a2238; --c5:#d9c48a; --c5-bg:#2f2a1a; --c6:#b9c3cd; --c6-bg:#262d35; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12161c; --surface:#1a2028; --ink:#e7ebf0; --muted:#9aa4b0; --faint:#6b7580; --line:#2c3440; --tint:#222830; --accent:#86a5ff; --accent-soft:#25304a;
+  --a31:#ff9d63; --a31-bg:#3a2416; --a32:#5fd1bf; --a32-bg:#15302c; --a41:#a7a4ff; --a41-bg:#24233f; --a42:#e29be0; --a42-bg:#3a2238; --a43:#d9c48a; --a43-bg:#2f2a1a;
+  --rev:#b9c3cd; --rev-bg:#262d35; --sac:#ffc46b; --sac-bg:#3d2c10; --exam:#ff9a92; --exam-bg:#3f1d1b;
+  --net:#5fd0da; --net-bg:#123236; --ms:#a9abff; --ms-bg:#25264a; --you:#e7ebf0; --you-bg:#222830; --c1:#ff9d63; --c1-bg:#3a2416; --c2:#5fd1bf; --c2-bg:#15302c; --c3:#a7a4ff; --c3-bg:#24233f; --c4:#e29be0; --c4-bg:#3a2238; --c5:#d9c48a; --c5-bg:#2f2a1a; --c6:#b9c3cd; --c6-bg:#262d35; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;margin:0}
+.wrap{max-width:900px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 64px;display:grid;gap:28px}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1{font-family:var(--display);font-size:clamp(28px,5vw,38px);line-height:1.05;margin:4px 0 0;text-wrap:balance}
+h2{font-family:var(--display);font-size:21px;margin:0;text-wrap:balance}
+h3{font-size:15px;margin:0}
+p{margin:0;max-width:68ch}
+section{display:grid;gap:12px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.small{font-size:13.5px}
+.em{font-style:normal;flex:none;width:1.4em;text-align:center;line-height:1}
+/* demo bar */
+.demobar{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;justify-content:space-between;background:var(--tint);border:1px dashed var(--faint);border-radius:10px;padding:8px 12px;font-size:13.5px;color:var(--muted)}
+.demobar nav{display:flex;flex-wrap:wrap;gap:6px}
+.demobar a{font-weight:600;text-decoration:none;padding:3px 9px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.demobar a[aria-current="page"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+/* cards and lists */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:10px;min-width:0}
+.pill{display:inline-flex;gap:6px;align-items:center;font-size:12.5px;font-weight:600;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.pill.net{background:var(--net-bg);color:var(--net)} .pill.ms{background:var(--ms-bg);color:var(--ms)} .pill.you{background:var(--you-bg);color:var(--you)}
+.pill.sac{background:var(--sac-bg);color:var(--sac)} .pill.exam{background:var(--exam-bg);color:var(--exam)}
+.pill.a31{background:var(--a31-bg);color:var(--a31)} .pill.a32{background:var(--a32-bg);color:var(--a32)} .pill.a41{background:var(--a41-bg);color:var(--a41)} .pill.a42{background:var(--a42-bg);color:var(--a42)} .pill.a43{background:var(--a43-bg);color:var(--a43)}
+.btn{appearance:none;font:inherit;font-size:13.5px;font-weight:600;display:inline-flex;gap:6px;align-items:center;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 11px;cursor:pointer;text-decoration:none}
+.btn.ms{border-color:var(--ms);color:var(--ms)}
+.btn.lnk{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btns{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+.path{font-family:var(--mono);font-size:12px;color:var(--muted);word-break:break-word}
+/* toast sits under the button that was clicked (no position:fixed: in a tall Google Sites embed the bottom of the frame can be off screen) */
+.toast{position:absolute;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:10px;font-size:14px;max-width:min(560px,calc(100% - 32px));z-index:30;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+footer{font-size:13px;color:var(--muted);display:grid;gap:4px}
+@media (prefers-reduced-motion:no-preference){.btn{transition:border-color .15s}}
+
+.pill.c1{background:var(--c1-bg);color:var(--c1)} .pill.c2{background:var(--c2-bg);color:var(--c2)} .pill.c3{background:var(--c3-bg);color:var(--c3)} .pill.c4{background:var(--c4-bg);color:var(--c4)} .pill.c5{background:var(--c5-bg);color:var(--c5)} .pill.c6{background:var(--c6-bg);color:var(--c6)}
+.pill.test{background:var(--sac-bg);color:var(--sac)}
+
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{position:relative}
+/* Notion copy (built with data-theme="light"): white to blend into the Notion page, and wider so it fills the embed */
+html[data-theme="light"]{--bg:#ffffff}
+html[data-theme="light"] .wrap{max-width:1240px;padding-block:8px 32px}
+/* hide the embed's own scroll bar so only one shows; wheel, trackpad and touch scrolling still work */
+/* ---------- hub view: today first, then up next, key dates, done, units ---------- */
+.today{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--ink);border-radius:12px;padding:16px 18px;display:grid;gap:8px}
+.today .lab{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.today .big{font-family:var(--display);font-size:clamp(20px,4vw,25px);line-height:1.2;display:flex;gap:8px;align-items:baseline}
+.today .item+.item{border-top:1px solid var(--line);padding-top:8px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.list{list-style:none;margin:0;padding:0;display:grid;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.list li{display:grid;grid-template-columns:118px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line)}
+.list li:last-child{border-bottom:0}
+.list .when{font-variant-numeric:tabular-nums;font-size:13.5px}
+.list .when small{display:block;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.list .what{display:flex;gap:8px;align-items:baseline;min-width:0}
+.list .what .code{font-family:var(--mono);font-size:12.5px;color:var(--muted);flex:none}
+.list li.sac,.list li.test{background:var(--sac-bg)} .list li.sac .what,.list li.test .what{color:var(--sac);font-weight:600}
+.list li.exam{background:var(--exam-bg)} .list li.exam .what{color:var(--exam);font-weight:600}
+.list li.off{color:var(--muted);font-style:italic}
+.empty{color:var(--muted);font-style:italic;padding:12px 14px}
+.aosdot{width:9px;height:9px;border-radius:50%;flex:none;align-self:center}
+.dates{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.date{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--sac);border-radius:10px;padding:10px 12px;display:grid;gap:3px;text-decoration:none;color:inherit}
+.date.check{border-left-color:var(--faint)} .date.exam{border-left-color:var(--exam)} .date.past{opacity:.55}
+.date .d{font-family:var(--display);font-size:18px}
+.date .t{font-weight:600}
+.date .c{font-size:13px;color:var(--muted)}
+.date .more{font-size:13px;color:var(--accent)}
+.units{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.unit{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--c6);border-radius:10px;padding:10px 12px;display:grid;gap:4px;align-content:start;text-decoration:none;color:var(--ink)}
+.unit span{font-size:13px;color:var(--muted)}
+.unit.soon{opacity:.6}
+a.unit:hover b,.unit-main:hover b{text-decoration:underline}
+.unit-main{display:grid;gap:4px;text-decoration:none;color:var(--ink)}
+.unit-sub{font-size:13px;font-weight:600;text-decoration:none;color:var(--accent);margin-top:2px}
+.unit-sub:hover{text-decoration:underline}
+/* ---------- unit view: header with the outcome, lessons by stage, revision checklist ---------- */
+.hero{border-radius:14px;padding:18px 20px;display:grid;gap:8px}
+.hero .q{font-family:var(--display);font-size:clamp(18px,3vw,21px);line-height:1.25;margin:0}
+.hero .stmt{font-size:14px;opacity:.85}
+.back{font-size:14px;text-decoration:none;font-weight:600;width:fit-content}
+.stage{display:grid;gap:8px}
+.stage h2 small{font-family:var(--mono);font-size:12px;font-weight:400;color:var(--muted);margin-left:8px}
+.lesson{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--c6);border-radius:10px;padding:12px 14px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:start}
+.lesson.p,.lesson.d{border-left-width:6px}
+.lesson.sac,.lesson.test{border-left-color:var(--sac)!important;background:var(--sac-bg)}
+.lesson.exam{border-left-color:var(--exam)!important;background:var(--exam-bg)}
+.lesson .head{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.lesson .code{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.lesson .ttl{font-weight:600}
+.lesson .wk{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.lesson details{grid-column:1/-1;font-size:13.5px}
+.lesson summary{cursor:pointer;color:var(--muted);width:fit-content}
+.lesson ul{margin:6px 0 0;padding-left:18px;display:grid;gap:4px;max-width:70ch}
+.lesson .note{grid-column:1/-1;font-size:13px;color:var(--muted)}
+.types{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13.5px;color:var(--muted)}
+.ck{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:6px 16px 12px;scroll-margin-top:16px}
+.ck h3{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;margin:14px 0 6px}
+.ck ol{list-style:none;margin:0;padding:0;display:grid}
+.ck>ol>li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.ck>ol>li:last-child{border-bottom:0}
+.ck input{width:18px;height:18px;margin-top:2px}
+.ck .by{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.ck .by span{font-family:var(--mono);font-size:11.5px;background:var(--tint);border-radius:4px;padding:1px 6px;color:var(--muted)}
+.ck .by span.gap{background:var(--sac-bg);color:var(--sac);font-family:var(--body);font-weight:600}
+.ck ul{margin:4px 0 0;padding-left:18px;list-style:disc}
+.ck ul li{padding:2px 0;font-size:13.5px}
+.ck li.done>div{color:var(--muted)}
+.prog{font-size:14px;color:var(--muted)}
+.prog b{color:var(--ink);font-variant-numeric:tabular-nums}
+/* ---------- term calendar ---------- */
+.cal{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:10px}
+.cal-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cal-top b{font-family:var(--display);font-size:18px}
+.cal-top button{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+.cal-top button:disabled{opacity:.35;cursor:default}
+.cal-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+.cal-dow{font-family:var(--mono);font-size:11.5px;color:var(--muted);text-align:center;padding:2px 0}
+.cal-d{min-height:64px;border:1px solid var(--line);border-radius:8px;padding:4px 5px;display:flex;flex-direction:column;gap:2px;background:var(--bg);font:inherit;color:inherit;text-align:left;cursor:pointer;min-width:0}
+.cal-d.blank{visibility:hidden}
+.cal-d.none{cursor:default;opacity:.55}
+.cal-d.past{opacity:.6}
+.cal-d.today{outline:2px solid var(--ink);outline-offset:-1px}
+.cal-d.sel{box-shadow:0 0 0 2px var(--accent) inset}
+.cal-d.off{background:var(--tint)}
+.cal-d.sac,.cal-d.test{background:var(--sac-bg)} .cal-d.exam{background:var(--exam-bg)}
+.cal-n{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.cal-i{font-size:12px;line-height:1.25;border-left:3px solid var(--c6);padding-left:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cal-i.off{border-left-color:var(--faint);font-style:italic;color:var(--muted)}
+.cal-day{border-top:1px solid var(--line);padding-top:10px;display:grid;gap:8px}
+.cal-day .lab{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.calbtn{font-size:14px;font-weight:600;text-decoration:none;color:var(--accent);width:fit-content}
+@media (max-width:600px){.cal-d{min-height:48px;padding:3px}.cal-i .tx{display:none}.cal-i{font-size:13px;border-left-width:2px}}
+sub,sup{line-height:0}
+.view{display:grid;gap:28px}
+@media (max-width:600px){.list li{grid-template-columns:1fr}.list .when{grid-column:1/-1}.btns{justify-content:flex-start}.lesson{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="demobar" id="demobar" hidden></div>
+  <!-- hub view -->
+  <div class="view" id="view-hub">
+    <header style="display:grid;gap:6px">
+      <div class="eyebrow" id="eyebrow"></div>
+      <h1 id="h1"></h1>
+    </header>
+    <section><h2>Units</h2><div class="units" id="units"></div></section>
+    <section><div class="today" id="today"></div></section>
+    <section><h2>Up next</h2><ul class="list" id="next"></ul></section>
+    <section id="cal-sec" style="scroll-margin-top:12px"><h2>Term calendar</h2><p class="small muted">Tap a day to see the lesson and its links.</p><div class="cal" id="cal"></div></section>
+    <section id="dates-sec"><h2>Key dates</h2><div class="dates" id="dates"></div></section>
+    <section><h2>Done</h2><p class="small muted">Missed a lesson? Open it from here to catch up.</p><ul class="list" id="done"></ul></section>
+    <section><div class="row" id="links"></div></section>
+    <footer id="foot"></footer>
+  </div>
+  <!-- unit view -->
+  <div class="view" id="view-unit" hidden>
+    <a class="back" href="#">← Class hub</a>
+    <header class="hero" id="u-hero"></header>
+    <div class="types" id="u-types"></div>
+    <div id="u-stages" style="display:grid;gap:22px"></div>
+    <section id="u-checklist" hidden style="scroll-margin-top:12px">
+      <h2>Revision checklist</h2>
+      <p class="small muted" id="u-cknote"></p>
+      <div class="prog" id="u-prog"></div>
+      <div class="ck" id="u-ck"></div>
+    </section>
+    <footer id="u-foot"></footer>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+<script>
+(function(){
+// One page holds the hub and every unit, switched with #u/<unit id> links,
+// so the whole class site is a single HTML file to drag into a Notion page and embed.
+const C={"class":{"code":"11CHE2","title":"Year 11 Chemistry","year":2026},"curriculum":{"name":"VCE Chemistry Study Design 2023–2027","short":"Study design","point_label":"key knowledge","cite":"VCE Chemistry Study Design (VCAA)."},"teams":{"root":"11CHE2 2026 › Class Materials","hide":true,"extra":[],"urls":{}},"hub":{"next":8,"done":6},"links":[{"t":"Unit 2 exam revision","u":"https://app.notion.com/p/Unit-2-Exam-Revision-16e57edf90a782e6870281a1ad344d7d"},{"t":"Titrations and Gases SAC hub","u":"https://app.notion.com/p/Titrations-Gases-SAC-Hub-Unit-2-Chemistry-f5157edf90a782c99a7e818946ec9ad6"},{"t":"12A Measuring solutions","u":"https://app.notion.com/p/12A-Measuring-solutions-22557edf90a7836c89d80145927cfb73"},{"t":"13A Volumetric analysis","u":"https://app.notion.com/p/13A-Volumetric-analysis-cff57edf90a78338a20e813c8c8aeb2c"},{"t":"14A Gases","u":"https://app.notion.com/p/14A-Gases-31c57edf90a783a182a78143054f0f91"},{"t":"15A Analysing ions using gravimetric analysis","u":"https://app.notion.com/p/15A-Analysing-ions-using-gravimetric-analysis-b0357edf90a78205a75201656618ea59"},{"t":"U2 AoS2 revision","u":"https://app.notion.com/p/U2AOS2-Revision-10457edf90a7823584da01bddf7ad3db"},{"t":"U2 AoS2 SAC 2026","u":"https://app.notion.com/p/U2AOS2-SAC-2026-12357edf90a7835a82f601820e571bd7"}],"units":[{"id":"aos2","short":"Unit 2 AoS2","title":"How are chemicals measured and analysed?","colour":"c3","folder":"01 Unit 2 AoS2","eyebrow":"Term 4 · Unit 2 · Area of Study 2","blurb":"Analysing ions, titrations and gases, finishing with the AoS2 SAC","stages":[{"title":"Week 1","subtitle":"from Mon 5 Oct","lessons":[{"k":"t","c":"15B","t":"Analysing ions using light","when":"Tue 6 Oct, Wed 7 Oct, Fri 9 Oct","folder":null}]},{"title":"Week 2","subtitle":"from Mon 12 Oct","lessons":[{"k":"r","c":"14–15","t":"Consolidation: Chapters 14 and 15","when":"Tue 13 Oct","folder":null,"links":[{"t":"14A Gases","u":"https://app.notion.com/p/14A-Gases-31c57edf90a783a182a78143054f0f91"},{"t":"15A Analysing ions using gravimetric analysis","u":"https://app.notion.com/p/15A-Analysing-ions-using-gravimetric-analysis-b0357edf90a78205a75201656618ea59"}]},{"k":"r","c":"AoS2","t":"U2 AoS2 SAC revision","when":"Wed 14 Oct, Fri 16 Oct","folder":null,"links":[{"t":"U2 AoS2 revision","u":"https://app.notion.com/p/U2AOS2-Revision-10457edf90a7823584da01bddf7ad3db"}]}]},{"title":"Week 3","subtitle":"from Mon 19 Oct","lessons":[{"k":"sac","c":"SAC","t":"U2 AoS2 SAC: titrations and gases","when":"Tue 20 Oct","folder":null,"links":[{"t":"U2 AoS2 SAC 2026","u":"https://app.notion.com/p/U2AOS2-SAC-2026-12357edf90a7835a82f601820e571bd7"},{"t":"Titrations and Gases SAC hub","u":"https://app.notion.com/p/Titrations-Gases-SAC-Hub-Unit-2-Chemistry-f5157edf90a782c99a7e818946ec9ad6"}]}]}],"links":[{"t":"Titrations and Gases SAC hub","u":"https://app.notion.com/p/Titrations-Gases-SAC-Hub-Unit-2-Chemistry-f5157edf90a782c99a7e818946ec9ad6"},{"t":"12A Measuring solutions","u":"https://app.notion.com/p/12A-Measuring-solutions-22557edf90a7836c89d80145927cfb73"},{"t":"13A Volumetric analysis","u":"https://app.notion.com/p/13A-Volumetric-analysis-cff57edf90a78338a20e813c8c8aeb2c"},{"t":"14A Gases","u":"https://app.notion.com/p/14A-Gases-31c57edf90a783a182a78143054f0f91"},{"t":"15A Analysing ions using gravimetric analysis","u":"https://app.notion.com/p/15A-Analysing-ions-using-gravimetric-analysis-b0357edf90a78205a75201656618ea59"},{"t":"U2 AoS2 revision","u":"https://app.notion.com/p/U2AOS2-Revision-10457edf90a7823584da01bddf7ad3db"},{"t":"U2 AoS2 SAC 2026","u":"https://app.notion.com/p/U2AOS2-SAC-2026-12357edf90a7835a82f601820e571bd7"}]},{"id":"exam","short":"Unit 2 exam","title":"Unit 2 exam revision","colour":"c1","folder":"02 Exam revision","eyebrow":"Term 4 · Unit 2 · End-of-semester exam","blurb":"Revision lessons, then the exam period 12–20 Nov","site":"https://app.notion.com/p/Unit-2-Exam-Revision-16e57edf90a782e6870281a1ad344d7d","links":[{"t":"Unit 2 exam revision page","u":"https://app.notion.com/p/Unit-2-Exam-Revision-16e57edf90a782e6870281a1ad344d7d"},{"t":"Topic test 1: Concentration and dilution","u":"https://app.notion.com/p/Test-1-Concentration-and-Dilution-40057edf90a780f4be2ae999945e943f"},{"t":"Topic test 2: Titrations and limiting reactants","u":"https://app.notion.com/p/Test-2-Titrations-and-limiting-reactants-40057edf90a78070ae05e2821c64abd6"},{"t":"Topic test 3: Greenhouse gases and pV = nRT","u":"https://app.notion.com/p/Test-3-Greenhouse-Gases-and-pV-nRT-40057edf90a780c18400ca846dfca8fa"},{"t":"Topic test 4: Gas stoichiometry","u":"https://app.notion.com/p/Test-4-Gas-stoichiometry-40057edf90a7801bad43f999fa98c278"},{"t":"Topic test 5: Calorimetry","u":"https://app.notion.com/p/Test-5-Calorimetry-40057edf90a7809b8f35fafdc11baacf"},{"t":"Topic test 6: Redox","u":"https://app.notion.com/p/Test-6-Redox-40057edf90a780399aebcb89ba8f2be0"},{"t":"Titrations and Gases SAC hub","u":"https://app.notion.com/p/Titrations-Gases-SAC-Hub-Unit-2-Chemistry-f5157edf90a782c99a7e818946ec9ad6"},{"t":"12A Measuring solutions","u":"https://app.notion.com/p/12A-Measuring-solutions-22557edf90a7836c89d80145927cfb73"},{"t":"13A Volumetric analysis","u":"https://app.notion.com/p/13A-Volumetric-analysis-cff57edf90a78338a20e813c8c8aeb2c"},{"t":"14A Gases","u":"https://app.notion.com/p/14A-Gases-31c57edf90a783a182a78143054f0f91"},{"t":"15A Analysing ions using gravimetric analysis","u":"https://app.notion.com/p/15A-Analysing-ions-using-gravimetric-analysis-b0357edf90a78205a75201656618ea59"},{"t":"U2 AoS2 revision","u":"https://app.notion.com/p/U2AOS2-Revision-10457edf90a7823584da01bddf7ad3db"},{"t":"U2 AoS2 SAC 2026","u":"https://app.notion.com/p/U2AOS2-SAC-2026-12357edf90a7835a82f601820e571bd7"}],"stages":[{"title":"Week 3","subtitle":"from Mon 19 Oct","lessons":[{"k":"r","c":"Rev","t":"Unit 2 exam revision","when":"Wed 21 Oct, Fri 23 Oct","folder":null,"links":[{"t":"Unit 2 exam revision page","u":"https://app.notion.com/p/Unit-2-Exam-Revision-16e57edf90a782e6870281a1ad344d7d"}]}]},{"title":"Week 4","subtitle":"from Mon 26 Oct","lessons":[{"k":"r","c":"Rev","t":"Unit 2 exam revision","when":"Tue 27 Oct, Wed 28 Oct, Fri 30 Oct","folder":null,"links":[{"t":"Unit 2 exam revision page","u":"https://app.notion.com/p/Unit-2-Exam-Revision-16e57edf90a782e6870281a1ad344d7d"}]}]},{"title":"Week 5","subtitle":"from Mon 2 Nov","lessons":[{"k":"r","c":"Rev","t":"Unit 2 exam revision","when":"Wed 4 Nov, Fri 6 Nov","folder":null,"links":[{"t":"Unit 2 exam revision page","u":"https://app.notion.com/p/Unit-2-Exam-Revision-16e57edf90a782e6870281a1ad344d7d"}]}]},{"title":"Week 6","subtitle":"from Mon 9 Nov","lessons":[{"k":"r","c":"Rev","t":"Unit 2 exam revision","when":"Tue 10 Nov, Wed 11 Nov","folder":null,"links":[{"t":"Unit 2 exam revision page","u":"https://app.notion.com/p/Unit-2-Exam-Revision-16e57edf90a782e6870281a1ad344d7d"}]},{"k":"exam","c":"Exam","t":"Exam period begins (12–20 Nov). Chemistry exam day to be confirmed","when":"Thu 12 Nov","folder":null,"links":[{"t":"Unit 2 exam revision page","u":"https://app.notion.com/p/Unit-2-Exam-Revision-16e57edf90a782e6870281a1ad344d7d"}]}]}]}],"assessments":[{"k":"sac","title":"U2 AoS2 SAC: titrations and gases","covers":"Unit 2 Area of Study 2","unit":"aos2","date":"2026-10-20"},{"k":"exam","title":"Unit 2 exam (12–20 Nov)","covers":"Unit 2 · 73 marks · 10 min reading + 90 min writing · VCAA Data Book. Exam day to be confirmed (exam period 12–20 Nov)","unit":"exam"}],"schedule":[{"date":"2026-10-06","time":"8:51 am","unit":"aos2","k":"t","c":"15B","t":"Analysing ions using light","order":0},{"date":"2026-10-07","time":"1:25 pm","unit":"aos2","k":"t","c":"15B","t":"Analysing ions using light","order":1},{"date":"2026-10-09","time":"11:21 am · double","unit":"aos2","k":"t","c":"15B","t":"Analysing ions using light","order":2},{"date":"2026-10-13","time":"8:51 am","unit":"aos2","k":"r","c":"14–15","t":"Consolidation: Chapters 14 and 15","links":[{"t":"14A Gases","u":"https://app.notion.com/p/14A-Gases-31c57edf90a783a182a78143054f0f91"},{"t":"15A Analysing ions using gravimetric analysis","u":"https://app.notion.com/p/15A-Analysing-ions-using-gravimetric-analysis-b0357edf90a78205a75201656618ea59"}],"order":3},{"date":"2026-10-14","time":"1:25 pm","unit":"aos2","k":"r","c":"AoS2","t":"U2 AoS2 SAC revision","links":[{"t":"U2 AoS2 revision","u":"https://app.notion.com/p/U2AOS2-Revision-10457edf90a7823584da01bddf7ad3db"}],"order":4},{"date":"2026-10-16","time":"11:21 am · double","unit":"aos2","k":"r","c":"AoS2","t":"U2 AoS2 SAC revision","links":[{"t":"U2 AoS2 revision","u":"https://app.notion.com/p/U2AOS2-Revision-10457edf90a7823584da01bddf7ad3db"}],"order":5},{"date":"2026-10-20","time":"8:51 am","unit":"aos2","k":"sac","c":"SAC","t":"U2 AoS2 SAC: titrations and gases","links":[{"t":"U2 AoS2 SAC 2026","u":"https://app.notion.com/p/U2AOS2-SAC-2026-12357edf90a7835a82f601820e571bd7"},{"t":"Titrations and Gases SAC hub","u":"https://app.notion.com/p/Titrations-Gases-SAC-Hub-Unit-2-Chemistry-f5157edf90a782c99a7e818946ec9ad6"}],"order":6},{"date":"2026-10-21","time":"1:25 pm","unit":"exam","k":"r","c":"Rev","t":"Unit 2 exam revision","links":[{"t":"Unit 2 exam revision page","u":"https://app.notion.com/p/Unit-2-Exam-Revision-16e57edf90a782e6870281a1ad344d7d"}],"order":7},{"date":"2026-10-23","time":"11:21 am · double","unit":"exam","k":"r","c":"Rev","t":"Unit 2 exam revision","links":[{"t":"Unit 2 exam revision page","u":"https://app.notion.com/p/Unit-2-Exam-Revision-16e57edf90a782e6870281a1ad344d7d"}],"order":8},{"date":"2026-10-27","time":"8:51 am","unit":"exam","k":"r","c":"Rev","t":"Unit 2 exam revision","links":[{"t":"Unit 2 exam revision page","u":"https://app.notion.com/p/Unit-2-Exam-Revision-16e57edf90a782e6870281a1ad344d7d"}],"order":9},{"date":"2026-10-28","time":"1:25 pm","unit":"exam","k":"r","c":"Rev","t":"Unit 2 exam revision","links":[{"t":"Unit 2 exam revision page","u":"https://app.notion.com/p/Unit-2-Exam-Revision-16e57edf90a782e6870281a1ad344d7d"}],"order":10},{"date":"2026-10-30","time":"11:21 am · double","unit":"exam","k":"r","c":"Rev","t":"Unit 2 exam revision","links":[{"t":"Unit 2 exam revision page","u":"https://app.notion.com/p/Unit-2-Exam-Revision-16e57edf90a782e6870281a1ad344d7d"}],"order":11},{"date":"2026-11-03","k":"off","t":"No class: Melbourne Cup Day","order":12},{"date":"2026-11-04","time":"1:25 pm","unit":"exam","k":"r","c":"Rev","t":"Unit 2 exam revision","links":[{"t":"Unit 2 exam revision page","u":"https://app.notion.com/p/Unit-2-Exam-Revision-16e57edf90a782e6870281a1ad344d7d"}],"order":13},{"date":"2026-11-06","time":"11:21 am · double","unit":"exam","k":"r","c":"Rev","t":"Unit 2 exam revision","links":[{"t":"Unit 2 exam revision page","u":"https://app.notion.com/p/Unit-2-Exam-Revision-16e57edf90a782e6870281a1ad344d7d"}],"order":14},{"date":"2026-11-10","time":"8:51 am","unit":"exam","k":"r","c":"Rev","t":"Unit 2 exam revision","links":[{"t":"Unit 2 exam revision page","u":"https://app.notion.com/p/Unit-2-Exam-Revision-16e57edf90a782e6870281a1ad344d7d"}],"order":15},{"date":"2026-11-11","time":"1:25 pm","unit":"exam","k":"r","c":"Rev","t":"Unit 2 exam revision","links":[{"t":"Unit 2 exam revision page","u":"https://app.notion.com/p/Unit-2-Exam-Revision-16e57edf90a782e6870281a1ad344d7d"}],"order":16},{"date":"2026-11-12","unit":"exam","k":"exam","c":"Exam","t":"Exam period begins (12–20 Nov). Chemistry exam day to be confirmed","links":[{"t":"Unit 2 exam revision page","u":"https://app.notion.com/p/Unit-2-Exam-Revision-16e57edf90a782e6870281a1ad344d7d"}],"order":17}]};
+const $=id=>document.getElementById(id);
+const EMO={t:"📒",d:"🤹",p:"🧪",sac:"📌",test:"📝",exam:"🔍",check:"🕵️",r:"🔁",h:"📚",ex:"🚌"};
+const NAMES={t:"Theory",d:"Demonstration",p:"Practical",sac:"SAC",test:"Test",exam:"Exam",check:"Checkpoint",r:"Revision",h:"Homework",ex:"Excursion"};
+const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],DAY=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const parse=s=>{const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d);};
+const fmt=d=>`${DAY[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}`;
+const fmtD=s=>s?fmt(parse(s)):"TBC";
+const today=C.today?parse(C.today):new Date();today.setHours(0,0,0,0);
+const UNIT=Object.fromEntries(C.units.map(u=>[u.id,u]));
+const live=u=>!!(u&&u.stages&&u.stages.length);
+const root=C.teams.root;const HIDE=!!C.teams.hide;
+const unitHref=(id,ck)=>`#u/${id}${ck?"/checklist":""}`;
+const store={get(k){try{return JSON.parse(localStorage.getItem(k)||"{}");}catch(e){return {};}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}};
+if(C.demo){const b=$("demobar");b.hidden=false;b.textContent=C.demo;}
+const tbtn=(p,label)=>p&&!HIDE?`<a class="btn ms" href="#" data-path="${p}">📁 ${label||"Resources"}</a>`:"";
+const lk=x=>(x.links||[]).map(l=>`<a class="btn lnk" href="${l.u}" target="_blank" rel="noopener">🔗 ${l.t}</a>`).join("");
+const folderOf=x=>{if(x.folder===null)return null;const u=UNIT[x.unit];
+  if(x.folder&&x.folder.startsWith("/"))return root+" › "+x.folder.slice(1).split("/").join(" › ");
+  const f=x.folder||(x.c&&x.k!=="off"?`${x.c} ${x.t}`.trim():null);return f&&u?`${root} › ${u.folder} › ${f}`:(f?`${root} › ${f}`:null);};
+const dot=x=>{const u=UNIT[x.unit];return u?`<i class="aosdot" style="background:var(--${u.colour})"></i>`:"";};
+
+// ---------- hub ----------
+function renderHub(){
+  $("eyebrow").textContent=`${C.class.code} · Class hub`;
+  $("h1").textContent=C.class.title;
+  const S=C.schedule.map(x=>({...x,dt:parse(x.date)})).sort((a,b)=>a.dt-b.dt||(a.order||0)-(b.order||0));
+  const T=S.filter(x=>+x.dt===+today),N=S.filter(x=>x.dt>today).slice(0,C.hub?.next||8),D=S.filter(x=>x.dt<today&&x.k!=="off").reverse().slice(0,C.hub?.done||6);
+  const tEl=$("today");
+  if(T.length){tEl.innerHTML=`<span class="lab">Today · ${fmt(today)}</span>`+T.map(x=>{const u=UNIT[x.unit];
+    if(x.k==="off")return `<div class="item"><span class="big">${x.t}</span></div>`;
+    return `<div class="item" style="display:grid;gap:6px">${x.time?`<span class="lab">${x.time}${x.room?" · "+x.room:""}</span>`:""}<span class="big"><i class="em">${EMO[x.k]||""}</i>${x.c?`<span class="small muted">${x.c}</span>`:""}${x.t}</span><div class="row">${u?`<span class="pill ${u.colour}">${u.short}</span>`:""}${x.bring?`<span class="small muted">${x.bring}</span>`:""}</div><div class="row">${tbtn(folderOf(x),x.resLabel)}${lk(x)}</div></div>`;}).join("");
+    const u=UNIT[T.find(x=>x.unit)?.unit];if(u)tEl.style.borderLeftColor=`var(--${u.colour})`;}
+  else{const nx=N.find(x=>x.k!=="off");tEl.innerHTML=`<span class="lab">No ${C.class.code} class today · ${fmt(today)}</span>${nx?`<span class="big"><i class="em">${EMO[nx.k]||""}</i>Next: ${nx.t}</span><span class="small muted">${fmt(nx.dt)}${nx.time?" · "+nx.time:""}${nx.room?" · "+nx.room:""}</span><div class="row">${lk(nx)}</div>`:""}`;}
+  tEl.insertAdjacentHTML("beforeend",`<a class="calbtn" href="#" id="tocal">📅 Term calendar ↓</a>`);
+  renderCal(S);
+  const row=(x,prev)=>{
+    if(x.k==="off")return `<li class="off"><span class="when">${fmt(x.dt)}</span><span class="what">${x.t}</span><span></span></li>`;
+    const same=prev&&+prev.dt===+x.dt;const lab=x.k==="sac"?"SAC info":x.k==="test"?"Test info":null;
+    return `<li class="${x.k}"><span class="when">${same?"":fmt(x.dt)}<small>${x.time||""}${x.room?" · "+x.room:""}</small></span><span class="what">${dot(x)}<i class="em">${EMO[x.k]||""}</i>${x.c?`<span class="code">${x.c}</span>`:""}<span>${x.t}</span></span><span class="btns">${tbtn(folderOf(x),lab)}${lk(x)}</span></li>`;};
+  $("next").innerHTML=N.length?N.map((x,i)=>row(x,N[i-1])).join(""):`<li class="empty">Nothing scheduled yet.</li>`;
+  $("done").innerHTML=D.length?D.map((x,i)=>row(x,D[i-1])).join(""):`<li class="empty">Nothing yet this term.</li>`;
+  const A=C.assessments||[];$("dates-sec").hidden=!A.length;
+  $("dates").innerHTML=A.map(a=>{const dt=a.date?parse(a.date):null;const past=dt&&dt<today;
+    const k=a.k==="exam"?"exam":a.k==="check"?"check":"sac";const u=UNIT[a.unit];const go=u&&u.points&&live(u)&&a.k!=="check";
+    const inner=`<span class="d">${a.label||(dt?fmt(dt):"TBC")}</span><span class="t">${EMO[a.k]||"📌"} ${a.title}</span>${a.covers?`<span class="c">${a.covers}</span>`:""}${go?`<span class="more">See what it covers →</span>`:""}`;
+    return go?`<a class="date ${k}${past?" past":""}" href="${unitHref(u.id,true)}">${inner}</a>`:`<div class="date ${k}${past?" past":""}">${inner}</div>`;}).join("");
+  $("units").innerHTML=C.units.map(u=>u.site?`<div class="unit" style="border-top-color:var(--${u.colour})"><a class="unit-main" href="${u.site}" target="_blank" rel="noopener"><b>${u.short} · ${u.title} ↗</b><span>${u.blurb||""}</span></a>${live(u)?`<a class="unit-sub" href="${unitHref(u.id)}">Lesson dates and revision checklist →</a>`:""}</div>`
+    :live(u)?`<a class="unit" style="border-top-color:var(--${u.colour})" href="${unitHref(u.id)}"><b>${u.short} · ${u.title}</b><span>${u.blurb||""}</span></a>`:`<div class="unit soon" style="border-top-color:var(--${u.colour})"><b>${u.short} · ${u.title}</b><span>${u.blurb||"Coming"}</span></div>`).join("");
+  $("links").innerHTML=tbtn(root,"All class materials in Teams")+((C.teams.extra||[]).map(e=>tbtn(root+" › "+e.folder,e.label)).join(""))+lk(C);
+  $("foot").innerHTML=`${HIDE?"":"<span>Files open in Microsoft Teams with your school account.</span>"}<span>Generated from your teacher's planner. Dates can change; check here, not a printed copy.</span>`;
+}
+
+
+// ---------- term calendar: school days only, one month at a time ----------
+let CALM=null,CALSEL=null;
+function renderCal(S){
+  const by={};S.forEach(x=>{(by[x.date]=by[x.date]||[]).push(x);});
+  const months=[...new Set(S.map(x=>x.date.slice(0,7)))].sort();if(!months.length){$("cal-sec").hidden=true;return;}
+  const tk=`${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}`;
+  if(CALM===null)CALM=Math.max(0,months.indexOf(tk)>=0?months.indexOf(tk):(tk<months[0]?0:months.length-1));
+  const key=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+  const draw=()=>{
+    const [y,m]=months[CALM].split("-").map(Number);const first=new Date(y,m-1,1),last=new Date(y,m,0);
+    let cells="";const lead=(first.getDay()+6)%7;for(let i=0;i<Math.min(lead,5);i++)cells+=`<span class="cal-d blank"></span>`;
+    for(let d=1;d<=last.getDate();d++){const dt=new Date(y,m-1,d);const wd=dt.getDay();if(wd===0||wd===6)continue;
+      const k=key(dt),xs=by[k]||[];const main=xs.find(x=>["exam","sac","test"].includes(x.k))||xs.find(x=>x.k==="off")||xs[0];
+      const cls=["cal-d",xs.length?(main.k==="off"?"off":["exam","sac","test"].includes(main.k)?main.k:""):"none",+dt===+today?"today":"",dt<today?"past":"",k===CALSEL?"sel":""].join(" ");
+      const items=xs.map(x=>{const u=UNIT[x.unit];if(x.k==="off")return `<span class="cal-i off" title="${x.t}">🚫<span class="tx"> No class</span></span>`;
+        return `<span class="cal-i" style="border-left-color:var(--${u?u.colour:"c6"})" title="${(x.c?x.c+" ":"")+x.t}">${EMO[x.k]||""}<span class="tx"> ${x.c&&x.c.length<=5?x.c:x.t}</span></span>`;}).join("");
+      cells+=xs.length?`<button class="${cls}" data-day="${k}"><span class="cal-n">${d}</span>${items}</button>`:`<span class="${cls}"><span class="cal-n">${d}</span></span>`;}
+    const sel=CALSEL&&by[CALSEL]?`<div class="cal-day"><span class="lab">${fmt(parse(CALSEL))}</span>${by[CALSEL].map(x=>{const u=UNIT[x.unit];
+      if(x.k==="off")return `<div class="muted">${x.t}</div>`;
+      return `<div style="display:grid;gap:6px">${x.time?`<span class="small muted">${x.time}${x.room?" · "+x.room:""}</span>`:""}<div class="row"><i class="em">${EMO[x.k]||""}</i>${x.c?`<span class="small muted">${x.c}</span>`:""}<b>${x.t}</b>${u?`<span class="pill ${u.colour}">${u.short}</span>`:""}</div><div class="row">${tbtn(folderOf(x))}${lk(x)}</div></div>`;}).join("")}</div>`:"";
+    $("cal").innerHTML=`<div class="cal-top"><button data-mv="-1" ${CALM?"":"disabled"} aria-label="Previous month">‹</button><b>${MON[m-1]} ${y}</b><button data-mv="1" ${CALM<months.length-1?"":"disabled"} aria-label="Next month">›</button></div><div class="cal-grid">${["Mon","Tue","Wed","Thu","Fri"].map(d=>`<span class="cal-dow">${d}</span>`).join("")}${cells}</div>${sel}`;};
+  draw();
+  $("cal").onclick=e=>{const mv=e.target.closest("[data-mv]");if(mv){CALM+=+mv.dataset.mv;CALSEL=null;draw();return;}
+    const b=e.target.closest("[data-day]");if(b){CALSEL=CALSEL===b.dataset.day?null:b.dataset.day;draw();}};
+}
+document.addEventListener("click",e=>{if(e.target.closest("#tocal")){e.preventDefault();try{$("cal-sec").scrollIntoView({behavior:"smooth",block:"start"});}catch(x){}}});
+
+// ---------- unit ----------
+let CUR=null,CK={},SK="";
+function renderUnit(U){
+  CUR=U;const col=U.colour,base=`${root} › ${U.folder}`;
+  const PL=C.curriculum.point_label||"curriculum points";
+  const asmt=(C.assessments||[]).find(a=>a.unit===U.id&&a.k!=="check");
+  const hero=$("u-hero");hero.style.background=`var(--${col}-bg)`;
+  hero.innerHTML=`<div class="eyebrow">${C.class.code} · ${U.eyebrow||U.short}</div><h1 style="color:var(--${col})">${U.title}</h1>${U.question?`<p class="q">${U.question}</p>`:""}${U.statement?`<p class="stmt">${U.statement}</p>`:""}
+<div class="row">${asmt?`<span class="pill sac">${EMO[asmt.k]||"📌"} ${asmt.title} · ${asmt.label||fmtD(asmt.date)}</span>`:""}${U.points?`<a class="btn" href="${unitHref(U.id,true)}">✅ Revision checklist</a>`:""}${HIDE?"":`<a class="btn ms" href="#" data-path="${base}">📁 Unit folder in Teams</a>`}${lk(U)}</div>`;
+  const used=new Set();U.stages.forEach(s=>s.lessons.forEach(l=>used.add(l.k)));
+  $("u-types").innerHTML=Object.keys(NAMES).filter(k=>used.has(k)).map(k=>`<span>${EMO[k]} ${NAMES[k]}</span>`).join("");
+  const get=ref=>{const [s,i,sub]=ref.split(".").map(Number);const it=U.points[s].items[i];return sub===undefined?it.t:it.sub[sub];};
+  $("u-stages").innerHTML=U.stages.map(st=>`<section class="stage"><h2>${st.title}${st.subtitle?`<small>${st.subtitle}</small>`:""}</h2>${st.lessons.map(l=>{
+    const isA=["sac","test","exam"].includes(l.k);
+    const folder=l.folder===null||HIDE?null:(l.folder||(l.c?`${l.c} ${l.t}`:l.t));
+    const res=folder?`<a class="btn ms" href="#" data-path="${folder.startsWith("/")?root+" › "+folder.slice(1).split("/").join(" › "):base+" › "+folder}">📁 ${isA?NAMES[l.k]+" info":"Resources"}</a>`:"";
+    const pts=l.points&&U.points?`<details><summary>${C.curriculum.short||"Curriculum"}: ${l.points.length} point${l.points.length>1?"s":""}</summary><ul>${l.points.map(r=>`<li>${get(r)}</li>`).join("")}</ul></details>`:"";
+    return `<article class="lesson ${l.k}" style="border-left-color:var(--${col})"><div class="head"><i class="em">${EMO[l.k]||""}</i>${l.c?`<span class="code">${l.c}</span>`:""}<span class="ttl">${l.t}</span>${l.when?`<span class="wk">${l.when}</span>`:""}</div><span class="btns">${res}${lk(l)}</span>${pts}${l.note?`<p class="note">${l.note}</p>`:""}</article>`;}).join("")}</section>`).join("");
+  const ckSec=$("u-checklist");ckSec.hidden=!U.points;
+  if(U.points){
+    $("u-cknote").textContent=`Every ${PL.replace(/s$/,"")} ${asmt?`the ${asmt.title} can assess`:"in this unit"}, word for word from the ${C.curriculum.name}. Tick what you're confident with; your ticks stay on this device.`;
+    const cover={};U.stages.forEach(st=>st.lessons.forEach(l=>(l.points||[]).forEach(r=>{const key=r.split(".").slice(0,2).join(".");(cover[key]=cover[key]||[]).push(l.c||l.t);})));
+    SK="ck-"+C.class.code+"-"+U.id;CK=store.get(SK);let n=0;
+    $("u-ck").innerHTML=U.points.map((s,si)=>`${s.section?`<h3>${s.section}</h3>`:""}<ol>${s.items.map((it,ii)=>{n++;const key=`${si}.${ii}`;const by=[...new Set(cover[key]||[])];
+      return `<li class="${CK[key]?"done":""}"><input type="checkbox" id="ck-${key}" data-k="${key}" ${CK[key]?"checked":""} style="accent-color:var(--${col})" aria-label="Confident with this point"><div><label for="ck-${key}">${it.t}</label>${(it.sub||[]).length?`<ul>${it.sub.map(x=>`<li>${x}</li>`).join("")}</ul>`:""}<div class="by">${by.map(b=>`<span>${b}</span>`).join("")}${(it.gap||!by.length)?`<span class="gap">${it.gap||"No lesson scheduled yet"}</span>`:""}</div></div></li>`;}).join("")}</ol>`).join("");
+    $("u-ck").dataset.n=n;prog();
+  }
+  $("u-foot").innerHTML=(U.points?`<span>${C.curriculum.cite||""}</span>`:"")+(HIDE?"":`<span>Resources open in Microsoft Teams with your school account.</span>`);
+}
+function prog(){$("u-prog").innerHTML=`<b>${Object.values(CK).filter(Boolean).length}</b> of <b>${$("u-ck").dataset.n}</b> points ticked`;}
+$("u-ck").addEventListener("change",e=>{const k=e.target.dataset.k;if(!k)return;CK[k]=e.target.checked;e.target.closest("li").classList.toggle("done",e.target.checked);store.set(SK,CK);prog();});
+
+// ---------- switch views from the address hash ----------
+function route(){
+  let h="";try{h=decodeURIComponent(location.hash.slice(1));}catch(e){}
+  const m=h.match(/^u\/([^/]+)(\/checklist)?$/);const U=m&&UNIT[m[1]];
+  if(live(U)){
+    if(CUR!==U)renderUnit(U);
+    $("view-hub").hidden=true;$("view-unit").hidden=false;document.title=`${U.title} · ${C.class.code}`;
+    if(m[2]&&U.points)setTimeout(()=>{try{$("u-checklist").scrollIntoView({block:"start"});}catch(e){}},0);else window.scrollTo(0,0);
+  }else{
+    $("view-unit").hidden=true;$("view-hub").hidden=false;document.title=`${C.class.code} Class Hub`;window.scrollTo(0,0);
+  }
+}
+renderHub();
+window.addEventListener("hashchange",route);route();
+
+// ---------- Teams buttons: real link when the class file has one, otherwise show the path ----------
+const toast=$("toast");let tt;
+document.addEventListener("click",e=>{const a=e.target.closest("[data-path]");if(!a)return;const url=(C.teams.urls||{})[a.dataset.path];
+  if(url){a.href=url;a.target="_blank";a.rel="noopener";return;}e.preventDefault();
+  toast.textContent="Opens Teams › "+a.dataset.path.replace(root+" › ","");toast.hidden=false;
+  const r=a.getBoundingClientRect();toast.style.top=(r.bottom+window.scrollY+8)+"px";
+  clearTimeout(tt);tt=setTimeout(()=>toast.hidden=true,3600);});
+})();
+</script>
+</body>
+</html>
