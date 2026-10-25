@@ -110,6 +110,11 @@ svg .brokenfil{stroke:var(--broken);stroke-width:1.6;fill:none}
 svg .cdot{fill:var(--elec)}
 svg .arrow{fill:var(--elec)}
 @media (prefers-reduced-motion:reduce){.bar span{transition:none}}
+/* stacked fraction (numerator over a bar over denominator); colour follows the text token */
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:.85em;line-height:1.15;margin:.1em .15em;color:inherit}
+.frac .frac-n{padding:0 .25em .08em}
+.frac .frac-d{padding:.08em .25em 0;border-top:2px solid currentColor;align-self:stretch;text-align:center}
+.frac .frac-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 </style>
 </head>
 <body>
@@ -442,9 +447,12 @@ function updateStrip(m){
   hEl.textContent = hoursText(m.hours) + ' hours';
   var pct = Math.min(100, m.hours/1000*100);
   var P = V * rnd(m.total,2);
+  // {{numerator|denominator}} marks a stacked fraction; rich() escapes all text (numbers included) and builds the fraction markup
+  function escH(t){ return String(t).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function rich(t){ return String(t).split(/\{\{(.+?)\|(.+?)\}\}/).map(function(p,i){ return i%3===0 ? escH(p) : i%3===1 ? '<span class="frac"><span class="frac-n">'+escH(p)+'</span><span class="frac-sr">/</span>' : '<span class="frac-d">'+escH(p)+'</span></span>'; }).join(''); }
   var steps = [
     'Power used = voltage × current = 12 V × ' + fmt(m.total,2) + ' A = ' + fmt(P,1) + ' W',
-    'Hours until the battery is flat = energy stored ÷ power used = 1,200 Wh ÷ ' + fmt(P,1) + ' W = ' + hoursText(m.hours) + ' hours. Wh means watt-hours, a unit of energy.'
+    'Hours until the battery is flat = {{energy stored|power used}} = {{1,200 Wh|' + fmt(P,1) + ' W}} = ' + hoursText(m.hours) + ' hours. Wh means watt-hours, a unit of energy.'
   ];
   var html = '<div class="bar" role="img" aria-label="'+hoursText(m.hours)+' hours on a scale from 0 to 1,000 hours"><span style="width:'+pct.toFixed(1)+'%"></span></div>' +
     '<div class="scale"><span>0 hours</span><span>500</span><span>1,000 hours</span></div>';
@@ -455,7 +463,7 @@ function updateStrip(m){
   html += '</div>';
   if (S.workShown > 0){
     html += '<div class="work"><ol>';
-    for (var i=0;i<S.workShown;i++) html += '<li>'+steps[i]+'</li>';
+    for (var i=0;i<S.workShown;i++) html += '<li>'+rich(steps[i])+'</li>';
     html += '</ol></div>';
   }
   box.innerHTML = html;

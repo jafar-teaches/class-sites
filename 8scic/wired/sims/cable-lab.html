@@ -67,6 +67,11 @@ h1{font-size:clamp(1.9rem,6vw,2.7rem);font-weight:900;font-stretch:118%}
 .working{margin-top:10px}
 .working ol{margin:8px 0 6px;padding-left:1.3em}
 .working li{margin-bottom:.45em}
+/* stacked fraction (numerator over a bar over denominator); colour follows the text token */
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:.85em;line-height:1.15;margin:0 .15em;color:inherit}
+.frac .frac-n{padding:0 .25em .08em}
+.frac .frac-d{padding:.08em .25em 0;border-top:2px solid currentColor;align-self:stretch;text-align:center}
+.frac .frac-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .working .btns{display:flex;flex-wrap:wrap;gap:6px}
 .hidden-val{color:var(--soft)}
 /* note */
@@ -408,15 +413,18 @@ function allowed(kind, val){
 }
 
 // ---------- working ----------
+// Working strings mark a stacked fraction as {{numerator|denominator}}. rich() escapes all text (numbers included) and builds the fraction markup.
+const escH = t => String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function rich(t){ return String(t).split(/\{\{(.+?)\|(.+?)\}\}/).map((p,i) => i%3===0 ? escH(p) : i%3===1 ? '<span class="frac"><span class="frac-n">'+escH(p)+'</span><span class="frac-sr">/</span>' : '<span class="frac-d">'+escH(p)+'</span></span>').join(''); }
 function workingLines(){
   const m = model(S.mat,S.area,S.len), mt = MAT[S.mat], two = 2*S.len;
   const rcRaw = parseFloat(mt.perM)*two/S.area, iRaw = 12/m.rt, vpRaw = m.I*2.4;
   const tag = (raw, shown) => Math.abs(raw - shown) > 1e-9 ? ' (rounded)' : '';
   return [
     'Length of wire. The cable has two wires, one out and one back. 2 × '+S.len+' = '+two+' m of wire.',
-    'Cable resistance. 1 m of '+mt.name.toLowerCase()+' wire, 1.0 mm² thick, has '+mt.perM+' Ω. Multiply by the length, then divide by the thickness. '+mt.perM+' × '+two+' ÷ '+S.area.toFixed(1)+' = '+m.Rc+' Ω'+tag(rcRaw, m.rc)+'.',
+    'Cable resistance. 1 m of '+mt.name.toLowerCase()+' wire, 1.0 mm² thick, has '+mt.perM+' Ω. Multiply by the length, then divide by the thickness. {{'+mt.perM+' × '+two+'|'+S.area.toFixed(1)+'}} = '+m.Rc+' Ω'+tag(rcRaw, m.rc)+'.',
     'Total resistance. The pump and the cable are in one loop, so add them. '+m.Rc+' Ω + 2.4 Ω = '+m.Rt+' Ω.',
-    'Current. I = V ÷ R = 12 V ÷ '+m.Rt+' Ω = '+m.Is+' A'+tag(iRaw, m.I)+'.',
+    'Current. I = {{V|R}} = {{12 V|'+m.Rt+' Ω}} = '+m.Is+' A'+tag(iRaw, m.I)+'.',
     'Voltage left at the pump. V = I × R = '+m.Is+' A × 2.4 Ω = '+m.Vp+' V'+tag(vpRaw, m.vp)+'.',
     'Voltage lost in the cable. 12.0 V − '+m.Vp+' V = '+m.Vc+' V.'
   ];
@@ -494,7 +502,7 @@ function render(){
   $('sumLine').textContent = 'Pump '+m.Vp+' V + cable '+m.Vc+' V = 12.0 V from the battery.';
   // working
   const wl = workingLines(), list = $('wList');
-  list.innerHTML = wl.slice(0, S.wStep).map(t => '<li>'+t+'</li>').join('');
+  list.innerHTML = wl.slice(0, S.wStep).map(t => '<li>'+rich(t)+'</li>').join('');
   $('wNext').textContent = S.wStep===0 ? 'Show the working' : 'Show the next step';
   $('wNext').disabled = S.wStep >= wl.length;
   $('wAll').disabled = S.wStep >= wl.length;

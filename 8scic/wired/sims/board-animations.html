@@ -143,6 +143,13 @@ svg text{font-family:var(--body)}
 /* state helpers */
 [data-v]{transition:opacity .4s ease,visibility .4s}
 [data-v].off{opacity:0;visibility:hidden}
+/* stacked fractions: HTML (captions, notes) and SVG (.sfrac groups laid out by layoutFracs) */
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:.82em;line-height:1.1;margin:0 .15em;color:inherit}
+.frac .frac-n{padding:0 .2em .06em}
+.frac .frac-d{padding:.06em .2em 0;border-top:max(2px,.08em) solid currentColor;align-self:stretch;text-align:center}
+.frac .frac-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.sfrac text{font-family:inherit}
+.sfrac .sf-bar{stroke:none}
 [data-tf]{transition:transform .9s ease-in-out}
 .sw-blade{stroke:var(--ink);stroke-width:5;stroke-linecap:round;transform-box:fill-box}
 .dim{opacity:.35;transition:opacity .4s}
@@ -198,6 +205,9 @@ const st = (o)=>o?A(o):'';
 const G = (v, inner, extra)=>`<g data-v="${v}"${st(extra)}>${inner}</g>`;
 const W = (d, cls='')=>`<path class="w ${cls}" d="${d}"/>`;
 const T = (x,y,s,cls='',anchor='middle',extra)=>`<text class="lbl ${cls}" x="${x}" y="${y}" text-anchor="${anchor}"${st(extra)}>${s}</text>`;
+/* stacked fraction in SVG, centred on x, baseline y. map is a step map ('1:a|3:b') whose values are
+   'before~numerator~denominator~after' (or plain text with no fraction). Laid out by layoutFracs after each render. */
+const F = (x,y,map,cls='',extra)=>`<g class="sfrac lbl ${cls}" data-x="${x}" data-y="${y}" data-f="${map}"${st(extra)}><text class="sf-p"></text><text class="sf-n" text-anchor="middle"></text><rect class="sf-bar" height="0" width="0"/><text class="sf-d" text-anchor="middle"></text><text class="sf-q"></text></g>`;
 const dot=(x,y,r=6)=>`<circle class="dot" cx="${x}" cy="${y}" r="${r}"/>`;
 const arr=(x,y,deg,cls='')=>`<path class="arr ${cls}" d="M-13 -11 L12 0 L-13 11 Z" transform="translate(${x} ${y}) rotate(${deg})"/>`;
 const flow=(d,cls='',arrows=[],acls='')=>`<path class="flow ${cls}" d="${d}"/>`+arrows.map(a=>arr(a[0],a[1],a[2],acls)).join('');
@@ -432,8 +442,8 @@ ANIMS.push({id:6, lesson:3, title:"Ohm's law triangle",
  steps:[
   "The Ohm's law triangle: V on top, I and R below.",
   'Cover V to find voltage: V = I × R.',
-  'Cover I to find current: I = V ÷ R.',
-  'Cover R to find resistance: R = V ÷ I.',
+  'Cover I to find current: I = {{V|R}}.',
+  'Cover R to find resistance: R = {{V|I}}.',
   'A 10 Ω resistor has a current of 5 A. Find V.',
   'We want V, so cover V: V = I × R.',
   'Put in the values with units: V = 5 A × 10 Ω.',
@@ -448,8 +458,9 @@ ANIMS.push({id:6, lesson:3, title:"Ohm's law triangle",
   const line=(y,s,v,k)=>T(720,y,s,'big','middle',Object.assign({'data-v':v},k?{'data-k':k}:{}));
   o+=`<g style="font-size:52px">`;
   o+=line(200,'V = I × R','2-4','3:soft');
-  o+=line(300,'I = V ÷ R','3-4','4:soft');
-  o+=line(400,'R = V ÷ I','4-4');
+  const fline=(y,m,v,k)=>F(720,y,'1:'+m,'big',Object.assign({'data-v':v},k?{'data-k':k}:{}));
+  o+=fline(300,'I =~V~R~','3-4','4:soft');
+  o+=fline(400,'R =~V~I~','4-4');
   o+=`</g>`;
   o+=G('5',T(720,110,'Worked example','big soft')+T(590,180,'R = 10 Ω','big')+T(745,180,'I = 5 A','big')+T(880,180,'V = ?','big'));
   o+=G('6',T(720,275,'V = I × R','big'));
@@ -460,7 +471,7 @@ ANIMS.push({id:6, lesson:3, title:"Ohm's law triangle",
 
 /* 7 — Series vs parallel (Lesson 6) */
 ANIMS.push({id:7, lesson:6, title:'Series and parallel: how the totals add',
- note:'Same 12 V battery and identical 4 Ω bulbs in both. Series: 12 ÷ 8 Ω = 1.5 A, 6 V + 6 V = 12 V. Parallel: 12 ÷ 4 Ω = 3 A per branch, 3 A + 3 A = 6 A. No battery-life claim: students test that in Practical 2.',
+ note:'Same 12 V battery and identical 4 Ω bulbs in both. Series: {{12 V|8 Ω}} = 1.5 A, 6 V + 6 V = 12 V. Parallel: {{12 V|4 Ω}} = 3 A per branch, 3 A + 3 A = 6 A. No battery-life claim: students test that in Practical 2.',
  steps:[
   'Series: two identical 4 Ω bulbs in one loop.',
   'There is one path, so the current is 1.5 A everywhere.',
@@ -663,14 +674,14 @@ ANIMS.push({id:10, lesson:10, title:'Parallel wiring in a house',
 
 /* 11 — Total resistance in parallel (Lesson 7) */
 ANIMS.push({id:11, lesson:7, title:'Total resistance in parallel',
- note:'12 V battery. One 6 Ω: 2 A. 6 Ω ∥ 6 Ω: 2 A + 2 A = 4 A, R = 12 ÷ 4 = 3 Ω. 6 Ω ∥ 3 Ω: 2 A + 4 A = 6 A, R = 12 ÷ 6 = 2 Ω; 1/6 + 1/3 = 1/2. Dot density shows current.',
+ note:'12 V battery. One 6 Ω: 2 A. 6 Ω ∥ 6 Ω: 2 A + 2 A = 4 A, R = {{12|4}} = 3 Ω. 6 Ω ∥ 3 Ω: 2 A + 4 A = 6 A, R = {{12|6}} = 2 Ω; 1/6 + 1/3 = 1/2. Dot density shows current.',
  steps:[
   'One 6 Ω resistor on 12 V: the current is 2 A.',
   'A second 6 Ω branch also gets 12 V and 2 A.',
-  'Total current is 4 A, so R = 12 V ÷ 4 A = 3 Ω.',
+  'Total current is 4 A, so R = {{12 V|4 A}} = 3 Ω.',
   'The rule gives the same: 1/R = 1/6 + 1/6 = 2/6, so R = 3 Ω.',
   'Swap in a 3 Ω branch. Now 2 A + 4 A = 6 A.',
-  'Total R = 12 ÷ 6 = 2 Ω. Check: 1/6 + 1/3 = 1/2.',
+  'Total R = {{12|6}} = 2 Ω. Check: 1/6 + 1/3 = 1/2.',
   'More paths, less resistance: the total is always less than the smallest branch.'],
  svg(){
   let o='';
@@ -692,12 +703,12 @@ ANIMS.push({id:11, lesson:7, title:'Total resistance in parallel',
   o+=T(320,515,'More dots each second means more current.','xs soft reg');
   // working panel
   o+=T(745,62,'','big','middle',{'data-txt':'1:One branch|2:Two 6 Ω branches|5:6 Ω and 3 Ω'});
-  o+=T(745,120,'Branch 1: 12 V ÷ 6 Ω = 2 A','sm');
-  o+=G('2',T(745,160,'','sm','middle',{'data-txt':'2:Branch 2: 12 V ÷ 6 Ω = 2 A|5:Branch 2: 12 V ÷ 3 Ω = 4 A'}));
-  o+=G('3',T(745,215,'','sm','middle',{'data-txt':'3:Total: 2 A + 2 A = 4 A|5:Total: 2 A + 4 A = 6 A'}));
-  o+=G('1-1,3-4,6',T(745,262,'','sm','middle',{'data-txt':'1:Total R = 6 Ω|3:Total R = 12 V ÷ 4 A = 3 Ω|6:Total R = 12 V ÷ 6 A = 2 Ω'}));
-  o+=G('3-4',T(745,296,'Half of 6 Ω','xs soft reg'));
-  o+=G('4-4,6',T(745,355,'','sm','middle',{'data-txt':'4:1/R = 1/6 + 1/6|6:1/R = 1/6 + 1/3'})+T(745,392,'','sm','middle',{'data-txt':'4:= 2/6|6:= 1/6 + 2/6 = 3/6 = 1/2'})+T(745,429,'','sm','middle',{'data-txt':'4:Flip it: R = 6/2 = 3 Ω|6:Flip it: R = 2/1 = 2 Ω'}));
+  o+=F(745,124,'1:Branch 1:~12 V~6 Ω~= 2 A','sm');
+  o+=G('2',F(745,184,'2:Branch 2:~12 V~6 Ω~= 2 A|5:Branch 2:~12 V~3 Ω~= 4 A','sm'));
+  o+=G('3',T(745,238,'','sm','middle',{'data-txt':'3:Total: 2 A + 2 A = 4 A|5:Total: 2 A + 4 A = 6 A'}));
+  o+=G('1-1,3-4,6',F(745,296,'1:Total R = 6 Ω|3:Total R =~12 V~4 A~= 3 Ω|6:Total R =~12 V~6 A~= 2 Ω','sm'));
+  o+=G('3-4',T(745,338,'Half of 6 Ω','xs soft reg'));
+  o+=G('4-4,6',T(745,376,'','sm','middle',{'data-txt':'4:1/R = 1/6 + 1/6|6:1/R = 1/6 + 1/3'})+T(745,412,'','sm','middle',{'data-txt':'4:= 2/6|6:= 1/6 + 2/6 = 3/6 = 1/2'})+T(745,448,'','sm','middle',{'data-txt':'4:Flip it: R = 6/2 = 3 Ω|6:Flip it: R = 2/1 = 2 Ω'}));
   o+=G('7',`<rect x="575" y="466" width="340" height="54" rx="10" fill="none" stroke="var(--ink)" stroke-width="4"/>`+T(745,502,'Total 2 Ω is less than 3 Ω','sm')+look(480,271,36));
   return o;
  }});
@@ -871,6 +882,37 @@ const reduced=()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 window.reduced=reduced;
 let cur=null, step=1;
 
+/* stacked fractions. Text uses {{numerator|denominator}}; rich() escapes everything else. */
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const FR=/\{\{(.+?)\|(.+?)\}\}/g;
+function rich(s){return String(s).split(FR).map((p,i)=>i%3===0?esc(p):i%3===1?`<span class="frac"><span class="frac-n">${esc(p)}</span><span class="frac-sr">/</span>`:`<span class="frac-d">${esc(p)}</span></span>`).join('');}
+function plain(s){return String(s).replace(FR,'$1/$2');}
+/* lay out every SVG .sfrac group: before-text, stacked fraction (numerator, bar, denominator), after-text */
+function layoutFracs(root){
+  root.querySelectorAll('.sfrac').forEach(g=>{
+    const [pre='',num='',den='',post='']=(g._f||[]).map(x=>x.trim());
+    const tp=g.querySelector('.sf-p'),tn=g.querySelector('.sf-n'),td=g.querySelector('.sf-d'),tq=g.querySelector('.sf-q'),bar=g.querySelector('.sf-bar');
+    const x=+g.getAttribute('data-x'),y=+g.getAttribute('data-y');
+    const fs=parseFloat(getComputedStyle(g).fontSize)||24, ff=Math.round(fs*.85);
+    tp.textContent=pre;tn.textContent=num;td.textContent=den;tq.textContent=post;
+    const has=!!(num||den);
+    tn.style.fontSize=td.style.fontSize=ff+'px';
+    const wp=pre?tp.getComputedTextLength():0, wq=post?tq.getComputedTextLength():0;
+    const fw=has?Math.max(tn.getComputedTextLength(),td.getComputedTextLength())+fs*.3:0;
+    const gap=fs*.28;
+    const tot=wp+(has?(wp?gap:0)+fw:0)+(wq?gap+wq:0);
+    let cx=x-tot/2;
+    tp.setAttribute('x',cx.toFixed(1));tp.setAttribute('y',y);tp.setAttribute('text-anchor','start');
+    cx+=wp+(has&&wp?gap:0);
+    const mid=cx+fw/2, axis=y-fs*.3;
+    tn.setAttribute('x',mid.toFixed(1));tn.setAttribute('y',(y-fs*.62).toFixed(1));
+    td.setAttribute('x',mid.toFixed(1));td.setAttribute('y',(y+fs*.62).toFixed(1));
+    const bh=Math.max(2,fs*.075);
+    bar.setAttribute('x',cx.toFixed(1));bar.setAttribute('y',(axis-bh/2).toFixed(1));
+    bar.setAttribute('width',has?fw.toFixed(1):0);bar.setAttribute('height',has?bh.toFixed(1):0);
+    tq.setAttribute('x',(cx+fw+(has?gap:0)).toFixed(1));tq.setAttribute('y',y);tq.setAttribute('text-anchor','start');
+  });
+}
 function parseMap(s){return s.split('|').map(p=>{const i=p.indexOf(':');return [+p.slice(0,i),p.slice(i+1)];});}
 function pick(s,n){let v=null;for(const [k,val] of parseMap(s)) if(k<=n) v=val;return v;}
 function inRanges(s,n){return s.split(',').some(r=>{const [a,b]=r.split('-');if(b===undefined||b==='') return n>=+a;return n>=+a&&n<=+b;});}
@@ -886,10 +928,12 @@ function render(animate,prev){
     el._k=v;});
   root.querySelectorAll('[data-tf]').forEach(el=>{el.style.transform=pick(el.getAttribute('data-tf'),step)||'';});
   root.querySelectorAll('[data-txt]').forEach(el=>{el.textContent=pick(el.getAttribute('data-txt'),step)||'';});
+  root.querySelectorAll('[data-f]').forEach(el=>{el._f=(pick(el.getAttribute('data-f'),step)||'').split('~');});
+  layoutFracs(root);
   if(cur.hook) cur.hook(root,step,prev,animate);
   if(!animate){void root.getBoundingClientRect();requestAnimationFrame(()=>requestAnimationFrame(()=>root.classList.remove('instant')));}
   const n=cur.steps.length;
-  cap.textContent=cur.steps[step-1];
+  cap.innerHTML=`<span>${rich(cur.steps[step-1])}</span>`;
   count.textContent=`Step ${step} of ${n}`;
   $('#back').disabled=step<=1;
   $('#next').disabled=step>=n;
@@ -930,7 +974,7 @@ function route(){
   [...new Set(ANIMS.map(a=>a.lesson))].sort((a,b)=>a-b).forEach(L=>{
     h+=`<section class="lgrp"><h2>Lesson ${L} <small>${LESSONS[L]}</small></h2><div class="cards">`;
     ANIMS.filter(a=>a.lesson===L).forEach(a=>{
-      h+=`<a class="card" href="#anim-${a.id}" id="card-${a.id}"><span class="n">${a.id}</span><span class="t">${a.title}</span><span class="s">${a.steps.length} steps · #anim-${a.id}</span><span class="tn">${a.note}</span></a>`;});
+      h+=`<a class="card" href="#anim-${a.id}" id="card-${a.id}"><span class="n">${a.id}</span><span class="t">${a.title}</span><span class="s">${a.steps.length} steps · #anim-${a.id}</span><span class="tn">${rich(a.note)}</span></a>`;});
     h+=`</div></section>`;});
   $('#menulist').innerHTML=h;
 })();
@@ -963,8 +1007,10 @@ document.querySelectorAll('.theme-btn').forEach(b=>b.addEventListener('click',()
   syncThemeBtn();}));
 try{window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',syncThemeBtn);}catch(e){}
 syncThemeBtn();
-window.__BOARD={ANIMS:ANIMS.map(a=>({id:a.id,lesson:a.lesson,title:a.title,steps:a.steps.length,captions:a.steps})),get state(){return cur?{id:cur.id,step}:null;}};
+window.__BOARD={ANIMS:ANIMS.map(a=>({id:a.id,lesson:a.lesson,title:a.title,steps:a.steps.length,captions:a.steps.map(plain)})),get state(){return cur?{id:cur.id,step}:null;}};
 route();
+/* web fonts change text widths: re-lay the stacked fractions once they arrive */
+try{document.fonts.ready.then(()=>{if(cur) layoutFracs(stage);});}catch(e){}
 })();
 </script>
 </body>
