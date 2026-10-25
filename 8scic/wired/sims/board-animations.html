@@ -3,8 +3,8 @@
 <head><meta name="robots" content="noindex">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Wired Year Board Animations</title>
-<meta name="description" content="Step-through board animations for Year 8 Science Electricity (Kai's Wired Year), made to cast on a classroom TV.">
+<title>Wired Board Animations</title>
+<meta name="description" content="Step-through board animations for Year 8 Science Electricity (Wired), made to cast on a classroom TV.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,700..900&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
@@ -171,13 +171,13 @@ svg text{font-family:var(--body)}
 <div id="menu">
   <div class="intro">
     <h1>Board animations</h1>
-    <p>Kai's Wired Year · Year 8 Science · Electricity. Cast one during board work, then step through while you talk.</p>
+    <p>Wired · Year 8 Science · Electricity. Cast one during board work, then step through while you talk.</p>
     <p><button class="btn theme-btn" type="button" aria-pressed="false">Dark mode</button></p>
   </div>
   <div id="menulist"></div>
   <div class="howto"><b>Controls.</b> <kbd>→</kbd> or Next goes forward, <kbd>←</kbd> or Back goes back. A presenter clicker (Page Down / Page Up) also works. <kbd>Home</kbd> restarts, <kbd>Esc</kbd> returns here. Link to one animation with <b>#anim-4</b>, or to one step with <b>#anim-4-step-3</b>.</div>
 </div>
-<footer id="menufoot"><span>Kai's Wired Year · Year 8 Science · Electricity · Board animations</span></footer>
+<footer id="menufoot"><span>Wired · Year 8 Science · Electricity · Board animations</span></footer>
 
 <div id="player" aria-label="Animation player">
   <div class="bar">
@@ -193,7 +193,7 @@ svg text{font-family:var(--body)}
     <p id="cap" aria-live="polite"></p>
     <button class="btn primary" id="next" type="button" aria-label="Next step">Next ▶</button>
   </div>
-  <div class="pfoot"><span>Kai's Wired Year · Year 8 Science · Electricity</span></div>
+  <div class="pfoot"><span>Wired · Year 8 Science · Electricity</span></div>
 </div>
 
 <script>
@@ -961,7 +961,7 @@ function restart(){if(!cur) return;const prev=step;step=1;render(false,prev);$('
 function showMenu(){
   cur=null; stage.innerHTML='';
   document.body.classList.remove('playing');
-  document.title='Wired Year Board Animations';
+  document.title='Wired Board Animations';
 }
 function route(){
   const m=/^#anim-(\d+)(?:-step-(\d+))?$/.exec(location.hash);
