@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head><meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charge Carriers</title>
+<meta name="description" content="Year 8 Electricity simulation: charge flows round a loop, and the bulb uses energy, not current.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,700..900&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F3F5F2;--card:#FFFFFF;--ink:#16222F;--soft:#52606C;--line:#D4DAD6;--wire:#24476B;--hv:#F2B705;--hvwash:#FFF4CC;--prac:#1D7F55;--pracwash:#E2F3EA;--done:#8A949C;--focus:#d99a00;--elec:#0f7f8d;--elecwash:#e1f1f2;
+--energy:#c2410c;--energywash:#fdeee6;
+--disp:'Archivo','Arial Narrow',system-ui,sans-serif;--body:'Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#10171E;--card:#18222C;--ink:#E6ECEF;--soft:#A3AFB8;--line:#2C3A46;--wire:#8DB4DA;--hv:#F5C531;--hvwash:#2E2810;--prac:#4CC38A;--pracwash:#12291E;--done:#5E6A73;--focus:#f5c03a;--elec:#4cc9d6;--elecwash:#10292c;--energy:#fb8c4a;--energywash:#2c1a10;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#10171E;--card:#18222C;--ink:#E6ECEF;--soft:#A3AFB8;--line:#2C3A46;--wire:#8DB4DA;--hv:#F5C531;--hvwash:#2E2810;--prac:#4CC38A;--pracwash:#12291E;--done:#5E6A73;--focus:#f5c03a;--elec:#4cc9d6;--elecwash:#10292c;--energy:#fb8c4a;--energywash:#2c1a10;color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;overflow-wrap:break-word}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+h1,h2,h3{font-family:var(--disp);line-height:1.12;margin:0}
+p{margin:0 0 .6em}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+header.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:22px 0 4px}
+h1{font-size:clamp(1.9rem,6vw,2.7rem);font-weight:900;font-stretch:118%}
+.lede{color:var(--soft);margin:6px 0 0}
+.theme{flex:none;border:2px solid var(--ink);background:var(--card);border-radius:999px;padding:6px 12px;font-size:.9rem;font-weight:700;min-height:40px}
+.story{border-left:5px solid var(--elec);background:var(--elecwash);padding:10px 14px;border-radius:0 10px 10px 0;margin:14px 0 0;max-width:80ch}
+.story p{margin:0}
+.stages{display:flex;gap:8px;margin:16px 0 14px}
+.stage-tab{flex:1 1 0;min-width:0;border:2px solid var(--ink);background:var(--card);border-radius:12px;padding:9px 12px;text-align:left;font-weight:700;font-family:var(--disp);font-size:1.02rem;min-height:48px}
+.stage-tab[aria-current="step"]{background:var(--ink);color:var(--paper)}
+.board{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.board{grid-template-columns:minmax(0,1fr)}}
+.col{display:flex;flex-direction:column;gap:14px;min-width:0}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;min-width:0}
+.tile h2{font-size:1.15rem;font-weight:800;margin-bottom:8px}
+.scene canvas{display:block;width:100%;border-radius:10px}
+.key{font-size:.95rem;color:var(--soft);margin:10px 0 0}
+.key p{margin:0 0 .25em}
+.playbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.btn{border:2px solid var(--ink);background:var(--card);border-radius:999px;padding:8px 16px;font-weight:700;min-height:44px;line-height:1.2}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn[disabled]{opacity:.42;cursor:not-allowed}
+.btn.small{min-height:38px;padding:5px 12px;font-size:.92rem}
+.look{box-shadow:0 0 0 4px var(--focus)}
+@media (prefers-reduced-motion:no-preference){.look.pulse{animation:pulse 1s ease-in-out 3}}
+@keyframes pulse{50%{box-shadow:0 0 0 8px var(--focus)}}
+.strip{margin-top:12px;border-top:1px solid var(--line);padding-top:10px;font-size:.98rem}
+.strip p{margin:0 0 .3em}
+.strip .sum{font-weight:700}
+.note h2{font-size:1.25rem}
+.note .tag{display:inline-block;font-weight:700;font-size:.85rem;padding:2px 10px;border-radius:999px;background:var(--line);margin-bottom:8px}
+.note .tag.ok{background:var(--prac);color:#fff}
+:root[data-theme="dark"] .note .tag.ok{color:#10171E}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .note .tag.ok{color:#10171E}}
+.note ul{margin:6px 0 10px;padding-left:1.2em}
+.note li{margin-bottom:.35em}
+.note .bold{font-weight:700}
+.note .lookline,.note .nextline{font-size:.95rem;color:var(--soft)}
+.note .lookline b,.note .nextline b{color:var(--ink)}
+fieldset{border:0;margin:10px 0 0;padding:0}
+legend{font-weight:700;padding:0;margin-bottom:8px}
+.opt{display:flex;gap:10px;align-items:flex-start;border:2px solid var(--line);border-radius:12px;padding:9px 12px;margin-bottom:8px;cursor:pointer;background:var(--card)}
+.opt input{margin-top:5px;width:18px;height:18px;flex:none;accent-color:var(--ink)}
+.opt:has(input:checked){border-color:var(--ink)}
+.opt:has(input:disabled){cursor:default}
+.row{margin-bottom:12px}
+.row .label{font-weight:700;margin-bottom:6px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{border:2px solid var(--ink);background:var(--card);border-radius:999px;padding:6px 14px;font-weight:700;min-height:42px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.seg button[disabled]{opacity:.42;cursor:not-allowed}
+.lock{font-size:.92rem;color:var(--soft);margin:4px 0 0}
+.tries{font-size:.95rem;margin:8px 0 0}
+.tries .done{color:var(--prac);font-weight:700}
+.toggle{display:flex;gap:10px;align-items:flex-start;margin:8px 0;cursor:pointer}
+.toggle input{width:20px;height:20px;margin-top:3px;flex:none;accent-color:var(--ink)}
+.extnote{font-size:.95rem;border-left:4px solid var(--wire);padding:4px 10px;margin:4px 0 10px}
+details.simple{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:0 14px;margin:16px 0 0}
+details.simple summary{cursor:pointer;font-family:var(--disp);font-weight:800;font-size:1.1rem;padding:12px 0;min-height:44px}
+details.simple ul{margin:0 0 14px;padding-left:1.2em}
+details.simple li{margin-bottom:.4em;max-width:75ch}
+footer{margin:26px 0 0;padding:16px 0 26px;border-top:1px solid var(--line);color:var(--soft);font-size:.9rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div>
+    <h1>Charge carriers</h1>
+    <p class="lede">Watch charge flow round a loop, and find out what a bulb really uses.</p>
+  </div>
+  <button class="theme" id="themeBtn" type="button">Dark mode</button>
+</header>
+<div class="story"><p>Kai's sister says the bulb eats the electricity, so less goes back to the battery. Kai found two ammeters in the parts box to test her idea.</p></div>
+
+<nav class="stages" aria-label="Stages">
+  <button class="stage-tab" type="button" data-stage="1" id="tab1">Stage 1 · Current</button>
+  <button class="stage-tab" type="button" data-stage="2" id="tab2">Stage 2 · Voltage</button>
+</nav>
+
+<main class="board">
+  <div class="col">
+    <section class="tile scene" aria-label="The circuit">
+      <canvas id="cv" role="img" aria-label="A loop with a battery, a switch, ammeter A1, the bulbs and ammeter A2."></canvas>
+      <div class="key" id="key">
+        <p>Each dot is a bit of charge. The more orange fill a dot has, the more energy it carries.</p>
+        <p>The arrows show conventional current, the direction the book uses, from + to −.</p>
+      </div>
+      <div class="playbar">
+        <button class="btn primary" id="switchBtn" type="button">Close the switch</button>
+        <button class="btn" id="playBtn" type="button">Pause</button>
+        <button class="btn" id="stepBtn" type="button">Step</button>
+      </div>
+      <div class="strip" id="vstrip" hidden></div>
+      <div class="sr" aria-live="polite" id="live"></div>
+    </section>
+  </div>
+  <div class="col">
+    <section class="tile note" id="note" aria-live="polite"></section>
+    <section class="tile" id="tryBox" aria-labelledby="tryH">
+      <h2 id="tryH">Try a change</h2>
+      <div class="row">
+        <div class="label" id="cellsL">Cells in the battery</div>
+        <div class="seg" role="group" aria-labelledby="cellsL" id="cellsSeg">
+          <button type="button" data-cells="1">1 cell</button>
+          <button type="button" data-cells="2">2 cells</button>
+          <button type="button" data-cells="3">3 cells</button>
+        </div>
+      </div>
+      <div class="row" id="bulbsRow">
+        <div class="label" id="bulbsL">Bulbs in the loop</div>
+        <div class="seg" role="group" aria-labelledby="bulbsL" id="bulbsSeg">
+          <button type="button" data-bulbs="1">1 bulb</button>
+          <button type="button" data-bulbs="2">2 bulbs</button>
+          <button type="button" data-bulbs="3">3 bulbs</button>
+        </div>
+      </div>
+      <p class="lock" id="lockLine"></p>
+      <p class="tries" id="tries"></p>
+    </section>
+    <section class="tile" aria-labelledby="extH">
+      <h2 id="extH">Extension</h2>
+      <label class="toggle"><input type="checkbox" id="extE"> <span>Show electron direction</span></label>
+      <p class="extnote" id="extENote" hidden>Electrons carry the charge in metal wires. They drift the other way, from − to +. The small bars just outside the wire show them. Real electrons drift very slowly, about 0.1 mm each second.</p>
+      <label class="toggle"><input type="checkbox" id="extJ"> <span>Show energy for each coulomb</span></label>
+      <p class="extnote" id="extJNote" hidden></p>
+    </section>
+  </div>
+</main>
+
+<details class="simple">
+  <summary>Where this model simplifies</summary>
+  <ul>
+    <li>Each bulb's resistance here never changes. A real bulb lets less current through once its filament gets hot.</li>
+    <li>Each cell here always gives exactly 1.5 V. A real cell gives a little less when current flows, and less again as it goes flat.</li>
+    <li>The dots are huge and far apart. A real wire holds billions of billions of charges.</li>
+    <li>In metal wires, electrons really carry the charge. They drift from − to +, at about 0.1 mm each second.</li>
+    <li>The light comes on straight away, because the whole loop of charge starts moving at once. The dots here also start together.</li>
+    <li>The orange fill is a picture to help you. Scientists describe how the energy travels in a more detailed way.</li>
+  </ul>
+</details>
+
+<footer>
+  <span>Kai's Wired Year · Year 8 Science · Electricity</span>
+</footer>
+</div>
+
+<script>
+(function(){
+'use strict';
+// ---------- model (matches check_ab.py) ----------
+const CELL_V = 1.5, BULB_R = 5, MAX_P = (3*CELL_V)*(3*CELL_V)/BULB_R;
+const rnd = (x,d) => { const f = 10**d; return Math.floor(x*f + 0.5 + 1e-9)/f; };
+const fmt = (x,d) => rnd(x,d).toFixed(d);
+function model(){
+  const vbat = S.cells*CELL_V;
+  if(!S.closed) return {I:0, vbat, vb:0, glow:0, A:'0.00', Vbat:fmt(vbat,2), Vbulb:'0.00', sum:'0.00'};
+  const I = vbat/(S.bulbs*BULB_R), vb = vbat/S.bulbs, p = vb*I;
+  return {I, vbat, vb, glow:Math.sqrt(p/MAX_P), A:fmt(I,2), Vbat:fmt(vbat,2), Vbulb:fmt(vb,2), sum:fmt(rnd(vb,2)*S.bulbs,2)};
+}
+
+// ---------- state ----------
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const S = {stage:1, cells:1, bulbs:1, closed:false, playing:false, phase:'predict', pred:null, choice:null,
+  before:null, tried:{}, ext:{e:false,j:false}, offset:0, eoff:0, ringT:0, msg:''};
+const $ = id => document.getElementById(id);
+const cv = $('cv'), ctx = cv.getContext('2d');
+
+// ---------- text (one place for every student string) ----------
+const NAME = {cells: n => n===1 ? '1 cell' : n+' cells', bulbs: n => n===1 ? '1 bulb' : n+' bulbs'};
+const PRED = {
+  1:{q:'When Kai closes the switch, A1 will read 0.30 A. What will A2 read?', right:'same',
+     opts:[['more','More than 0.30 A'],['same','0.30 A, the same as A1'],['less','Less than 0.30 A, because the bulb uses up some current'],['zero','0.00 A, because the bulb uses up all the current']]},
+  2:{q:'Kai adds a second bulb to the same loop. What will happen to the current?', right:'less',
+     opts:[['same','It stays at 0.60 A, because a battery always gives the same current'],['less','It goes down'],['more','It goes up']]}
+};
+const TRIES = {1:[['cells',2],['cells',3]], 2:[['bulbs',3],['cells',1],['cells',3]]};
+
+// ---------- theme ----------
+const root = document.documentElement;
+try{ const t = localStorage.getItem('kwy-theme-v1'); if(t==='dark'||t==='light') root.dataset.theme = t; }catch(e){}
+const sysDark = () => matchMedia('(prefers-color-scheme: dark)').matches;
+const isDark = () => root.dataset.theme ? root.dataset.theme==='dark' : sysDark();
+function themeLabel(){ $('themeBtn').textContent = isDark() ? 'Light mode' : 'Dark mode'; }
+$('themeBtn').addEventListener('click', () => {
+  root.dataset.theme = isDark() ? 'light' : 'dark';
+  try{ localStorage.setItem('kwy-theme-v1', root.dataset.theme); }catch(e){}
+  themeLabel(); readColours();
+});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { themeLabel(); readColours(); });
+let C = {};
+function readColours(){
+  const cs = getComputedStyle(root);
+  ['paper','card','ink','soft','line','wire','elec','focus','energy','prac'].forEach(k => C[k] = cs.getPropertyValue('--'+k).trim());
+}
+
+// ---------- canvas layout ----------
+let W = 600, H = 400, G = null;
+function fit(){
+  const w = Math.max(280, Math.round(cv.parentElement.clientWidth - 28));
+  W = w; const narrow = W < 560;
+  H = narrow ? 410 : 400;
+  const dpr = window.devicePixelRatio || 1;
+  cv.width = Math.round(W*dpr); cv.height = Math.round(H*dpr);
+  cv.style.height = H+'px';
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  layout();
+  if(C.ink) draw();
+}
+function layout(){
+  const narrow = W < 560;
+  const x0 = narrow ? 74 : 110, x1 = W - (narrow ? 86 : 120), y0 = 62, y1 = H - 62;
+  const cy = (y0+y1)/2, pitch = 24, hb = S.cells*pitch;
+  const batTop = cy - hb/2, batBot = cy + hb/2;
+  const pts = [[x0,batTop],[x0,y0],[x1,y0],[x1,y1],[x0,y1],[x0,batBot],[x0,batTop]];
+  const seg = []; let L = 0;
+  for(let i=0;i<pts.length-1;i++){ const a=pts[i], b=pts[i+1], l=Math.hypot(b[0]-a[0],b[1]-a[1]); seg.push({a,b,l,s:L}); L+=l; }
+  const xs = x0 + (x1-x0)*0.32, xa1 = x0 + (x1-x0)*0.7, xa2 = (x0+x1)/2;
+  const bulbs = []; const n = S.bulbs;
+  for(let k=0;k<n;k++){ const yb = y0 + (k+1)*(y1-y0)/(n+1); bulbs.push({x:x1, y:yb, s: seg[0].l + seg[1].l + (yb-y0)}); }
+  G = {narrow,x0,x1,y0,y1,cy,pitch,hb,batTop,batBot,seg,L,xs,xa1,xa2,bulbs,r:15};
+}
+function at(s){
+  s = ((s % G.L) + G.L) % G.L;
+  for(const g of G.seg){ if(s <= g.s + g.l){ const t = (s-g.s)/g.l; return [g.a[0]+(g.b[0]-g.a[0])*t, g.a[1]+(g.b[1]-g.a[1])*t, g]; } }
+  const g = G.seg[G.seg.length-1]; return [g.b[0], g.b[1], g];
+}
+// energy carried, as a fraction of the most a dot can carry (3 cells)
+function fillAt(s){
+  s = ((s % G.L) + G.L) % G.L;
+  const E = S.cells*CELL_V/(3*CELL_V), n = G.bulbs.length, r = G.r+10;
+  if(s >= G.L - G.hb) return E*(s-(G.L-G.hb))/G.hb;
+  if(s < G.bulbs[0].s - r) return E;
+  for(let k=0;k<n;k++){
+    const b = G.bulbs[k];
+    if(s < b.s - r) return E*(1-k/n);
+    if(s <= b.s + r) return E*(1-(k + (s-(b.s-r))/(2*r))/n);
+  }
+  return 0;
+}
+
+// ---------- drawing ----------
+function line(x1,y1,x2,y2,w,c,dash){ ctx.beginPath(); ctx.setLineDash(dash||[]); ctx.lineWidth=w; ctx.strokeStyle=c; ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke(); ctx.setLineDash([]); }
+function text(t,x,y,o){ o=o||{}; ctx.font=(o.b?'700 ':'400 ')+(o.s||14)+'px '+(o.f||"'Atkinson Hyperlegible', 'Segoe UI', sans-serif"); ctx.fillStyle=o.c||C.ink; ctx.textAlign=o.a||'center'; ctx.textBaseline=o.bl||'middle'; ctx.fillText(t,x,y); }
+function ring(x,y,r){
+  const pulse = reduce ? 0 : Math.max(0, Math.sin(S.ringT*Math.PI*2)) * (S.ringT<3 ? 4 : 0);
+  ctx.beginPath(); ctx.setLineDash([6,4]); ctx.lineWidth=3; ctx.strokeStyle=C.focus; ctx.arc(x,y,r+pulse,0,Math.PI*2); ctx.stroke(); ctx.setLineDash([]);
+}
+function meter(x,y,letter){
+  ctx.beginPath(); ctx.arc(x,y,14,0,Math.PI*2); ctx.fillStyle=C.card; ctx.fill(); ctx.lineWidth=2.5; ctx.strokeStyle=C.ink; ctx.stroke();
+  text(letter,x,y+1,{b:1,s:15});
+}
+function chevron(x,y,dx,dy){
+  ctx.save(); ctx.translate(x,y); ctx.rotate(Math.atan2(dy,dx));
+  ctx.beginPath(); ctx.moveTo(-5,-6); ctx.lineTo(3,0); ctx.lineTo(-5,6); ctx.lineWidth=2.5; ctx.strokeStyle=C.elec; ctx.stroke(); ctx.restore();
+}
+function draw(){
+  const m = model(), g = G;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = C.card; ctx.fillRect(0,0,W,H);
+  // wires (with gaps for battery and switch)
+  const ink = C.ink;
+  line(g.x0,g.batTop,g.x0,g.y0,3,ink); line(g.x0,g.y0,g.xs-16,g.y0,3,ink); line(g.xs+16,g.y0,g.x1,g.y0,3,ink);
+  line(g.x1,g.y0,g.x1,g.y1,3,ink); line(g.x1,g.y1,g.x0,g.y1,3,ink); line(g.x0,g.y1,g.x0,g.batBot,3,ink);
+  // arrows (conventional current)
+  const arrows = [[(g.x0+g.xs)/2, g.y0+15, 1,0], [(g.xa1+g.x1)/2, g.y0+15, 1,0], [(g.x1+g.xa2)/2, g.y1-15, -1,0], [(g.xa2+g.x0)/2, g.y1-15, -1,0], [g.x0+15, (g.y0+g.batTop)/2, 0,-1]];
+  arrows.forEach(a => chevron(a[0], a[1], a[2], a[3]));
+  // battery
+  for(let k=0;k<S.cells;k++){
+    const yt = g.batTop + k*g.pitch + 7;
+    line(g.x0-17,yt,g.x0+17,yt,2.5,ink);            // long plate (+)
+    line(g.x0-9,yt+9,g.x0+9,yt+9,6,ink);             // short plate (−)
+    if(k < S.cells-1) line(g.x0,yt+9,g.x0,yt+g.pitch,3,ink);
+  }
+  line(g.x0,g.batTop,g.x0,g.batTop+7,3,ink); line(g.x0,g.batTop+(S.cells-1)*g.pitch+16,g.x0,g.batBot,3,ink);
+  text('+', g.x0+26, g.batTop+4, {b:1,s:18});
+  text('−', g.x0+26, g.batBot-4, {b:1,s:18});
+  text(NAME.cells(S.cells), g.x0-24, g.cy, {a:'right',s:14,b:1});
+  // switch
+  ctx.beginPath(); ctx.arc(g.xs-16,g.y0,4,0,7); ctx.arc(g.xs+16,g.y0,4,0,7); ctx.fillStyle=ink; ctx.fill();
+  const ang = S.closed ? 0 : -0.55;
+  line(g.xs-16,g.y0,g.xs-16+32*Math.cos(ang),g.y0+32*Math.sin(ang),3,ink);
+  text(S.closed ? 'Switch closed' : 'Switch open', g.xs, g.y0+32, {s:13, c:C.soft});
+  // bulbs
+  g.bulbs.forEach((b,k) => {
+    if(m.glow>0){
+      const R = g.r + 6 + 26*m.glow;
+      const gr = ctx.createRadialGradient(b.x,b.y,g.r*0.6,b.x,b.y,R);
+      gr.addColorStop(0, hexA(C.energy, 0.55*m.glow+0.15)); gr.addColorStop(1, hexA(C.energy,0));
+      ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(b.x,b.y,R,0,7); ctx.fill();
+      const rays = Math.max(1, Math.round(m.glow*8));
+      for(let i=0;i<rays;i++){ const a = -Math.PI/2 + i*(Math.PI*2/8) + Math.PI/8; line(b.x+Math.cos(a)*(g.r+5), b.y+Math.sin(a)*(g.r+5), b.x+Math.cos(a)*(g.r+5+6+8*m.glow), b.y+Math.sin(a)*(g.r+5+6+8*m.glow), 2.5, C.energy); }
+    }
+    ctx.beginPath(); ctx.arc(b.x,b.y,g.r,0,7); ctx.fillStyle=C.card; ctx.fill(); ctx.lineWidth=2.5; ctx.strokeStyle=ink; ctx.stroke();
+    const d = g.r*0.7; line(b.x-d,b.y-d,b.x+d,b.y+d,2,ink); line(b.x-d,b.y+d,b.x+d,b.y-d,2,ink);
+    text('Bulb '+(k+1), b.x - g.r - 10, b.y, {a:'right', s:13, b:1});
+  });
+  // charge dots
+  drawDots();
+  // ammeters (drawn on top of the dots)
+  meter(g.xa1,g.y0,'A'); text('A1: '+m.A+' A', g.xa1, g.y0-34, {b:1,s:15});
+  meter(g.xa2,g.y1,'A'); text('A2: '+m.A+' A', g.xa2, g.y1+34, {b:1,s:15});
+  // voltmeters (stage 2)
+  if(S.stage===2){
+    const vx = g.x0 + 52;
+    line(vx,g.cy-14,vx,g.batTop-8,1.5,C.soft,[4,3]); line(vx,g.batTop-8,g.x0,g.batTop-8,1.5,C.soft,[4,3]);
+    line(vx,g.cy+14,vx,g.batBot+8,1.5,C.soft,[4,3]); line(vx,g.batBot+8,g.x0,g.batBot+8,1.5,C.soft,[4,3]);
+    meter(vx,g.cy,'V'); text(m.Vbat+' V', vx+20, g.cy+1, {a:'left',b:1,s:15});
+    g.bulbs.forEach(b => {
+      const bx = g.x1 + 50, gap = Math.min(24, (g.y1-g.y0)/(S.bulbs+1)/2 - 4);
+      line(bx,b.y-14,bx,b.y-gap,1.5,C.soft,[4,3]); line(bx,b.y-gap,g.x1,b.y-gap,1.5,C.soft,[4,3]);
+      line(bx,b.y+14,bx,b.y+gap,1.5,C.soft,[4,3]); line(bx,b.y+gap,g.x1,b.y+gap,1.5,C.soft,[4,3]);
+      meter(bx,b.y,'V'); text(m.Vbulb+' V', bx, b.y+gap+12, {b:1,s:14});
+    });
+  }
+  // electrons (extension)
+  drawElectrons();
+  // look-here rings
+  lookTargets().forEach(t => ring(t[0],t[1],t[2]));
+}
+function drawDots(){
+  const spacing = 30, N = Math.floor(G.L/spacing), sp = G.L/N;
+  for(let i=0;i<N;i++){
+    const s = i*sp + S.offset, p = at(s), f = fillAt(s);
+    ctx.beginPath(); ctx.arc(p[0],p[1],7,0,7); ctx.fillStyle=C.card; ctx.fill();
+    if(f>0.001){ ctx.save(); ctx.beginPath(); ctx.arc(p[0],p[1],6,0,7); ctx.clip(); ctx.fillStyle=C.energy; ctx.fillRect(p[0]-7, p[1]+7-14*f, 14, 14*f); ctx.restore(); }
+    ctx.beginPath(); ctx.arc(p[0],p[1],7,0,7); ctx.lineWidth=2; ctx.strokeStyle=C.elec; ctx.stroke();
+  }
+}
+function drawElectrons(){
+  if(S.ext.e){
+    const Ne = Math.floor(G.L/22), spe = G.L/Ne;
+    for(let i=0;i<Ne;i++){
+      const s = i*spe - S.eoff, p = at(s), gg = p[2];
+      if(((s%G.L)+G.L)%G.L > G.L - G.hb - 10) continue;
+      const dx = gg.b[0]-gg.a[0], dy = gg.b[1]-gg.a[1], l = Math.hypot(dx,dy)||1;
+      const nx = dy/l, ny = -dx/l; // outward normal for this clockwise loop
+      const ex = p[0]+nx*13, ey = p[1]+ny*13;
+      line(ex - (dx/l)*5, ey - (dy/l)*5, ex + (dx/l)*5, ey + (dy/l)*5, 3, C.wire);
+    }
+  }
+}
+function hexA(c,a){
+  if(c.startsWith('#')){ let h=c.slice(1); if(h.length===3) h=h.split('').map(x=>x+x).join(''); const n=parseInt(h,16); return 'rgba('+(n>>16&255)+','+(n>>8&255)+','+(n&255)+','+a+')'; }
+  return c;
+}
+function lookTargets(){
+  const g = G, out = [];
+  if(S.stage===1 && (S.phase==='predict'||S.phase==='test')) out.push([g.xa2,g.y1,24]);
+  if(S.stage===1 && S.phase==='result') { out.push([g.xa1,g.y0,24]); out.push([g.xa2,g.y1,24]); }
+  if(S.stage===2 && S.phase==='result') g.bulbs.forEach(b => out.push([g.x1+50,b.y,22]));
+  return out;
+}
+
+// ---------- animation ----------
+// The loop runs only while the canvas is on screen and the tab is visible (Google Sites embeds).
+// Pausing stops time and drawing; it never changes the circuit.
+let last = performance.now(), raf = 0, onScreen = true;
+const live = () => onScreen && !document.hidden;
+window.__frames = 0; window.__paused = false;
+function frame(now){
+  raf = 0;
+  const dt = Math.min(0.05,(now-last)/1000); last = now;
+  if(S.playing && S.closed) step(dt);
+  S.ringT += dt;
+  draw(); window.__frames++;
+  if(live()) raf = requestAnimationFrame(frame);
+}
+function resume(){
+  window.__paused = !live();
+  if(!raf && live()){ last = performance.now(); raf = requestAnimationFrame(frame); }
+}
+if(window.IntersectionObserver) new IntersectionObserver(es => { onScreen = es[es.length-1].isIntersecting; resume(); }).observe(cv);
+document.addEventListener('visibilitychange', resume);
+function step(dt){
+  const v = 50*model().I/0.3; // pixels per second, grows with current
+  S.offset = (S.offset + v*dt) % G.L;
+  S.eoff = (S.eoff + v*dt/4) % G.L;
+}
+
+// ---------- the one route for every change ----------
+function setPlaying(p){ S.playing = p; render(); }
+function change(kind, val){
+  if(kind==='cells'){ if(S.cells===val) return; S.cells = val; }
+  if(kind==='bulbs'){ if(S.bulbs===val) return; S.bulbs = val; }
+  layout();
+  const key = kind+':'+val; S.tried[key] = true;
+  if(S.stage===2 && S.phase==='test' && kind==='bulbs' && val===2) return showResult();
+  const m = model();
+  if(S.stage===1) S.msg = S.closed ? 'With '+NAME.cells(S.cells)+', A1 and A2 both read '+m.A+' A.' + (S.cells>1 ? ' More cells push more charge round each second.' : '') : '';
+  if(S.stage===2) S.msg = S.closed ? 'With '+NAME.cells(S.cells)+' and '+NAME.bulbs(S.bulbs)+', the current is '+m.A+' A. Each bulb gets '+m.Vbulb+' V.' : '';
+  render();
+}
+function toggleSwitch(){
+  if(S.phase==='predict' || (S.stage===2 && S.phase==='test')) return;
+  S.closed = !S.closed;
+  if(S.closed && !reduce) S.playing = true;
+  if(S.stage===1 && S.phase==='test' && S.closed) return showResult();
+  S.msg = S.closed ? '' : 'The switch is open, so the loop is broken. No charge flows, so both ammeters read 0.00 A.';
+  render();
+}
+function lockIn(){
+  const sel = document.querySelector('input[name=pred]:checked');
+  if(!sel) return;
+  S.pred = sel.value; S.phase = 'test'; S.ringT = 0;
+  render();
+}
+function showResult(){
+  S.phase = 'result'; S.ringT = 0; S.msg = '';
+  render();
+}
+function startStage(n){
+  S.stage = n; S.phase = 'predict'; S.pred = null; S.msg = ''; S.tried = {}; S.offset = 0; S.eoff = 0; S.ringT = 0;
+  if(n===1){ S.cells = 1; S.bulbs = 1; S.closed = false; S.playing = false; }
+  else { S.cells = 2; S.bulbs = 1; S.closed = true; S.playing = !reduce; }
+  layout(); render();
+}
+
+// ---------- page text ----------
+function predHTML(n, locked){
+  const P = PRED[n];
+  return '<fieldset><legend>'+P.q+'</legend>' + P.opts.map(o =>
+    '<label class="opt"><input type="radio" name="pred" value="'+o[0]+'"'+(S.pred===o[0]?' checked':'')+(locked?' disabled':'')+'> <span>'+o[1]+'</span></label>').join('') + '</fieldset>';
+}
+function render(){
+  const m = model(), note = $('note');
+  let h = '';
+  if(S.stage===1){
+    if(S.phase==='predict' || S.phase==='test'){
+      h += '<span class="tag">Predict first</span><h2>Before you close the switch</h2>';
+      h += '<p class="bold">This loop has one cell, a switch, one bulb and two ammeters.</p>';
+      h += '<ul><li>An ammeter measures current, the amount of charge flowing past each second.</li><li>A1 is before the bulb. A2 is after the bulb.</li></ul>';
+      h += predHTML(1, S.phase==='test');
+      if(S.phase==='predict') h += '<button class="btn primary" id="lockBtn" type="button" disabled>Lock in my prediction</button>';
+      else h += '<p class="nextline"><b>Next:</b> press Close the switch, under the circuit.</p>';
+    } else {
+      const ok = S.pred === PRED[1].right;
+      h += '<span class="tag'+(ok?' ok':'')+'">'+(ok?'✓ You predicted it':'Not quite. Here is what happened.')+'</span>';
+      h += '<h2>What happened</h2>';
+      h += '<p class="bold">With 1 cell, A1 and A2 both read 0.30 A. The current is the same before and after the bulb.</p>';
+      h += '<ul><li>The bulb does not use up charge. Every dot that goes in comes out the other side.</li><li>The bulb uses energy. The dots go in carrying energy and come out with none.</li></ul>';
+      h += '<p class="lookline"><b>Look:</b> watch the orange fill in each dot as it passes through the bulb.</p>';
+      h += '<p class="nextline"><b>Next:</b> try 2 cells or 3 cells in the Try a change box. Do A1 and A2 still match?</p>';
+      if(S.msg) h += '<p class="bold" id="msg">'+S.msg+'</p>';
+      h += '<button class="btn primary" id="nextStage" type="button">Next: Stage 2 · Voltage →</button>';
+    }
+  } else {
+    if(S.phase==='predict' || S.phase==='test'){
+      h += '<span class="tag">Stage 2 · Voltage</span><h2>Voltage is the push</h2>';
+      h += '<p class="bold">Voltage (also called potential difference) tells you how much energy the battery gives each bit of charge.</p>';
+      h += '<ul><li>Each cell gives 1.50 V, so 2 cells give 3.00 V.</li><li>A voltmeter measures the voltage across one part of the circuit.</li></ul>';
+      h += '<p class="lookline"><b>Look:</b> the voltmeter beside the bulb reads 3.00 V. A1 reads 0.60 A.</p>';
+      h += predHTML(2, S.phase==='test');
+      if(S.phase==='predict') h += '<button class="btn primary" id="lockBtn" type="button" disabled>Lock in my prediction</button>';
+      else h += '<p class="nextline"><b>Next:</b> press 2 bulbs in the Try a change box.</p>';
+    } else {
+      const ok = S.pred === PRED[2].right;
+      h += '<span class="tag'+(ok?' ok':'')+'">'+(ok?'✓ You predicted it':'Not quite. Here is what happened.')+'</span>';
+      h += '<h2>What happened</h2>';
+      h += '<p class="bold">With 2 cells, adding the second bulb made the current go down from 0.60 A to 0.30 A. A battery does not always give the same current.</p>';
+      h += '<ul><li>The charge now has to flow through two bulbs, so less charge flows each second.</li><li>The two bulbs share the voltage. 1.50 V + 1.50 V = 3.00 V.</li><li>Each bulb gets less energy, so both bulbs are dimmer.</li></ul>';
+      h += '<p class="lookline"><b>Look:</b> the voltmeter beside each bulb.</p>';
+      h += '<p class="nextline"><b>Next:</b> try other numbers of cells and bulbs. Change one thing at a time.</p>';
+      if(S.msg) h += '<p class="bold" id="msg">'+S.msg+'</p>';
+    }
+  }
+  h += '<p style="margin:12px 0 0"><button class="btn small" id="restart" type="button">Start this stage again</button></p>';
+  note.innerHTML = h;
+  const lb = $('lockBtn');
+  if(lb){
+    note.querySelectorAll('input[name=pred]').forEach(r => r.addEventListener('change', () => { S.pred = r.value; lb.disabled = false; }));
+    if(S.pred) lb.disabled = false;
+    lb.addEventListener('click', lockIn);
+  }
+  const ns = $('nextStage'); if(ns) ns.addEventListener('click', () => { startStage(2); $('tab2').focus(); });
+  $('restart').addEventListener('click', () => startStage(S.stage));
+  renderControls(m);
+}
+function renderControls(m){
+  // tabs
+  [1,2].forEach(n => { const t = $('tab'+n); if(S.stage===n) t.setAttribute('aria-current','step'); else t.removeAttribute('aria-current'); });
+  // switch, play, step
+  const sw = $('switchBtn');
+  sw.textContent = S.closed ? 'Open the switch' : 'Close the switch';
+  sw.disabled = (S.phase==='predict' || (S.stage===2 && S.phase==='test'));
+  sw.classList.toggle('look', S.stage===1 && S.phase==='test');
+  sw.classList.toggle('pulse', S.stage===1 && S.phase==='test');
+  $('playBtn').textContent = S.playing ? 'Pause' : 'Play';
+  $('playBtn').disabled = !S.closed;
+  $('stepBtn').disabled = !S.closed || S.playing;
+  // try a change
+  const result = S.phase==='result';
+  document.querySelectorAll('#cellsSeg button').forEach(b => {
+    const v = +b.dataset.cells; b.setAttribute('aria-pressed', String(v===S.cells));
+    b.disabled = !result;
+  });
+  $('bulbsRow').hidden = S.stage===1;
+  document.querySelectorAll('#bulbsSeg button').forEach(b => {
+    const v = +b.dataset.bulbs; b.setAttribute('aria-pressed', String(v===S.bulbs));
+    const target = S.stage===2 && S.phase==='test' && v===2;
+    b.disabled = !(result || target);
+    b.classList.toggle('look', target); b.classList.toggle('pulse', target);
+  });
+  let lock = '';
+  if(S.stage===1 && !result) lock = 'The cell buttons unlock after you press Close the switch.';
+  if(S.stage===2 && S.phase==='predict') lock = 'The 2 bulbs button unlocks when you press Lock in my prediction. The Open the switch button stays locked until then.';
+  if(S.stage===2 && S.phase==='test') lock = 'The other buttons unlock after you press 2 bulbs.';
+  $('lockLine').textContent = lock; $('lockLine').hidden = !lock;
+  const list = TRIES[S.stage];
+  const tr = $('tries');
+  if(result){
+    tr.hidden = false;
+    tr.innerHTML = 'Things to try: ' + list.map(t => { const lab = NAME[t[0]](t[1]); return S.tried[t[0]+':'+t[1]] ? '<span class="done">✓ '+lab+'</span>' : lab; }).join(', ') + '.';
+  } else tr.hidden = true;
+  // voltage strip (stage 2)
+  const vs = $('vstrip');
+  vs.hidden = S.stage!==2;
+  if(S.stage===2){
+    if(S.closed){
+      const parts = Array(S.bulbs).fill(m.Vbulb+' V').join(' + ');
+      vs.innerHTML = S.bulbs===1
+        ? '<p><b>Voltage check</b></p><p>The bulb uses '+m.Vbulb+' V.</p><p class="sum">The battery gives '+m.Vbat+' V, so the bulb uses all of it.</p>'
+        : '<p><b>Voltage check</b></p><p>The bulbs use '+parts+' = '+m.sum+' V.</p><p class="sum">The battery gives '+m.Vbat+' V, so the voltages add up.</p>';
+    } else vs.innerHTML = '<p><b>Voltage check</b></p><p>The switch is open, so no charge flows. The bulbs get no energy.</p>';
+  }
+  // extension
+  $('extENote').hidden = !S.ext.e;
+  $('extJNote').hidden = !S.ext.j;
+  $('extJNote').textContent = 'A coulomb is a large bundle of charge. With '+NAME.cells(S.cells)+', each coulomb gets '+m.Vbat+' joules (J) of energy from the battery. That is what '+m.Vbat+' V means.';
+  // screen reader readings
+  $('live').textContent = 'A1 reads '+m.A+' A. A2 reads '+m.A+' A.' + (S.stage===2 ? ' The battery gives '+m.Vbat+' V. Each bulb uses '+m.Vbulb+' V.' : '');
+}
+
+// ---------- wiring up ----------
+$('switchBtn').addEventListener('click', toggleSwitch);
+$('playBtn').addEventListener('click', () => setPlaying(!S.playing));
+$('stepBtn').addEventListener('click', () => { step(0.4); draw(); });
+document.querySelectorAll('#cellsSeg button').forEach(b => b.addEventListener('click', () => change('cells', +b.dataset.cells)));
+document.querySelectorAll('#bulbsSeg button').forEach(b => b.addEventListener('click', () => change('bulbs', +b.dataset.bulbs)));
+document.querySelectorAll('.stage-tab').forEach(b => b.addEventListener('click', () => startStage(+b.dataset.stage)));
+$('extE').addEventListener('change', e => { S.ext.e = e.target.checked; render(); });
+$('extJ').addEventListener('change', e => { S.ext.j = e.target.checked; render(); });
+new ResizeObserver(() => requestAnimationFrame(fit)).observe(cv.parentElement);
+
+readColours(); themeLabel(); fit(); startStage(1);
+resume();
+})();
+</script>
+</body>
+</html>

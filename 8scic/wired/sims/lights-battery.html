@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head><meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lights and the battery</title>
+<meta name="description" content="Join Kai's lights in series or in parallel and see how long the battery bank lasts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,700..900&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F3F5F2;--card:#FFFFFF;--ink:#16222F;--soft:#52606C;--line:#D4DAD6;--wire:#24476B;--hv:#F2B705;--hvwash:#FFF4CC;--prac:#1D7F55;--pracwash:#E2F3EA;--done:#8A949C;--focus:#d99a00;--elec:#0f7f8d;--elecwash:#e1f1f2;
+--disp:'Archivo','Arial Narrow',system-ui,sans-serif;--body:'Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif;color-scheme:light;
+--lamp:#ffd85c;--lampcore:#fff3c4;--glass:#f7f8f5;--broken:#9aa3aa}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#10171E;--card:#18222C;--ink:#E6ECEF;--soft:#A3AFB8;--line:#2C3A46;--wire:#8DB4DA;--hv:#F5C531;--hvwash:#2E2810;--prac:#4CC38A;--pracwash:#12291E;--done:#5E6A73;--focus:#f5c03a;--elec:#4cc9d6;--elecwash:#10292c;color-scheme:dark;--glass:#25313c;--broken:#6b7780}}
+:root[data-theme="dark"]{--paper:#10171E;--card:#18222C;--ink:#E6ECEF;--soft:#A3AFB8;--line:#2C3A46;--wire:#8DB4DA;--hv:#F5C531;--hvwash:#2E2810;--prac:#4CC38A;--pracwash:#12291E;--done:#5E6A73;--focus:#f5c03a;--elec:#4cc9d6;--elecwash:#10292c;color-scheme:dark;--glass:#25313c;--broken:#6b7780}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;overflow-wrap:break-word}
+.wrap{max-width:1160px;margin:0 auto;padding:0 16px}
+h1,h2,h3{font-family:var(--disp);line-height:1.12;margin:0}
+p{margin:0 0 .7em}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:18px 0 6px}
+.pill{display:inline-block;font-weight:700;font-size:.88rem;padding:3px 10px;border:2px solid var(--ink);border-radius:999px}
+.themebtn{border:2px solid var(--ink);background:var(--card);border-radius:999px;padding:5px 12px;font-size:.9rem;font-weight:700}
+header h1{font-size:clamp(2rem,6vw,3.2rem);font-weight:900;font-stretch:118%;margin:10px 0 6px}
+.lede{font-size:1.1rem;color:var(--soft);margin-bottom:.4em}
+.kai{border-left:5px solid var(--elec);background:var(--elecwash);padding:10px 14px;border-radius:0 8px 8px 0;max-width:72ch;margin:10px 0 18px}
+.grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:860px){.grid{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.card h2{font-size:1.3rem;font-weight:800;margin-bottom:8px}
+#scene{display:block;width:100%;height:auto}
+.key{font-size:.92rem;color:var(--soft);margin:8px 0 12px}
+.ctrls{display:grid;gap:10px}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.row .lbl{font-weight:700;min-width:13.5em}
+@media (max-width:480px){.row .lbl{min-width:0;width:100%}}
+.seg{display:inline-flex;border:2px solid var(--ink);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:var(--card);padding:6px 14px;font-weight:700;min-height:40px}
+.seg button+button{border-left:2px solid var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.btn{border:2px solid var(--ink);background:var(--card);border-radius:999px;padding:6px 16px;font-weight:700;min-height:40px}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn:disabled,.seg button:disabled{opacity:.45;cursor:not-allowed}
+.quiet{border:0;background:none;padding:4px 2px;text-decoration:underline;color:var(--soft);font-size:.92rem}
+.strip{margin-top:14px;border-top:2px solid var(--line);padding-top:12px;display:grid;gap:10px}
+.readout{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline}
+.readout .name{font-weight:700}
+.readout .val{font-family:var(--disp);font-weight:800;font-size:1.35rem}
+.bar{position:relative;height:22px;border-radius:6px;background:var(--paper);border:1px solid var(--line);overflow:hidden}
+.bar span{position:absolute;left:0;top:0;bottom:0;background:var(--elec);transition:width .4s ease}
+.scale{display:flex;justify-content:space-between;font-size:.8rem;color:var(--soft)}
+.work{background:var(--paper);border-radius:10px;padding:10px 12px;font-size:.95rem}
+.work ol{margin:6px 0 0;padding-left:1.3em}
+.work li{margin-bottom:4px}
+.hidden-note{color:var(--soft);font-size:.95rem}
+.guide .stepno{font-size:.85rem;color:var(--soft);font-weight:700;margin-bottom:2px}
+.guide h3{font-size:1.2rem;margin-bottom:8px}
+.choices{display:grid;gap:8px;margin:10px 0}
+.choice{display:flex;gap:10px;align-items:flex-start;border:2px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--card);text-align:left;width:100%}
+.choice[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.choice .dot{flex:0 0 18px;height:18px;border-radius:50%;border:2px solid var(--ink);margin-top:3px}
+.choice[aria-pressed="true"] .dot{background:var(--ink)}
+.choice:disabled{cursor:default}
+.locked{font-size:.92rem;color:var(--soft)}
+.verdict{border-radius:10px;padding:10px 12px;margin:10px 0;background:var(--paper)}
+.verdict.yes{background:var(--pracwash);border-left:5px solid var(--prac)}
+.verdict.no{border-left:5px solid var(--soft)}
+.ticklist{list-style:none;padding:0;margin:8px 0}
+.ticklist li{padding:4px 0}
+.ticklist .t{display:inline-block;width:1.5em;font-weight:700}
+.ticklist .ok .t{color:var(--prac)}
+.guide ul.pts{margin:6px 0 10px;padding-left:1.2em}
+.guide ul.pts li{margin-bottom:4px}
+.nav{display:flex;justify-content:space-between;gap:8px;margin-top:14px;border-top:1px solid var(--line);padding-top:12px;flex-wrap:wrap}
+textarea{width:100%;min-height:90px;border:2px solid var(--line);border-radius:10px;padding:8px;background:var(--card)}
+.model{background:var(--paper);border-radius:10px;padding:10px 12px;margin-top:10px}
+.model label{display:flex;gap:8px;align-items:flex-start;margin:6px 0}
+.model input{margin-top:5px;width:18px;height:18px;flex:0 0 18px;accent-color:var(--prac)}
+.lookline{font-size:.92rem;color:var(--soft)}
+.full{grid-column:1/-1}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{text-align:left;vertical-align:top;padding:8px 9px;border-bottom:1px solid var(--line)}
+th{font-family:var(--disp);font-weight:700;font-size:.9rem;border-bottom:2px solid var(--ink)}
+td.num{font-family:var(--disp);font-weight:700;white-space:nowrap}
+td.wait{color:var(--soft)}
+details.simp{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 16px}
+details.simp summary{font-family:var(--disp);font-weight:800;font-size:1.1rem;cursor:pointer}
+details.simp ul{margin:10px 0 0;padding-left:1.2em}
+details.simp li{margin-bottom:6px;max-width:80ch}
+footer{margin:26px 0 30px;padding-top:14px;border-top:1px solid var(--line);color:var(--soft);font-size:.92rem;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* scene */
+svg text{font-family:var(--body);fill:var(--ink)}
+svg .wirep{stroke:var(--ink);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+svg .cellL{stroke:var(--ink);stroke-width:3}
+svg .lbl{font-size:13px}
+svg .lblb{font-size:13px;font-weight:700}
+svg .val{font-size:14px;font-weight:700}
+svg .soft{fill:var(--soft)}
+svg .meter{fill:var(--card);stroke:var(--ink);stroke-width:2.5}
+svg .glass{fill:var(--glass);stroke:var(--ink);stroke-width:2}
+svg .fil{stroke:var(--ink);stroke-width:1.6;fill:none}
+svg .brokenfil{stroke:var(--broken);stroke-width:1.6;fill:none}
+svg .cdot{fill:var(--elec)}
+svg .arrow{fill:var(--elec)}
+@media (prefers-reduced-motion:reduce){.bar span{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="topbar">
+    <span class="pill">Lessons 6–7 · Series and parallel circuits</span>
+    <button class="themebtn" id="themeBtn" type="button" aria-pressed="false">Dark mode: off</button>
+  </div>
+  <h1>Lights and the battery</h1>
+  <p class="lede">Join Kai's lights in series or in parallel, and see how long the battery bank lasts.</p>
+  <p class="kai">Kai wired three lights in a line, and they were dim. Now Kai wants to know which way of joining them makes the battery bank last longest.</p>
+</header>
+
+<main class="grid">
+  <section class="card" aria-labelledby="circuitH">
+    <h2 id="circuitH">Kai's circuit</h2>
+    <svg id="scene" role="img" aria-labelledby="sceneDesc"><desc id="sceneDesc">Circuit diagram</desc></svg>
+    <p class="key" id="key"></p>
+    <div class="ctrls">
+      <div class="row"><span class="lbl" id="nLbl">Number of lights</span>
+        <span class="seg" role="group" aria-labelledby="nLbl">
+          <button type="button" data-n="1" aria-pressed="false">1</button><button type="button" data-n="2" aria-pressed="false">2</button><button type="button" data-n="3" aria-pressed="true">3</button>
+        </span></div>
+      <div class="row"><span class="lbl" id="mLbl">How the lights are joined</span>
+        <span class="seg" role="group" aria-labelledby="mLbl">
+          <button type="button" data-mode="series" aria-pressed="true">In series</button><button type="button" data-mode="parallel" aria-pressed="false">In parallel</button>
+        </span></div>
+      <div class="row"><span class="lbl">Bulb 1</span>
+        <button type="button" class="btn" id="breakBtn" aria-pressed="false">Break Bulb 1</button></div>
+    </div>
+    <div class="strip" aria-live="polite">
+      <div class="readout"><span class="name">Total current from the battery</span><span class="val" id="totalI">0.10 A</span></div>
+      <div>
+        <div class="readout"><span class="name">Hours until the battery is flat</span><span class="val" id="hours"></span></div>
+        <div id="hoursBox"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card guide" aria-labelledby="guideH" id="guide">
+    <h2 id="guideH">What to do</h2>
+    <div id="guideBody"></div>
+    <div class="nav">
+      <button type="button" class="btn" id="backBtn">Back</button>
+      <button type="button" class="btn primary" id="nextBtn">Next</button>
+    </div>
+  </section>
+
+  <section class="card full" aria-labelledby="resH">
+    <h2 id="resH">Your results</h2>
+    <p class="key">The table fills in when you try each circuit with no broken bulb.</p>
+    <div class="tbl"><table id="results"><thead><tr><th>Circuit</th><th>Total current from the battery</th><th>Hours until the battery is flat</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <details class="simp full">
+    <summary>Where this model simplifies</summary>
+    <ul>
+      <li>Each bulb has the same fixed resistance of 40 Ω (ohms). A real bulb's resistance changes as it heats up. Dim bulbs stay cooler, so they would take a little more current than shown.</li>
+      <li>Kai's real lights are LED lights. An LED light would not light at all on only 4 V, so we treat them as simple bulbs here.</li>
+      <li>The battery bank is really 12.8 V. We use 12 V to keep the numbers simple.</li>
+      <li>The battery stays at 12 V until it is flat. A real battery's voltage drops slowly as it runs down, and the wires have a little resistance too.</li>
+      <li>Only the lights are switched on. The fridge, pump and laptop are left out.</li>
+      <li>The sim's lights are 40 Ω (0.30 A each). Real bulbs differ, but the pattern is the same.</li>
+    </ul>
+  </details>
+</main>
+
+<footer>
+  <span>Kai's Wired Year · Year 8 Science · Electricity</span>
+</footer>
+</div>
+
+<script>
+(function(){
+'use strict';
+/* ---------- model (matches check_cd.py) ---------- */
+var V = 12, R = 40, E = 1200;
+function rnd(x, dp){ var m = Math.pow(10, dp||0); return Math.floor(x*m + 0.5 + 1e-9)/m; }
+function fmt(x, dp){ return rnd(x, dp).toFixed(dp); }
+function model(n, mode, broken){
+  var bulbs = [], total = 0, i, I;
+  if (mode === 'series' || n === 1){
+    if (broken){
+      for (i=0;i<n;i++) bulbs.push({v:0, i:0, p:0, ok:i!==0});
+    } else {
+      I = V/(n*R);
+      for (i=0;i<n;i++) bulbs.push({v:V/n, i:I, p:(V/n)*I, ok:true});
+      total = I;
+    }
+  } else {
+    for (i=0;i<n;i++){
+      if (broken && i===0) bulbs.push({v:V, i:0, p:0, ok:false});
+      else { I = V/R; bulbs.push({v:V, i:I, p:V*I, ok:true}); total += I; }
+    }
+  }
+  var P = V*total;
+  return {bulbs:bulbs, total:total, P:P, hours: P>0 ? E/P : null};
+}
+function bright(b){
+  if (!b.ok) return 'Broken';
+  if (b.p <= 0) return 'Off';
+  var r = b.p/(V*V/R);
+  if (r > 0.5) return 'Bright';
+  if (r > 0.2) return 'Dim';
+  return 'Very dim';
+}
+function hoursText(h){
+  if (h === null) return 'none';
+  var r = rnd(h, 0);
+  return (Math.abs(h-r) < 1e-9 ? '' : 'about ') + r.toLocaleString('en-AU');
+}
+
+/* ---------- state ---------- */
+var S = {n:3, mode:'series', broken:false, step:0,
+  pred:null, predLocked:false, skipped:false,
+  tried:{}, seen:{}, brokeSeen:{series:false, parallel:false},
+  pred2:null, pred2Locked:false, skipped2:false,
+  workShown:0, answer:'', modelShown:false, ticks:[false,false,false]};
+var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+function key(){ return S.n===1 ? '1' : S.n + S.mode; }
+function hoursOpen(){ return S.predLocked || S.skipped; }
+
+/* ---------- theme ---------- */
+var root = document.documentElement, themeBtn = document.getElementById('themeBtn');
+var dq = window.matchMedia('(prefers-color-scheme: dark)');
+function isDark(){ var t = root.getAttribute('data-theme'); return t ? t==='dark' : dq.matches; }
+function paintThemeBtn(){ var d = isDark(); themeBtn.textContent = 'Dark mode: ' + (d?'on':'off'); themeBtn.setAttribute('aria-pressed', d?'true':'false'); }
+try { var saved = localStorage.getItem('kwy-theme-v1'); if (saved==='dark'||saved==='light') root.setAttribute('data-theme', saved); } catch(e){}
+themeBtn.addEventListener('click', function(){
+  var next = isDark() ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  try { localStorage.setItem('kwy-theme-v1', next); } catch(e){}
+  paintThemeBtn(); draw();
+});
+if (dq.addEventListener) dq.addEventListener('change', function(){ paintThemeBtn(); draw(); });
+paintThemeBtn();
+
+/* ---------- scene ---------- */
+var svg = document.getElementById('scene'), NS = 'http://www.w3.org/2000/svg';
+var segs = [], dotsG = null;
+function el(name, attrs, parent, text){
+  var e = document.createElementNS(NS, name);
+  for (var k in attrs) e.setAttribute(k, attrs[k]);
+  if (text !== undefined) e.textContent = text;
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function line(x1,y1,x2,y2,I,parent){
+  el('path',{d:'M'+x1+' '+y1+' L'+x2+' '+y2,'class':'wirep'},parent);
+  segs.push({x1:x1,y1:y1,x2:x2,y2:y2,I:I,len:Math.hypot(x2-x1,y2-y1)});
+}
+function bulb(cx, cy, b, label, parent, horiz){
+  var g = el('g', {}, parent);
+  var r = 15;
+  if (b.ok && b.p > 0){
+    var ratio = b.p/(V*V/R);
+    var gr = r + 4 + 17*Math.sqrt(ratio);
+    el('circle',{cx:cx,cy:cy,r:gr,fill:'var(--lamp)',opacity:(0.25+0.55*ratio).toFixed(2)},g);
+    el('circle',{cx:cx,cy:cy,r:r,fill:'var(--lampcore)',stroke:'var(--ink)','stroke-width':2},g);
+  } else {
+    el('circle',{cx:cx,cy:cy,r:r,'class':'glass'},g);
+  }
+  // filament (a loop like Table 8.1's lamp symbol)
+  if (b.ok){
+    el('path',{d:'M'+(cx-r)+' '+cy+' C '+(cx-6)+' '+(cy-14)+', '+(cx+6)+' '+(cy-14)+', '+(cx+r)+' '+cy,'class':'fil'},g);
+  } else {
+    el('path',{d:'M'+(cx-r)+' '+cy+' C '+(cx-8)+' '+(cy-10)+', '+(cx-5)+' '+(cy-12)+', '+(cx-3)+' '+(cy-11),'class':'brokenfil'},g);
+    el('path',{d:'M'+(cx+3)+' '+(cy-9)+' C '+(cx+5)+' '+(cy-10)+', '+(cx+8)+' '+(cy-8)+', '+(cx+r)+' '+cy,'class':'brokenfil'},g);
+  }
+  return g;
+}
+function battery(cx, cy, parent){
+  // two cells: long line positive (left), short line negative
+  el('rect',{x:cx-22,y:cy-20,width:44,height:40,fill:'var(--card)'},parent);
+  [[-14,22],[-4,12],[6,22],[16,12]].forEach(function(c){
+    el('line',{x1:cx+c[0],y1:cy-c[1]/1,x2:cx+c[0],y2:cy+c[1]/1,'class':'cellL','stroke-width':c[1]===22?3:5},parent);
+  });
+  el('text',{x:cx-26,y:cy-14,'class':'lblb','text-anchor':'end'},parent,'+');
+  el('text',{x:cx+26,y:cy-14,'class':'lblb'},parent,'−');
+}
+function ammeter(cx, cy, parent){
+  el('circle',{cx:cx,cy:cy,r:14,'class':'meter'},parent);
+  el('text',{x:cx,y:cy+5,'class':'lblb','text-anchor':'middle'},parent,'A');
+}
+function draw(){
+  var W = Math.max(300, Math.min(660, svg.parentNode.clientWidth - 32 || 600));
+  var m = model(S.n, S.mode, S.broken);
+  while (svg.lastChild) svg.removeChild(svg.lastChild);
+  el('desc',{id:'sceneDesc'},svg, describe(m));
+  segs = [];
+  var g = el('g',{},svg);
+  var L = 26, Rr = W - 22, H, B, i, x, y, b, lab;
+  var bx = Math.round(L + (Rr-L)*0.30), ax = Math.round(L + (Rr-L)*0.76);
+  var parallel = (S.mode === 'parallel' && S.n > 1);
+  if (!parallel){
+    var T = 62; B = 220; H = 296;
+    // conventional current: + (left of battery) -> left -> up -> right along top -> down -> left -> ammeter -> − (right of battery)
+    line(bx-22, B, L, B, m.total, g);
+    line(L, B, L, T, m.total, g);
+    var xs = [];
+    for (i=0;i<S.n;i++) xs.push(Math.round(L + (Rr-L)*(i+1)/(S.n+1)));
+    var px = L;
+    for (i=0;i<S.n;i++){ line(px, T, xs[i]-15, T, m.total, g); px = xs[i]+15; }
+    line(px, T, Rr, T, m.total, g);
+    line(Rr, T, Rr, B, m.total, g);
+    line(Rr, B, ax+14, B, m.total, g);
+    line(ax-14, B, bx+22, B, m.total, g);
+    for (i=0;i<S.n;i++){
+      b = m.bulbs[i];
+      bulb(xs[i], T, b, 'Bulb '+(i+1), g);
+      el('text',{x:xs[i],y:T-34,'class':'lblb','text-anchor':'middle'},g,'Bulb '+(i+1));
+      el('text',{x:xs[i],y:T+44,'class':'val','text-anchor':'middle','data-v':i},g, b.ok ? fmt(b.v,1)+' V' : '–');
+      el('text',{x:xs[i],y:T+62,'class':'val','text-anchor':'middle','data-i':i},g, fmt(b.i,2)+' A');
+      el('text',{x:xs[i],y:T+80,'class':'lbl soft','text-anchor':'middle','data-b':i},g, bright(b));
+    }
+  } else {
+    var T2 = 50, gap = 92;
+    var ys = []; for (i=0;i<S.n;i++) ys.push(T2 + i*gap);
+    B = ys[S.n-1] + 108; H = B + 76;
+    var cx = Math.round(L + (Rr-L)*0.30);
+    // branch currents
+    var bi = m.bulbs.map(function(q){return q.i;});
+    function above(k){ var s=0; for (var j=0;j<=k;j++) s+=bi[j]; return s; }
+    line(bx-22, B, L, B, m.total, g);
+    // left rail upwards: from B to lowest rung carries total; between rungs carries sum of the rungs above
+    line(L, B, L, ys[S.n-1], m.total, g);
+    for (i=S.n-1;i>0;i--) line(L, ys[i], L, ys[i-1], above(i-1), g);
+    for (i=0;i<S.n;i++){
+      line(L, ys[i], cx-15, ys[i], bi[i], g);
+      line(cx+15, ys[i], Rr, ys[i], bi[i], g);
+    }
+    for (i=0;i<S.n-1;i++) line(Rr, ys[i], Rr, ys[i+1], above(i), g);
+    line(Rr, ys[S.n-1], Rr, B, m.total, g);
+    line(Rr, B, ax+14, B, m.total, g);
+    line(ax-14, B, bx+22, B, m.total, g);
+    for (i=0;i<S.n;i++){
+      b = m.bulbs[i]; y = ys[i];
+      bulb(cx, y, b, 'Bulb '+(i+1), g);
+      var tx = cx + 40;
+      // white backing so labels sit cleanly over the rung wire
+      el('rect',{x:tx-6,y:y-36,width:Math.min(124, Rr-tx-2),height:16,fill:'var(--card)'},g);
+      var t1 = el('text',{x:tx,y:y-24,'class':'lblb'},g,'Bulb '+(i+1)+' · ');
+      el('tspan',{'data-b':i},t1,bright(b));
+      var t2 = el('text',{x:tx,y:y+24,'class':'val'},g);
+      el('tspan',{'data-v':i},t2,b.ok ? fmt(b.v,1)+' V' : '–');
+      el('tspan',{dx:12,'data-i':i},t2,fmt(b.i,2)+' A');
+    }
+  }
+  battery(bx, B, g);
+  el('text',{x:bx,y:B+40,'class':'lblb','text-anchor':'middle'},g,'Battery bank');
+  el('text',{x:bx,y:B+57,'class':'lbl soft','text-anchor':'middle'},g,'12 V, stores 1,200 Wh');
+  ammeter(ax, B, g);
+  el('text',{x:ax,y:B+40,'class':'lblb','text-anchor':'middle'},g,'Ammeter');
+  el('text',{x:ax,y:B+57,'class':'val','text-anchor':'middle'},g,fmt(m.total,2)+' A');
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  svg.setAttribute('width', W); svg.setAttribute('height', H);
+  svg.style.maxWidth = W+'px';
+  dotsG = el('g',{'aria-hidden':'true'},svg);
+  if (reduce.matches) drawArrows(); else placeDots(lastT);
+  document.getElementById('key').textContent = reduce.matches
+    ? 'Next to each bulb you can see the voltage across it, the current through it, and how bright it is. Arrows show the way the current flows, from the + end of the battery round to the − end.'
+    : 'Next to each bulb you can see the voltage across it, the current through it, and how bright it is. Moving dots show the current, from the + end of the battery round to the − end. Faster dots mean a bigger current.';
+  updateStrip(m);
+}
+function describe(m){
+  var s = S.n===1 ? 'One bulb' : S.n+' bulbs '+(S.mode==='series'?'in series':'in parallel');
+  s += ' joined to a 12 volt battery bank. Total current ' + fmt(m.total,2) + ' amps.';
+  m.bulbs.forEach(function(b,i){ s += ' Bulb '+(i+1)+': '+bright(b)+', '+(b.ok?fmt(b.v,1)+' volts, ':'')+fmt(b.i,2)+' amps.'; });
+  return s;
+}
+function drawArrows(){
+  segs.forEach(function(s){
+    if (s.I <= 0 || s.len < 30) return;
+    var ux=(s.x2-s.x1)/s.len, uy=(s.y2-s.y1)/s.len, mx=(s.x1+s.x2)/2, my=(s.y1+s.y2)/2;
+    var px=-uy, py=ux, a=7;
+    el('path',{d:'M'+(mx+ux*a)+' '+(my+uy*a)+' L'+(mx-ux*a+px*a)+' '+(my-uy*a+py*a)+' L'+(mx-ux*a-px*a)+' '+(my-uy*a-py*a)+' Z','class':'arrow'},dotsG);
+  });
+}
+var lastT = 0, SP = 22, K = 130; // px per second per amp
+function placeDots(t){
+  if (!dotsG) return;
+  while (dotsG.lastChild) dotsG.removeChild(dotsG.lastChild);
+  segs.forEach(function(s){
+    if (s.I <= 0) return;
+    var off = (t/1000 * K * s.I) % SP;
+    for (var d = off; d < s.len; d += SP){
+      el('circle',{cx:(s.x1+(s.x2-s.x1)*d/s.len).toFixed(1),cy:(s.y1+(s.y2-s.y1)*d/s.len).toFixed(1),r:3.2,'class':'cdot'},dotsG);
+    }
+  });
+}
+// The dots move only while the circuit is on screen and the tab is visible (Google Sites embeds).
+// lastT is the circuit's own clock: it stops while paused, so the dots carry on from where they were.
+var raf = 0, onScreen = true, prevNow = null;
+function live(){ return onScreen && !document.hidden && !reduce.matches; }
+window.__frames = 0; window.__paused = false;
+function frame(now){
+  raf = 0;
+  if (prevNow !== null) lastT += Math.min(50, now - prevNow);
+  prevNow = now;
+  if (!reduce.matches) placeDots(lastT);
+  window.__frames++;
+  if (live()) raf = requestAnimationFrame(frame);
+}
+function resume(){
+  window.__paused = !live();
+  if (!live()) { prevNow = null; return; }
+  if (!raf) raf = requestAnimationFrame(frame);
+}
+if (window.IntersectionObserver) new IntersectionObserver(function(es){ onScreen = es[es.length-1].isIntersecting; resume(); }).observe(svg);
+document.addEventListener('visibilitychange', resume);
+if (reduce.addEventListener) reduce.addEventListener('change', resume);
+resume();
+if (reduce.addEventListener) reduce.addEventListener('change', draw);
+
+/* ---------- strip: total current and hours ---------- */
+function updateStrip(m){
+  document.getElementById('totalI').textContent = fmt(m.total,2) + ' A';
+  var hEl = document.getElementById('hours'), box = document.getElementById('hoursBox');
+  if (!hoursOpen()){
+    hEl.textContent = 'Hidden';
+    box.innerHTML = '<p class="hidden-note">The hours appear after you press Lock in my prediction in Step 1.</p>';
+    return;
+  }
+  if (m.hours === null){
+    hEl.textContent = 'Not going flat';
+    box.innerHTML = '<p class="hidden-note">No current flows, so the battery is not being used.</p>';
+    return;
+  }
+  hEl.textContent = hoursText(m.hours) + ' hours';
+  var pct = Math.min(100, m.hours/1000*100);
+  var P = V * rnd(m.total,2);
+  var steps = [
+    'Power used = voltage × current = 12 V × ' + fmt(m.total,2) + ' A = ' + fmt(P,1) + ' W',
+    'Hours until the battery is flat = energy stored ÷ power used = 1,200 Wh ÷ ' + fmt(P,1) + ' W = ' + hoursText(m.hours) + ' hours. Wh means watt-hours, a unit of energy.'
+  ];
+  var html = '<div class="bar" role="img" aria-label="'+hoursText(m.hours)+' hours on a scale from 0 to 1,000 hours"><span style="width:'+pct.toFixed(1)+'%"></span></div>' +
+    '<div class="scale"><span>0 hours</span><span>500</span><span>1,000 hours</span></div>';
+  html += '<div class="row" style="margin-top:8px">';
+  if (S.workShown < 2) html += '<button type="button" class="btn" data-work="next">'+(S.workShown===0?'Show the working':'Show the next step')+'</button>';
+  if (S.workShown < 2) html += '<button type="button" class="quiet" data-work="all">Show all steps</button>';
+  if (S.workShown > 0) html += '<button type="button" class="quiet" data-work="hide">Hide the working</button>';
+  html += '</div>';
+  if (S.workShown > 0){
+    html += '<div class="work"><ol>';
+    for (var i=0;i<S.workShown;i++) html += '<li>'+steps[i]+'</li>';
+    html += '</ol></div>';
+  }
+  box.innerHTML = html;
+}
+document.getElementById('hoursBox').addEventListener('click', function(e){
+  var b = e.target.closest('[data-work]'); if (!b) return;
+  var w = b.getAttribute('data-work');
+  S.workShown = w==='next' ? Math.min(2, S.workShown+1) : w==='all' ? 2 : 0;
+  updateStrip(model(S.n, S.mode, S.broken));
+  var f = document.querySelector('#hoursBox [data-work]'); if (f) f.focus();
+});
+
+/* ---------- results table ---------- */
+var ROWS = [['1','1 light'],['2series','2 lights in series'],['3series','3 lights in series'],['2parallel','2 lights in parallel'],['3parallel','3 lights in parallel']];
+function rowParts(k){ var n = +k[0], mode = k.length>1 ? k.slice(1) : 'series'; return model(n, mode, false); }
+function drawResults(){
+  var tb = document.querySelector('#results tbody'), h = '';
+  ROWS.forEach(function(r){
+    var m = rowParts(r[0]), t = S.tried[r[0]];
+    h += '<tr data-row="'+r[0]+'"><td>'+r[1]+'</td>';
+    if (!t) h += '<td class="wait">Not tried yet</td><td class="wait">Not tried yet</td>';
+    else h += '<td class="num">'+fmt(m.total,2)+' A</td>' + (hoursOpen() ? '<td class="num">'+hoursText(m.hours)+' hours</td>' : '<td class="wait">Shown after Step 1</td>');
+    h += '</tr>';
+  });
+  tb.innerHTML = h;
+}
+
+/* ---------- guide ---------- */
+var PRED = [
+  ['series','Three lights in series'],
+  ['parallel','Three lights in parallel'],
+  ['same','Both flatten it at the same time']
+];
+var PRED2 = [['on','They stay on'],['brighter','They get brighter'],['out','They go out']];
+var MODEL_PTS = [
+  'In parallel, the battery supplies more total current (0.90 A) than in series (0.10 A).',
+  'More current uses the battery’s energy faster, so it goes flat sooner. It lasts about 111 hours, not 1,000 hours.',
+  'Table 8.2’s battery-life row should say series lasts longer, but the series bulbs are much dimmer.'
+];
+function choiceHTML(list, chosen, locked, attr){
+  return '<div class="choices" role="group">' + list.map(function(c){
+    return '<button type="button" class="choice" '+attr+'="'+c[0]+'" aria-pressed="'+(chosen===c[0])+'"'+(locked?' disabled':'')+'><span class="dot"></span><span>'+c[1]+'</span></button>';
+  }).join('') + '</div>';
+}
+var STEPS = [
+  function(){ // 0 predict
+    var h = '<p class="stepno">Step 1 of 5</p><h3>Predict first</h3>' +
+      '<p>Kai wants three lights on the battery bank. Kai can join them in series or in parallel.</p>' +
+      '<p><strong>Which way flattens the battery first?</strong></p>' +
+      choiceHTML(PRED, S.pred, S.predLocked, 'data-pred');
+    if (!S.predLocked){
+      h += '<div class="row"><button type="button" class="btn primary" id="lockBtn"'+(S.pred?'':' disabled')+'>Lock in my prediction</button>' +
+        (S.skipped ? '' : '<button type="button" class="quiet" id="skipBtn">Skip the prediction</button>') + '</div>';
+      h += '<p class="locked">'+(S.skipped ? 'You skipped the prediction, so the hours are showing.' : 'Choose an answer, then press Lock in my prediction. The hours under the circuit stay hidden until you do.')+'</p>';
+    } else {
+      h += '<p class="verdict">Your prediction: '+label(PRED,S.pred)+'. Press Next to test it.</p>';
+    }
+    return h;
+  },
+  function(){ // 1 test
+    var a = S.seen['3series'], b = S.seen['3parallel'];
+    var ms = rowParts('3series'), mp = rowParts('3parallel');
+    var h = '<p class="stepno">Step 2 of 5</p><h3>Test it</h3>' +
+      '<p>Set Number of lights to 3. Try In series, then In parallel.</p>' +
+      '<p>Read Hours until the battery is flat each time.</p>' +
+      '<ul class="ticklist">' +
+      '<li class="'+(a?'ok':'')+'"><span class="t">'+(a?'✓':'○')+'</span>3 lights in series: '+(a?hoursText(ms.hours)+' hours':'not tried yet')+'</li>' +
+      '<li class="'+(b?'ok':'')+'"><span class="t">'+(b?'✓':'○')+'</span>3 lights in parallel: '+(b?hoursText(mp.hours)+' hours':'not tried yet')+'</li></ul>';
+    if (a && b){
+      var right = S.pred === 'parallel';
+      if (S.predLocked){
+        h += '<div class="verdict '+(right?'yes':'no')+'"><strong>'+(right?'You predicted it.':'Not quite.')+'</strong> Three lights in parallel flatten the battery first. They last '+hoursText(mp.hours)+' hours, and in series they last '+hoursText(ms.hours)+' hours.</div>';
+      } else {
+        h += '<div class="verdict">Three lights in parallel flatten the battery first. They last '+hoursText(mp.hours)+' hours, and in series they last '+hoursText(ms.hours)+' hours.</div>';
+      }
+      h += '<p>Press Next to see why.</p>';
+    } else if (!hoursOpen()){
+      h += '<p class="locked">The hours are still hidden. Press Back to go to Step 1, and lock in your prediction first.</p>';
+    }
+    return h;
+  },
+  function(){ // 2 why
+    var mp = rowParts('3parallel'), ms = rowParts('3series');
+    var bi = fmt(mp.bulbs[0].i,2);
+    return '<p class="stepno">Step 3 of 5</p><h3>Why parallel flattens the battery first</h3>' +
+      '<p><strong>In parallel, each bulb gets the full 12 V, so each one takes its own '+bi+' A.</strong></p>' +
+      '<ul class="pts">' +
+      '<li>Each bulb is on its own branch. The battery supplies all the branch currents added together, so '+bi+' A + '+bi+' A + '+bi+' A = '+fmt(mp.total,2)+' A.</li>' +
+      '<li>In series, the bulbs share the 12 V. So the current is only '+fmt(ms.total,2)+' A, the same through every bulb.</li>' +
+      '<li>A bigger current uses the battery’s energy faster. The parallel bulbs are much brighter, though.</li></ul>' +
+      '<p class="lookline">Look: the current next to each bulb, and the Ammeter by the battery.</p>';
+  },
+  function(){ // 3 textbook
+    var h = '<p class="stepno">Step 4 of 5</p><h3>Check the textbook</h3>' +
+      '<p>Table 8.2 on page 211 says a parallel circuit gives a longer battery life. Your results show the opposite for identical bulbs.</p>' +
+      '<p>The rest of Table 8.2 is right. Only this one row needs fixing.</p>' +
+      '<label for="ans"><strong>Write two sentences for the publisher. Use your currents and hours as evidence.</strong></label>' +
+      '<textarea id="ans">'+esc(S.answer)+'</textarea>';
+    if (!S.modelShown){
+      h += '<div class="row" style="margin-top:8px"><button type="button" class="btn" id="modelBtn">Show a model answer</button></div>';
+    } else {
+      var got = S.ticks.filter(Boolean).length;
+      h += '<div class="model"><p><strong>Model answer</strong></p><p>Three identical bulbs in parallel draw 0.90 A from the battery, but in series they draw only 0.10 A. More current uses the energy faster. The battery lasts about 111 hours in parallel, but 1,000 hours in series.</p>' +
+        '<p><strong>Tick the points your answer includes.</strong></p>' +
+        MODEL_PTS.map(function(p,i){ return '<label><input type="checkbox" data-tick="'+i+'"'+(S.ticks[i]?' checked':'')+'><span>'+p+'</span></label>'; }).join('') +
+        '<p id="tickCount"><strong>You included '+got+' of 3.</strong></p>' +
+        '<button type="button" class="quiet" id="hideModel">Hide the model answer</button></div>';
+    }
+    return h;
+  },
+  function(){ // 4 break a bulb
+    var h = '<p class="stepno">Step 5 of 5</p><h3>Break a bulb</h3>' +
+      '<p>Kai’s three lights are in series. Then Bulb 1 breaks.</p>' +
+      '<p><strong>What happens to Bulb 2 and Bulb 3?</strong></p>' +
+      choiceHTML(PRED2, S.pred2, S.pred2Locked, 'data-pred2');
+    if (!S.pred2Locked && !S.skipped2){
+      h += '<div class="row"><button type="button" class="btn primary" id="lock2Btn"'+(S.pred2?'':' disabled')+'>Lock in my prediction</button>' +
+        '<button type="button" class="quiet" id="skip2Btn">Skip the prediction</button></div>' +
+        '<p class="locked">Choose an answer, then press Lock in my prediction.</p>';
+      return h;
+    }
+    h += '<p>Set Number of lights to 3 and press In series. Then press Break Bulb 1 under the circuit. Then try it In parallel too.</p>';
+    var a = S.brokeSeen.series, b = S.brokeSeen.parallel;
+    h += '<ul class="ticklist"><li class="'+(a?'ok':'')+'"><span class="t">'+(a?'✓':'○')+'</span>Bulb 1 broken, 3 lights in series</li>' +
+      '<li class="'+(b?'ok':'')+'"><span class="t">'+(b?'✓':'○')+'</span>Bulb 1 broken, 3 lights in parallel</li></ul>';
+    if (a){
+      var right = S.pred2 === 'out';
+      h += '<div class="verdict '+(S.pred2Locked&&right?'yes':'no')+'">'+(S.pred2Locked?'<strong>'+(right?'You predicted it.':'Not quite.')+'</strong> ':'')+'In series, Bulb 2 and Bulb 3 go out. There is only one path, so the break stops the current everywhere.</div>';
+    }
+    if (b){
+      h += '<div class="verdict">In parallel, Bulb 2 and Bulb 3 stay on. Each branch makes its own loop through the battery.</div>';
+    }
+    if (a && b) h += '<p>That is why Kai’s old fairy lights all went dark at once. They were in series.</p>';
+    return h;
+  }
+];
+function label(list, k){ for (var i=0;i<list.length;i++) if (list[i][0]===k) return list[i][1]; return ''; }
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+var gb = document.getElementById('guideBody'), backBtn = document.getElementById('backBtn'), nextBtn = document.getElementById('nextBtn');
+function canNext(){
+  if (S.step === 0) return S.predLocked || S.skipped;
+  return S.step < STEPS.length - 1;
+}
+function renderGuide(focusSel){
+  gb.innerHTML = STEPS[S.step]();
+  backBtn.disabled = S.step === 0;
+  nextBtn.disabled = !canNext();
+  nextBtn.textContent = S.step === STEPS.length-1 ? 'Finished' : 'Next';
+  if (focusSel){ var f = gb.querySelector(focusSel); if (f) f.focus(); }
+}
+gb.addEventListener('click', function(e){
+  var t = e.target.closest('button,input'); if (!t) return;
+  if (t.hasAttribute('data-pred')){ S.pred = t.getAttribute('data-pred'); renderGuide('[data-pred="'+S.pred+'"]'); }
+  else if (t.hasAttribute('data-pred2')){ S.pred2 = t.getAttribute('data-pred2'); renderGuide('[data-pred2="'+S.pred2+'"]'); }
+  else if (t.id === 'lockBtn'){ S.predLocked = true; renderGuide(); refresh(); nextBtn.focus(); }
+  else if (t.id === 'skipBtn'){ S.skipped = true; renderGuide(); refresh(); }
+  else if (t.id === 'lock2Btn'){ S.pred2Locked = true; renderGuide('h3'); }
+  else if (t.id === 'skip2Btn'){ S.skipped2 = true; renderGuide('h3'); }
+  else if (t.id === 'modelBtn'){ S.modelShown = true; renderGuide('.model input'); }
+  else if (t.id === 'hideModel'){ S.modelShown = false; renderGuide('#modelBtn'); }
+  else if (t.hasAttribute('data-tick')){ S.ticks[+t.getAttribute('data-tick')] = t.checked; document.getElementById('tickCount').innerHTML = '<strong>You included '+S.ticks.filter(Boolean).length+' of 3.</strong>'; }
+});
+gb.addEventListener('input', function(e){ if (e.target.id === 'ans') S.answer = e.target.value; });
+backBtn.addEventListener('click', function(){ if (S.step>0){ S.step--; renderGuide('h3'); } });
+nextBtn.addEventListener('click', function(){ if (canNext()){ S.step++; renderGuide('h3'); } });
+
+/* ---------- controls ---------- */
+function refresh(){
+  if (!S.broken) S.tried[key()] = true;
+  if (!S.broken && hoursOpen()) S.seen[key()] = true;
+  if (S.broken && S.n === 3) S.brokeSeen[S.mode] = true;
+  document.querySelectorAll('[data-n]').forEach(function(b){ b.setAttribute('aria-pressed', String(+b.getAttribute('data-n')===S.n)); });
+  document.querySelectorAll('[data-mode]').forEach(function(b){ b.setAttribute('aria-pressed', String(b.getAttribute('data-mode')===S.mode)); });
+  var bb = document.getElementById('breakBtn');
+  bb.textContent = S.broken ? 'Fix Bulb 1' : 'Break Bulb 1';
+  bb.setAttribute('aria-pressed', String(S.broken));
+  draw(); drawResults();
+  if (S.step === 1 || S.step === 4) renderGuide();
+}
+document.querySelectorAll('[data-n]').forEach(function(b){ b.addEventListener('click', function(){ S.n = +b.getAttribute('data-n'); refresh(); }); });
+document.querySelectorAll('[data-mode]').forEach(function(b){ b.addEventListener('click', function(){ S.mode = b.getAttribute('data-mode'); refresh(); }); });
+document.getElementById('breakBtn').addEventListener('click', function(){ S.broken = !S.broken; refresh(); });
+
+var rq = null;
+if (window.ResizeObserver) new ResizeObserver(function(){ if (rq) return; rq = requestAnimationFrame(function(){ rq = null; draw(); }); }).observe(svg.parentNode);
+else window.addEventListener('resize', draw);
+
+refresh(); renderGuide();
+})();
+</script>
+</body>
+</html>
