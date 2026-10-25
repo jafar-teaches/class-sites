@@ -228,7 +228,7 @@ a.tl:hover{text-decoration-color:var(--hv)}
 var store={get:function(k){try{return localStorage.getItem('wired:'+k)}catch(e){return null}},set:function(k,v){try{localStorage.setItem('wired:'+k,v)}catch(e){}}};
 var views=[].slice.call(document.querySelectorAll('[data-view]'));
 function today(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
-function route(){var h=location.hash.replace('#','')||'home';var m=/^l(\d+)(?:-(.+))?$/.exec(h);var id=m?'l'+m[1]:'home';
+function route(){if(!views.length)return;var h=location.hash.replace('#','')||'home';var m=/^l(\d+)(?:-(.+))?$/.exec(h);var id=m?'l'+m[1]:'home';
  if(!document.getElementById(id))id='home';
  views.forEach(function(v){v.hidden=v.id!==id});
  document.title=id==='home'?"Kai's Wired Year":'Lesson '+id.slice(1)+' · '+(document.querySelector('#'+id+' h1')||{}).textContent;
