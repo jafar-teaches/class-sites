@@ -172,6 +172,7 @@ a.tlink:hover{text-decoration-color:currentColor}
 sub,sup{line-height:0}
 .view{display:grid;gap:28px}
 @media (max-width:600px){.list li{grid-template-columns:1fr}.list .when{grid-column:1/-1}.btns{justify-content:flex-start}.lesson{grid-template-columns:minmax(0,1fr)}}
+.pins{min-width:0;position:sticky;top:0;z-index:20;background:var(--bg);margin:-14px -4px -14px;padding:10px 4px;border-bottom:1px solid var(--line,rgba(127,127,127,.25))}.pins .row{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin}.pins .btn{white-space:nowrap;flex:0 0 auto}.pins .row:empty{display:none}@media print{.pins{position:static}}
 </style>
 </head>
 <body>
@@ -183,13 +184,14 @@ sub,sup{line-height:0}
       <div class="eyebrow" id="eyebrow"></div>
       <h1 id="h1"></h1>
     </header>
+    <nav class="pins" aria-label="Class links"><div class="row" id="links"></div></nav>
     <section><h2>Units</h2><div class="units" id="units"></div></section>
     <section><div class="today" id="today"></div></section>
     <section><h2>Up next</h2><ul class="list" id="next"></ul></section>
     <section id="cal-sec" style="scroll-margin-top:12px"><h2>Term calendar</h2><p class="small muted">Tap a day to see the lesson and its links.</p><div class="cal" id="cal"></div></section>
     <section id="dates-sec"><h2>Key dates</h2><div class="dates" id="dates"></div></section>
     <section><h2>Done</h2><p class="small muted">Missed a lesson? Open it from here to catch up.</p><ul class="list" id="done"></ul></section>
-    <section><div class="row" id="links"></div></section>
+    
     <footer id="foot"></footer>
   </div>
   
