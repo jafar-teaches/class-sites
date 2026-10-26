@@ -95,7 +95,7 @@ footer{margin:26px 0 0;padding:16px 0 26px;border-top:1px solid var(--line);colo
   </div>
   <button class="theme" id="themeBtn" type="button">Dark mode</button>
 </header>
-<div class="story"><p>Kai's sister says the bulb eats the electricity, so less goes back to the battery. Kai found two ammeters in the parts box to test her idea.</p></div>
+<div class="story"><p>Kai's sister says the bulb eats the electricity, so less goes back to the battery. Kai takes two ammeters from the parts box to test her idea.</p></div>
 
 <nav class="stages" aria-label="Stages">
   <button class="stage-tab" type="button" data-stage="1" id="tab1">Stage 1 · Current</button>
@@ -470,8 +470,8 @@ function render(){
     }
   } else {
     if(S.phase==='predict' || S.phase==='test'){
-      h += '<span class="tag">Stage 2 · Voltage</span><h2>Voltage is the push</h2>';
-      h += '<p class="bold">Voltage (also called potential difference) tells you how much energy the battery gives each bit of charge.</p>';
+      h += '<span class="tag">Stage 2 · Voltage</span><h2>Voltage</h2>';
+      h += '<p class="bold">Voltage (also called potential difference) is the push from the battery. It tells you how much energy the battery gives each bit of charge.</p>';
       h += '<ul><li>Each cell gives 1.50 V, so 2 cells give 3.00 V.</li><li>A voltmeter measures the voltage across one part of the circuit.</li></ul>';
       h += '<p class="lookline"><b>Look:</b> the voltmeter beside the bulb reads 3.00 V. A1 reads 0.60 A.</p>';
       h += predHTML(2, S.phase==='test');

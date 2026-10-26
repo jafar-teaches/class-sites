@@ -480,7 +480,7 @@ ANIMS.push({id:7, lesson:6, title:'Series and parallel: how the totals add',
   'The current splits. Each branch carries 3 A.',
   'The branches rejoin: 3 A + 3 A = 6 A in the main wire.',
   'Each branch gets the full supply: 12 V across each bulb.',
-  'A bulb breaks. Series: all go out. Parallel: the other stays on.'],
+  'A bulb breaks. In series, all the bulbs go out. In parallel, the other stays on.'],
  svg(){
   let o='';
   o+=`<line x1="480" y1="30" x2="480" y2="520" stroke="var(--line)" stroke-width="2"/>`;
@@ -578,7 +578,7 @@ ANIMS.push({id:9, lesson:10, title:'Circuit breaker and safety switch',
  note:'Mains is AC; the arrows show one moment only. 240 V as the book says (Australian standard is 230 V nominal). The book’s summary calls circuit breakers “safety switches”: keep them separate.',
  steps:[
   'Normal: current flows out on the active wire, back on neutral.',
-  'Fault! The active and neutral wires touch. This is a short circuit.',
+  'A fault: the active and neutral wires touch. This is a short circuit.',
   'Very little resistance, so a huge current flows. Wires get hot.',
   'The circuit breaker trips. The current stops before a fire starts.',
   'Breaker reset, fault fixed. Now the earth wire comes loose.',
@@ -586,7 +586,7 @@ ANIMS.push({id:9, lesson:10, title:'Circuit breaker and safety switch',
   'A person touches the case. Current leaks through them to earth.',
   'The leak is small, so the circuit breaker stays on.',
   'The safety switch detects the leak and cuts the power fast.',
-  'Circuit breaker protects the wiring. Safety switch protects people.'],
+  'A circuit breaker protects the wiring. A safety switch protects people.'],
  svg(){
   let o='';
   // supply
@@ -682,7 +682,7 @@ ANIMS.push({id:11, lesson:7, title:'Total resistance in parallel',
   'The rule gives the same: 1/R = 1/6 + 1/6 = 2/6, so R = 3 Ω.',
   'Swap in a 3 Ω branch. Now 2 A + 4 A = 6 A.',
   'Total R = {{12|6}} = 2 Ω. Check: 1/6 + 1/3 = 1/2.',
-  'More paths, less resistance: the total is always less than the smallest branch.'],
+  'Adding paths lowers the resistance. The total is always less than the smallest branch.'],
  svg(){
   let o='';
   o+=`<line x1="530" y1="30" x2="530" y2="520" stroke="var(--line)" stroke-width="2"/>`;
@@ -763,12 +763,12 @@ ANIMS.push({id:12, lesson:8, title:'The homopolar motor',
 ANIMS.push({id:13, lesson:8, title:'Magnet falling through a copper pipe',
  note:'Magnet drawn N down, falling. Ring below: field through it grows, so its current makes a field up (N facing the magnet’s N): repels. Ring above: field shrinks, its current makes a field down (N facing the magnet’s S): attracts. Both oppose the motion (Lenz).',
  steps:[
-  'A steel slug falls through the pipe as fast as outside it.',
+  'A plain metal slug (not a magnet) falls through the pipe as fast as it falls outside it.',
   'A magnet the same size falls slowly through the same pipe.',
   'Copper is not magnetic. The magnet does not stick to the pipe.',
   'As the magnet moves, the field through each copper ring changes.',
   'This pushes currents round the copper. They are called eddy currents.',
-  'Their magnetic fields oppose the fall. Below repels; above pulls back.',
+  'Their magnetic fields oppose the fall. The ring below repels the magnet and the ring above pulls it back.',
   "The falling magnet's energy is transformed into heat in the copper."],
  svg(){
   let o='';
