@@ -1,6 +1,6 @@
 # class-sites
 
-Class pages for Year 8 Science, Year 9 Science and Year 11 Chemistry.
+Class pages for Year 8 Science, Year 9 Science and VCE Chemistry.
 
 - `8scic/` · Year 8 SEAL Science class hub
 - `8scic/kai/` · Energy unit: Kai's Off-Grid Year
@@ -9,3 +9,4 @@ Class pages for Year 8 Science, Year 9 Science and Year 11 Chemistry.
 - `9sci/transfer/` · Year 9 Science: Energy transfer lessons
 - `11che2/` · Year 11 Chemistry class hub
 - `11che2/exam-revision/` · Unit 2 exam revision
+- `vce-chem/u34/` · VCE Chemistry Units 3&4 course outline (for staff)
