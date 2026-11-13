@@ -9,4 +9,5 @@ Class pages for Year 8 Science, Year 9 Science and VCE Chemistry.
 - `9sci/transfer/` · Year 9 Science: Energy transfer lessons
 - `11che2/` · Year 11 Chemistry class hub
 - `11che2/exam-revision/` · Unit 2 exam revision
+- `12che/green-chemistry/` · Year 12 Chemistry Step-Up: green chemistry principles and SDGs
 - `vce-chem/u34/` · VCE Chemistry Units 3&4 course outline (for staff)

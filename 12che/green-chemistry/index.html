@@ -1,0 +1,683 @@
+<!DOCTYPE html><html lang="en-AU"><head><meta name="robots" content="noindex"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Green Chemistry and the SDGs</title><meta name="description" content="Year 12 Chemistry Step-Up: welcome, green chemistry principles and SDGs."><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#f3f6f3; --surface:#ffffff; --ink:#17231d; --muted:#55635b; --faint:#8a978f; --line:#d6ded7; --tint:#e9efea;
+  --leaf:#1d7550; --leaf-soft:#dcefe3; --sdg:#2858a8; --sdg-soft:#e0e8f6; --amber:#8f5300; --amber-soft:#fbe8c6;
+  --good:#1f7a3d; --good-soft:#dff2e5; --bad:#b3261e; --bad-soft:#fbe2df;
+  --b1:#1d7550; --b1-soft:#dcefe3; --b2:#2858a8; --b2-soft:#e0e8f6; --b3:#8f5300; --b3-soft:#fbe8c6;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111814; --surface:#18211c; --ink:#e6eee8; --muted:#a0aea6; --faint:#6f7d75; --line:#2b3730; --tint:#202a24;
+  --leaf:#6fd3a0; --leaf-soft:#173126; --sdg:#8db3ff; --sdg-soft:#1c2840; --amber:#ffc06a; --amber-soft:#382910;
+  --good:#7fd69a; --good-soft:#163222; --bad:#ff9a92; --bad-soft:#3d1c1a;
+  --b1:#6fd3a0; --b1-soft:#173126; --b2:#8db3ff; --b2-soft:#1c2840; --b3:#ffc06a; --b3-soft:#382910; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111814; --surface:#18211c; --ink:#e6eee8; --muted:#a0aea6; --faint:#6f7d75; --line:#2b3730; --tint:#202a24;
+  --leaf:#6fd3a0; --leaf-soft:#173126; --sdg:#8db3ff; --sdg-soft:#1c2840; --amber:#ffc06a; --amber-soft:#382910;
+  --good:#7fd69a; --good-soft:#163222; --bad:#ff9a92; --bad-soft:#3d1c1a;
+  --b1:#6fd3a0; --b1-soft:#173126; --b2:#8db3ff; --b2-soft:#1c2840; --b3:#ffc06a; --b3-soft:#382910; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+.wrap{max-width:900px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:22px 72px;display:grid;gap:18px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(28px,4.6vw,40px)}
+h2{font-size:24px}
+h3{font-size:19px}
+p{margin:0}
+a{color:var(--leaf)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--sdg);outline-offset:2px}
+.eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+.head{display:grid;gap:12px}
+.toprow{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.toolbtns{display:flex;gap:8px;flex-wrap:wrap}
+.tbtn{appearance:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px 6px 10px;font-size:14.5px;font-weight:700;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.tbtn:hover{border-color:var(--muted)}
+.sub{font-family:var(--display);font-size:20px;color:var(--leaf);font-weight:600}
+.kq{display:flex;gap:10px;align-items:flex-start;font-size:18px;font-weight:700}
+.kq .ico{color:var(--sdg);margin-top:3px}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:12px}
+@media (max-width:680px){.hgrid{grid-template-columns:1fr}}
+.hbox{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px;display:grid;gap:6px;min-width:0}
+.hbox .lab{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.hbox ol,.hbox ul{margin:0;padding-left:22px;display:grid;gap:3px}
+.hbox details summary{cursor:pointer;color:var(--leaf);font-weight:700;font-size:15px}
+.hbox details ul{margin-top:6px}
+
+.prog{display:grid;gap:6px}
+.pbar{height:8px;background:var(--tint);border-radius:999px;overflow:hidden}
+.pbar i{display:block;height:100%;background:var(--leaf);width:0;transition:width .3s}
+.pmeta{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);gap:10px;flex-wrap:wrap}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:thin}
+.tab{appearance:none;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 12px;cursor:pointer;display:grid;gap:0;text-align:left;min-width:max-content}
+.tab b{font-size:15.5px}
+.tab span{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.tab[aria-selected="true"]{border-color:var(--leaf);background:var(--leaf-soft)}
+.tab.done b::after{content:" \2713";color:var(--good)}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px clamp(16px,3vw,28px);display:grid;gap:16px}
+.panel[hidden]{display:none}
+.lead{color:var(--muted);max-width:66ch}
+.task{background:var(--tint);border-radius:10px;padding:12px 16px;display:grid;gap:4px;max-width:70ch}
+.task .lab{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--leaf)}
+.finish{justify-self:start;appearance:none;border:0;background:var(--leaf);color:var(--surface);font-weight:700;border-radius:10px;padding:11px 18px;cursor:pointer;font-size:16px}
+.finish:hover{filter:brightness(1.08)}
+.btn{appearance:none;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:15px}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{border-color:var(--leaf);color:var(--leaf)}
+.btn:disabled{opacity:.45;cursor:default}
+.note{font-size:15px;color:var(--muted)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:680px){.grid2{grid-template-columns:1fr}}
+textarea{width:100%;min-height:76px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;font-size:16px;background:var(--bg);color:var(--ink);resize:vertical}
+select{font:inherit;font-size:15.5px;border:1px solid var(--line);border-radius:8px;padding:7px 10px;background:var(--bg);color:var(--ink);max-width:100%}
+.fb{border-radius:10px;padding:10px 14px;font-size:15.5px;display:grid;gap:4px}
+.fb.ok{background:var(--good-soft);color:var(--ink)} .fb.ok b{color:var(--good)}
+.fb.no{background:var(--bad-soft);color:var(--ink)} .fb.no b{color:var(--bad)}
+.fb.info{background:var(--sdg-soft)}
+
+.aos{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.aosc{border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:4px;align-content:start}
+.aosc .code{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.aosc b{font-size:16px;line-height:1.35}
+.aosc .ch{font-size:14px;color:var(--muted)}
+.score{display:flex;height:44px;border-radius:10px;overflow:hidden;font-weight:700;font-size:14.5px}
+.score div{display:flex;align-items:center;justify-content:center;padding:0 6px;text-align:center;line-height:1.2}
+.score .s1{flex:20;background:var(--b1-soft);color:var(--b1)} .score .s2{flex:30;background:var(--b2-soft);color:var(--b2)} .score .s3{flex:50;background:var(--b3-soft);color:var(--b3)}
+.stepup{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px}
+.stepup li{display:flex;gap:10px;align-items:baseline;border-bottom:1px solid var(--line);padding:6px 0}
+.stepup .n{font-family:var(--mono);font-size:13px;color:var(--muted);flex:none;width:22px}
+.stepup li.today{background:var(--leaf-soft);border-radius:8px;padding:6px 8px;border-bottom-color:transparent}
+
+.route{border:2px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:10px;align-content:start}
+.route.pick{border-color:var(--leaf);background:var(--leaf-soft)}
+.route h3{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.facts{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.facts li{display:grid;grid-template-columns:118px minmax(0,1fr);gap:10px;font-size:15.5px;border-top:1px solid var(--line);padding-top:8px}
+.facts .k{font-family:var(--mono);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;padding-top:3px}
+@media (max-width:420px){.facts li{grid-template-columns:1fr;gap:2px}}
+.big{font-family:var(--display);font-size:26px;font-weight:700;line-height:1}
+
+.pchips{display:flex;flex-wrap:wrap;gap:6px}
+.pchip{font-size:14px;border-radius:999px;padding:3px 11px;background:var(--leaf-soft);color:var(--leaf);font-weight:700}
+.sdgchip{font-size:14px;border-radius:8px;padding:3px 10px;background:var(--sdg-soft);color:var(--sdg);font-weight:700}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+.card{border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:8px;align-content:start;background:var(--surface)}
+.card p{font-size:16px}
+.card .where{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.card.ok{border-color:var(--good);background:var(--good-soft)}
+.card.no{border-color:var(--bad);background:var(--bad-soft)}
+.card .why{font-size:14.5px}
+.card select{width:100%}
+
+.steps{display:grid;gap:14px}
+.step[hidden]{display:none}
+.step{display:grid;gap:12px}
+.stepnav{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:12px}
+.dots{display:flex;gap:6px}
+.dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.dots i.on{background:var(--leaf)}
+.steplab{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.ptable{width:100%;border-collapse:collapse;font-size:15.5px}
+.ptable th{text-align:left;font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:6px 8px;border-bottom:1px solid var(--line)}
+.ptable td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+.ptable td:first-child{font-weight:700;color:var(--leaf);white-space:nowrap}
+.tscroll{overflow-x:auto}
+.sdggrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.sdgt{border-radius:10px;background:var(--sdg-soft);padding:10px 12px;display:grid;gap:2px}
+.sdgt .num{font-family:var(--display);font-size:24px;font-weight:700;color:var(--sdg);line-height:1}
+.sdgt span{font-size:15px;font-weight:700}
+.defbox{border-left:4px solid var(--leaf);background:var(--leaf-soft);border-radius:0 10px 10px 0;padding:10px 14px;max-width:70ch}
+.econ{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:680px){.econ{grid-template-columns:1fr}}
+.econ figure{margin:0;border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:6px}
+.econ svg{width:100%;height:auto;max-width:100%}
+.econ figcaption{font-size:15px}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 4px;font-size:.95em;line-height:1.25}
+.frac>span:first-child{border-bottom:1.5px solid currentColor;padding:0 4px}
+.frac>span:last-child{padding:0 4px}
+.worked{display:grid;gap:6px;background:var(--tint);border-radius:10px;padding:12px 16px;max-width:70ch}
+.worked .line{display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+.worked .why{font-size:14px;color:var(--muted)}
+
+details.extend{border:1px dashed var(--line);border-radius:12px;padding:10px 14px}
+details.extend>summary{cursor:pointer;font-weight:700;color:var(--sdg)}
+details.extend[open]{display:grid;gap:10px}
+details.reveal summary{cursor:pointer;color:var(--leaf);font-weight:700;font-size:15px}
+details.reveal>div{margin-top:8px;display:grid;gap:6px;font-size:15.5px}
+
+.topics{display:flex;flex-wrap:wrap;gap:8px}
+.topic{appearance:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;font-weight:700;cursor:pointer;font-size:15px}
+.topic[aria-pressed="true"]{border-color:var(--sdg);background:var(--sdg-soft);color:var(--sdg)}
+.goals{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px}
+.goals label{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:15px;cursor:pointer}
+.goals input{accent-color:var(--sdg);width:18px;height:18px}
+
+.q{display:grid;gap:8px;border-top:1px solid var(--line);padding-top:14px}
+.q:first-of-type{border-top:0;padding-top:0}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.opt{appearance:none;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 12px;cursor:pointer;font-size:15px}
+.opt[aria-pressed="true"]{border-color:var(--ink);background:var(--tint);font-weight:700}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+
+.scrim{position:fixed;inset:0;background:rgb(0 0 0/.35);z-index:20}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,100%);background:var(--surface);border-left:1px solid var(--line);z-index:21;padding:calc(18px + env(safe-area-inset-top,0px)) max(18px,env(safe-area-inset-right,0px)) calc(18px + env(safe-area-inset-bottom,0px)) 18px;overflow-y:auto;display:grid;gap:12px;align-content:start}
+.drawer dl{margin:0;display:grid;gap:10px}
+.drawer dt{font-weight:700;color:var(--leaf)}
+.drawer dd{margin:0;font-size:15.5px}
+.drawer .rm{background:var(--amber-soft);border-radius:10px;padding:10px 12px;font-size:15px;display:grid;gap:4px}
+.drawer .rm b{color:var(--amber)}
+.x{appearance:none;border:0;background:none;font-size:28px;line-height:1;cursor:pointer;color:var(--muted);justify-self:end}
+
+.board{position:fixed;inset:0;z-index:30;background:var(--bg);display:grid;grid-template-rows:auto 1fr auto;gap:2.2vh;padding:calc(3vh + env(safe-area-inset-top,0px)) max(4vw,env(safe-area-inset-right,0px)) calc(3vh + env(safe-area-inset-bottom,0px)) max(4vw,env(safe-area-inset-left,0px));overflow:hidden}
+.board h2{font-size:clamp(24px,5.4vh,56px)}
+.board .bsub{font-family:var(--display);color:var(--leaf);font-size:clamp(18px,3.4vh,36px);font-weight:600}
+.bgrid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr;gap:2vh 2vw;min-height:0}
+.bbox{border-radius:16px;padding:2vh 2vw;display:grid;gap:1vh;align-content:start;font-size:clamp(16px,3vh,32px);line-height:1.3;min-height:0}
+.bbox .bl{display:flex;gap:.5em;align-items:center;font-family:var(--mono);font-size:.55em;letter-spacing:.08em;text-transform:uppercase}
+.bbox .bl .ico{width:1.6em;height:1.6em}
+.bbox.li{background:var(--b1-soft)} .bbox.li .bl{color:var(--b1)}
+.bbox.kqb{background:var(--b2-soft)} .bbox.kqb .bl{color:var(--b2)}
+.bbox.tyw{background:var(--b3-soft);grid-column:1/-1} .bbox.tyw .bl{color:var(--b3)}
+.bbox ol{margin:0;padding-left:1.3em;display:grid;gap:.6vh}
+.bfoot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.bsc{font-size:clamp(14px,2.4vh,24px);display:grid;gap:.5vh}
+@media (max-width:640px){.bgrid{grid-template-columns:1fr}}
+
+@media print{
+  .tabs,.toolbtns,.finish,.stepnav,.prog,.drawer,.scrim,.board{display:none!important}
+  .panel[hidden],.step[hidden]{display:grid!important}
+  body{background:#fff}
+}
+@media (prefers-reduced-motion:reduce){.pbar i{transition:none}}
+</style>
+
+</head><body>
+<div class="wrap">
+  <header class="head">
+    <div class="toprow">
+      <div class="eyebrow">12CHE · Step-Up · Period 1 of 8</div>
+      <div class="toolbtns">
+        <button class="tbtn" id="kwBtn" type="button"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h11a3 3 0 0 1 3 3v11H7a3 3 0 0 1-3-3z"/><path d="M8 9h6M8 13h6"/></svg>Key words</button>
+        <button class="tbtn" id="boardBtn" type="button"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Show on the board</button>
+      </div>
+    </div>
+    <h1>Welcome to Year 12 Chemistry</h1>
+    <div class="sub">Green chemistry principles and SDGs</div>
+    <div class="kq"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.2a2.6 2.6 0 0 1 5 1c0 1.8-2.5 2.2-2.5 3.8"/><path d="M12 17.2h.01"/></svg><span>What makes one chemical process greener than another?</span></div>
+    <div class="hgrid">
+      <div class="hbox">
+        <div class="lab">Today you will</div>
+        <ol>
+          <li>See what Year 12 Chemistry covers.</li>
+          <li>Decide which of two ways to make ibuprofen is greener.</li>
+          <li>Use green chemistry principles and the SDGs to map the year ahead.</li>
+        </ol>
+      </div>
+      <div class="hbox">
+        <div class="lab">Learning intention</div>
+        <p>To understand how green chemistry principles and the SDGs are used to judge chemical processes across Units 3&amp;4.</p>
+        <div class="lab" style="margin-top:6px">I must be able to</div>
+        <ul>
+          <li>I can name the seven green chemistry principles used in VCE Chemistry.</li>
+          <li>I can identify the principle at work in an example.</li>
+          <li>I can link a Units 3&amp;4 topic to an SDG in one sentence.</li>
+        </ul>
+        <details><summary>Show the Should and Could criteria</summary>
+          <ul>
+            <li><b>Should:</b> I can weigh two principles against each other to judge which process is greener.</li>
+            <li><b>Could:</b> I can calculate the atom economy of a reaction.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+    <div class="prog">
+      <div class="pbar" aria-hidden="true"><i id="pfill"></i></div>
+      <div class="pmeta"><span id="pdone">0 of 6 parts done</span><span id="pleft">About 60 min to go</span></div>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Lesson parts" id="tabs"></div>
+  </header>
+
+    <section class="panel" id="p-welcome" role="tabpanel">
+    <h2>Year 12 Chemistry at a glance</h2>
+    <p class="lead">Each area of study is built around one big question. The SACs and the exam ask you to answer it.</p>
+    <div class="aos">
+      <div class="aosc"><span class="code">Unit 3 · AOS 1 · Ch 1–3</span><b>What are the current and future options for supplying energy?</b><span class="ch">Fuels, food energy, calorimetry, galvanic and fuel cells</span></div>
+      <div class="aosc"><span class="code">Unit 3 · AOS 2 · Ch 4–6</span><b>How can the rate and yield of chemical reactions be optimised?</b><span class="ch">Rates, equilibrium, electrolysis, green hydrogen</span></div>
+      <div class="aosc"><span class="code">Unit 4 · AOS 1 · Ch 7–8</span><b>How are organic compounds categorised and synthesised?</b><span class="ch">Organic families, reaction pathways, atom economy</span></div>
+      <div class="aosc"><span class="code">Unit 4 · AOS 2 · Ch 9–11</span><b>How are organic compounds analysed and used?</b><span class="ch">Titrations, spectroscopy, chromatography, medicines</span></div>
+      <div class="aosc"><span class="code">Unit 4 · AOS 3</span><b>How is scientific inquiry used to investigate the sustainable production of energy and/or materials?</b><span class="ch">Your own investigation, shown as a scientific poster</span></div>
+    </div>
+    <h3>How your study score is made</h3>
+    <div class="score" role="img" aria-label="Unit 3 SACs 20 per cent, Unit 4 SACs 30 per cent, end-of-year exam 50 per cent">
+      <div class="s1">Unit 3 SACs<br>20%</div><div class="s2">Unit 4 SACs<br>30%</div><div class="s3">End-of-year exam · 50%</div>
+    </div>
+    <p class="note">Half your score comes from SACs during the year, so every area of study counts.</p>
+    <h3>Step-Up: 8 periods</h3>
+    <ol class="stepup">
+      <li class="today"><span class="n">1</span><span><b>Today:</b> welcome, green chemistry and SDGs</span></li>
+      <li><span class="n">2</span><span>1A Fossil fuels and 1B Biofuels</span></li>
+      <li><span class="n">3</span><span>1C Fuel for the body</span></li>
+      <li><span class="n">4</span><span>1D Enthalpy changes and combustion</span></li>
+      <li><span class="n">5</span><span>Stoichiometry and limiting reactants</span></li>
+      <li><span class="n">6</span><span>2A Energy from combustion reactions</span></li>
+      <li><span class="n">7</span><span>2A practice</span></li>
+      <li><span class="n">8</span><span>Step-Up quiz, then holiday homework</span></li>
+    </ol>
+    <div class="task"><span class="lab">Now</span><p>Listen as your teacher goes through how the class runs. Then move on to Engage.</p></div>
+    <button class="finish" type="button" data-finish="welcome">I have finished Welcome</button>
+  </section>
+
+    <section class="panel" id="p-engage" role="tabpanel" hidden>
+    <h2>Which is greener?</h2>
+    <p class="lead">Ibuprofen is one of the most used medicines in the world. Here are two real ways to make it. Both give the same pure ibuprofen.</p>
+    <div class="grid2">
+      <div class="route" id="routeA">
+        <h3>Route A</h3>
+        <ul class="facts">
+          <li><span class="k">Steps</span><span><span class="big">6</span> reaction steps</span></li>
+          <li><span class="k">Atoms used</span><span><span class="big">40%</span> of the atoms in the reactants end up in the ibuprofen.</span></li>
+          <li><span class="k">Extra chemicals</span><span>Aluminium chloride is used up in the first step. It becomes a large amount of aluminium waste that must be treated.</span></li>
+          <li><span class="k">Hazards</span><span>Uses several corrosive reagents, including aluminium chloride.</span></li>
+        </ul>
+      </div>
+      <div class="route" id="routeB">
+        <h3>Route B</h3>
+        <ul class="facts">
+          <li><span class="k">Steps</span><span><span class="big">3</span> reaction steps</span></li>
+          <li><span class="k">Atoms used</span><span><span class="big">77%</span> of the atoms in the reactants end up in the ibuprofen. The only by-product is acetic acid, which can be collected and sold.</span></li>
+          <li><span class="k">Extra chemicals</span><span>Catalysts speed up each step. They are recovered and reused.</span></li>
+          <li><span class="k">Hazards</span><span>Uses hydrogen fluoride, a very toxic and corrosive acid. It is kept in a closed system and reused.</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="task"><span class="lab">Decide</span><p>With a partner, choose the route you think is greener. Write one reason. There is no penalty for changing your mind later.</p></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" type="button" id="pickA" aria-pressed="false">Route A is greener</button>
+      <button class="btn" type="button" id="pickB" aria-pressed="false">Route B is greener</button>
+    </div>
+    <label for="engReason" class="note">My reason</label>
+    <textarea id="engReason" placeholder="Route __ is greener because..."></textarea>
+    <p class="note" id="engNote" hidden>Hold that thought. You will come back to it in Evaluate.</p>
+    <button class="finish" type="button" data-finish="engage">I have finished Engage</button>
+  </section>
+
+    <section class="panel" id="p-explore" role="tabpanel" hidden>
+    <h2>Principle card sort</h2>
+    <p class="lead">You met green chemistry in Year 11. VCE Chemistry uses seven of its twelve principles. Each card below comes from a topic you will study this year.</p>
+    <div class="pchips" aria-label="The seven principles">
+      <span class="pchip">Atom economy</span><span class="pchip">Catalysis</span><span class="pchip">Design for degradation</span><span class="pchip">Design for energy efficiency</span><span class="pchip">Designing safer chemicals</span><span class="pchip">Prevention of wastes</span><span class="pchip">Use of renewable feedstocks</span>
+    </div>
+    <div class="task"><span class="lab">Sort</span><p>For each card, choose the principle it shows best. Open Key words if you need a reminder of what each principle means. Then check your answers.</p></div>
+    <div class="cards" id="cards"></div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <button class="btn primary" type="button" id="checkSort">Check my answers</button>
+      <span class="note" id="sortScore" aria-live="polite"></span>
+    </div>
+    <details class="extend">
+      <summary>Finished the Core work? Try Extend</summary>
+      <p>Some cards fit more than one principle. Choose one card and explain which second principle it also shows, and why.</p>
+      <textarea id="sortExtend" placeholder="The ___ card also shows ___ because..."></textarea>
+      <details class="reveal"><summary>Show possible answers</summary><div>
+        <p><b>Fuel cell car:</b> if its hydrogen is made from water using solar power, it also shows use of renewable feedstocks.</p>
+        <p><b>Green hydrogen:</b> the water it starts from is renewable, so it also shows use of renewable feedstocks.</p>
+        <p><b>Artificial photosynthesis:</b> it runs on sunlight and water, so it also shows use of renewable feedstocks.</p>
+      </div></details>
+    </details>
+    <button class="finish" type="button" data-finish="explore">I have finished Explore</button>
+  </section>
+
+    <section class="panel" id="p-explain" role="tabpanel" hidden>
+    <h2>Three ways to judge sustainability</h2>
+    <div class="steps" id="steps">
+      <div class="step" data-step="1">
+        <span class="steplab">Part 1 of 5</span>
+        <h3>Green chemistry is about design</h3>
+        <div class="defbox"><b>Green chemistry</b> is the design of chemical products and processes that are safer and more sustainable than the ones used before.</div>
+        <p>Chemists Paul Anastas and John Warner wrote twelve principles of green chemistry. VCE Chemistry uses seven of them.</p>
+        <p>The key word is <b>design</b>. A greener process prevents a problem before it starts, so nothing needs cleaning up afterwards.</p>
+      </div>
+      <div class="step" data-step="2" hidden>
+        <span class="steplab">Part 2 of 5</span>
+        <h3>The seven principles</h3>
+        <div class="tscroll"><table class="ptable">
+          <thead><tr><th>Principle</th><th>What it means</th><th>Where you meet it</th></tr></thead>
+          <tbody>
+            <tr><td>Atom economy</td><td>As many reactant atoms as possible end up in the product you want.</td><td>8A Organic reactions</td></tr>
+            <tr><td>Catalysis</td><td>A catalyst gives the same product with less waste, less energy and fewer reagents.</td><td>4B Catalysts, 5D Haber</td></tr>
+            <tr><td>Design for degradation</td><td>A product breaks down into harmless substances after use.</td><td>Year 11 polymers</td></tr>
+            <tr><td>Design for energy efficiency</td><td>A process uses as little energy as possible.</td><td>3E Fuel cells, 5D</td></tr>
+            <tr><td>Designing safer chemicals</td><td>A product does its job with as little toxicity as possible.</td><td>8B, 11 Medicines</td></tr>
+            <tr><td>Prevention of wastes</td><td>It is better to avoid making waste than to treat it later.</td><td>6D Green hydrogen</td></tr>
+            <tr><td>Use of renewable feedstocks</td><td>Raw materials come from plants and other renewable sources, not fossil fuels.</td><td>1B Biofuels, 8A Biodiesel</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="step" data-step="3" hidden>
+        <span class="steplab">Part 3 of 5</span>
+        <h3>Sustainable development and the SDGs</h3>
+        <div class="defbox"><b>Sustainable development</b> meets the needs of people today without stopping future generations from meeting their own needs.</div>
+        <p>In 2015 the United Nations set 17 Sustainable Development Goals (SDGs) to reach by 2030. Chemistry links to all 17, but VCE Chemistry focuses on these nine.</p>
+        <div class="sdggrid">
+          <div class="sdgt"><span class="num">2</span><span>Zero hunger</span></div>
+          <div class="sdgt"><span class="num">6</span><span>Clean water and sanitation</span></div>
+          <div class="sdgt"><span class="num">7</span><span>Affordable and clean energy</span></div>
+          <div class="sdgt"><span class="num">9</span><span>Industry, innovation and infrastructure</span></div>
+          <div class="sdgt"><span class="num">11</span><span>Sustainable cities and communities</span></div>
+          <div class="sdgt"><span class="num">12</span><span>Responsible consumption and production</span></div>
+          <div class="sdgt"><span class="num">13</span><span>Climate action</span></div>
+          <div class="sdgt"><span class="num">14</span><span>Life below water</span></div>
+          <div class="sdgt"><span class="num">15</span><span>Life on land</span></div>
+        </div>
+      </div>
+      <div class="step" data-step="4" hidden>
+        <span class="steplab">Part 4 of 5</span>
+        <h3>From a linear to a circular economy</h3>
+        <p>The third way to judge sustainability is to ask what happens to materials after use.</p>
+        <div class="econ">
+          <figure>
+            <svg viewBox="0 0 300 90" role="img" aria-label="Linear economy: take, make, use, dispose, in a straight line">
+              <g font-family="Atkinson Hyperlegible, sans-serif" font-size="13" text-anchor="middle">
+                <rect x="4" y="30" width="62" height="30" rx="8" fill="var(--tint)" stroke="var(--line)"/><text x="35" y="50" fill="var(--ink)">Take</text>
+                <rect x="80" y="30" width="62" height="30" rx="8" fill="var(--tint)" stroke="var(--line)"/><text x="111" y="50" fill="var(--ink)">Make</text>
+                <rect x="156" y="30" width="62" height="30" rx="8" fill="var(--tint)" stroke="var(--line)"/><text x="187" y="50" fill="var(--ink)">Use</text>
+                <rect x="232" y="30" width="64" height="30" rx="8" fill="var(--bad-soft)" stroke="var(--bad)"/><text x="264" y="50" fill="var(--ink)">Dispose</text>
+                <path d="M66 45h12M142 45h12M218 45h12" stroke="var(--muted)" stroke-width="2" fill="none"/>
+              </g>
+            </svg>
+            <figcaption><b>Linear economy.</b> Resources are taken, made into products, used once and thrown away.</figcaption>
+          </figure>
+          <figure>
+            <svg viewBox="0 0 300 150" role="img" aria-label="Circular economy: make, use, recover, remake, in a loop">
+              <g font-family="Atkinson Hyperlegible, sans-serif" font-size="13" text-anchor="middle">
+                <ellipse cx="150" cy="75" rx="98" ry="52" fill="none" stroke="var(--leaf)" stroke-width="2" stroke-dasharray="5 5"/>
+                <rect x="112" y="8" width="76" height="30" rx="8" fill="var(--leaf-soft)" stroke="var(--leaf)"/><text x="150" y="28" fill="var(--ink)">Make</text>
+                <rect x="220" y="60" width="76" height="30" rx="8" fill="var(--leaf-soft)" stroke="var(--leaf)"/><text x="258" y="80" fill="var(--ink)">Use</text>
+                <rect x="112" y="112" width="76" height="30" rx="8" fill="var(--leaf-soft)" stroke="var(--leaf)"/><text x="150" y="132" fill="var(--ink)">Recover</text>
+                <rect x="4" y="60" width="76" height="30" rx="8" fill="var(--leaf-soft)" stroke="var(--leaf)"/><text x="42" y="80" fill="var(--ink)">Remake</text>
+              </g>
+            </svg>
+            <figcaption><b>Circular economy.</b> Products and wastes are recovered and become the raw materials for something new.</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="step" data-step="5" hidden>
+        <span class="steplab">Part 5 of 5</span>
+        <h3>Why this matters this year</h3>
+        <p>The study design names green chemistry principles in three areas of study. At least one Units 3&amp;4 SAC must ask you to judge sustainability.</p>
+        <div class="tscroll"><table class="ptable">
+          <thead><tr><th>Area of study</th><th>Principles named</th></tr></thead>
+          <tbody>
+            <tr><td>Unit 3 AOS 1</td><td>Design for energy efficiency, use of renewable feedstocks (fuel cells)</td></tr>
+            <tr><td>Unit 3 AOS 2</td><td>Catalysis, design for energy efficiency (rate versus yield)</td></tr>
+            <tr><td>Unit 4 AOS 1</td><td>Use of renewable feedstocks, catalysis, designing safer chemicals, and atom economy calculations</td></tr>
+          </tbody>
+        </table></div>
+        <h3>Atom economy: a first look</h3>
+        <div class="worked">
+          <div class="line"><b>Atom economy</b> = <span class="frac"><span>molar mass of the desired product</span><span>total molar mass of all reactants</span></span> × 100%</div>
+          <div class="line">Ethanol from ethene and water: C<sub>2</sub>H<sub>4</sub>(g) + H<sub>2</sub>O(g) → C<sub>2</sub>H<sub>5</sub>OH(g)</div>
+          <div class="line">Atom economy = <span class="frac"><span>46.0</span><span>28.0 + 18.0</span></span> × 100% = 100%</div>
+          <div class="why">Every reactant atom ends up in the ethanol. Addition reactions like this always have an atom economy of 100%.</div>
+        </div>
+      </div>
+    </div>
+    <div class="stepnav">
+      <button class="btn" type="button" id="stepBack">Back</button>
+      <div class="dots" id="dots" aria-hidden="true"></div>
+      <button class="btn primary" type="button" id="stepNext">Next</button>
+    </div>
+    <details class="extend">
+      <summary>Finished the Core work? Try Extend</summary>
+      <p>Route B for ibuprofen uses these reactants. Calculate its atom economy. Ibuprofen is C<sub>13</sub>H<sub>18</sub>O<sub>2</sub>.</p>
+      <p class="note">Isobutylbenzene, C<sub>10</sub>H<sub>14</sub> · acetic anhydride, C<sub>4</sub>H<sub>6</sub>O<sub>3</sub> · hydrogen, H<sub>2</sub> · carbon monoxide, CO</p>
+      <details class="reveal"><summary>Show the worked solution one step at a time</summary><div id="aeSteps"></div>
+        <button class="btn" type="button" id="aeNext">Show the next step</button></details>
+    </details>
+    <button class="finish" type="button" data-finish="explain">I have finished Explain</button>
+  </section>
+
+    <section class="panel" id="p-elaborate" role="tabpanel" hidden>
+    <h2>Map the year to the SDGs</h2>
+    <p class="lead">Each group takes one topic from this year. You will link it to the SDGs it helps with, then report back to the class in one sentence.</p>
+    <div class="worked">
+      <span class="steplab">Worked example</span>
+      <p><b>Topic:</b> Bioethanol (1B)</p>
+      <div class="pchips"><span class="sdgchip">Goal 7</span><span class="sdgchip">Goal 13</span></div>
+      <p>Bioethanol supports <b>Goal 13 Climate action</b> because the CO<sub>2</sub> released when it burns is partly balanced by the CO<sub>2</sub> the crops absorbed as they grew.</p>
+    </div>
+    <div class="task"><span class="lab">Your turn</span><p>Choose your group's topic. Tick every goal it links to. Then write your best link as one sentence.</p></div>
+    <div class="topics" id="topics"></div>
+    <div id="topicBody" hidden style="display:grid;gap:12px">
+      <p id="topicDesc"></p>
+      <div class="goals" id="goals"></div>
+      <label for="sdgSentence" class="note">Our sentence</label>
+      <textarea id="sdgSentence" placeholder="[Topic] supports Goal __ (name) because..."></textarea>
+      <details class="reveal"><summary>Show possible links</summary><div id="topicLinks"></div></details>
+    </div>
+    <details class="extend">
+      <summary>Finished the Core work? Try Extend</summary>
+      <p>A topic can help one goal and harm another. Choose a topic and describe one way it could work against an SDG.</p>
+      <textarea id="sdgExtend" placeholder="___ could work against Goal __ because..."></textarea>
+      <details class="reveal"><summary>Show a possible answer</summary><div>
+        <p>Growing crops for biofuels uses farmland that could grow food, which can work against <b>Goal 2 Zero hunger</b> and <b>Goal 15 Life on land</b>.</p>
+      </div></details>
+    </details>
+    <button class="finish" type="button" data-finish="elaborate">I have finished Elaborate</button>
+  </section>
+
+    <section class="panel" id="p-evaluate" role="tabpanel" hidden>
+    <h2>Exit ticket</h2>
+    <div class="fb info" id="revealBox">
+      <p><b>The routes revealed.</b> Route A was the original 1960s method. Route B replaced it in the 1990s and won a US green chemistry award in 1997.</p>
+      <p id="yourPick"></p>
+    </div>
+    <div id="quiz"></div>
+    <div class="task"><span class="lab">Last word</span><p>Look back at your Engage reason. Rewrite it using at least two principle names.</p></div>
+    <textarea id="evalReason" placeholder="Route B is greener because... However..."></textarea>
+    <button class="finish" type="button" data-finish="evaluate">I have finished Evaluate</button>
+  </section>
+</div>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="Key words">
+  <button class="x" type="button" id="kwClose" aria-label="Close key words">×</button>
+  <h2>Key words</h2>
+  <dl>
+    <dt>Green chemistry</dt><dd>The design of chemical products and processes that are safer and more sustainable than the ones used before.</dd>
+    <dt>Atom economy</dt><dd>The percentage of the reactants' mass that ends up in the product you want.</dd>
+    <dt>Catalysis</dt><dd>Using a catalyst, a substance that speeds up a reaction without being used up.</dd>
+    <dt>Design for degradation</dt><dd>Making products that break down into harmless substances after use.</dd>
+    <dt>Design for energy efficiency</dt><dd>Making a process use as little energy as possible.</dd>
+    <dt>Designing safer chemicals</dt><dd>Making a product do its job with as little toxicity as possible.</dd>
+    <dt>Prevention of wastes</dt><dd>Avoiding waste in the first place, instead of treating it later.</dd>
+    <dt>Use of renewable feedstocks</dt><dd>Making products from raw materials that can be replaced quickly, mainly plants.</dd>
+    <dt>Feedstock</dt><dd>The raw material a process starts from.</dd>
+    <dt>By-product</dt><dd>A substance made in a reaction that is not the product you want.</dd>
+    <dt>Sustainable development</dt><dd>Meeting the needs of people today without stopping future generations from meeting theirs.</dd>
+    <dt>SDGs</dt><dd>The UN's 17 Sustainable Development Goals, to be reached by 2030.</dd>
+    <dt>Circular economy</dt><dd>A system where products and wastes are recovered and used again, instead of thrown away.</dd>
+  </dl>
+  <div class="rm"><b>Watch out</b><p>"Green" does not just mean "uses plants". A process can use a renewable feedstock and still waste energy or make toxic by-products.</p></div>
+  <div class="rm"><b>Watch out</b><p>A catalyst is not a reactant. It is not used up, so it does not count in atom economy.</p></div>
+</aside>
+
+<div class="board" id="board" hidden role="dialog" aria-label="Board view">
+  <div><div class="bsub">Welcome to Year 12 Chemistry</div><h2>Green chemistry principles and SDGs</h2></div>
+  <div class="bgrid">
+    <div class="bbox li"><div class="bl"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/></svg>Learning intention</div><p>To understand how green chemistry principles and the SDGs are used to judge chemical processes across Units 3&amp;4.</p></div>
+    <div class="bbox kqb"><div class="bl"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.2a2.6 2.6 0 0 1 5 1c0 1.8-2.5 2.2-2.5 3.8"/><path d="M12 17.2h.01"/></svg>Key question</div><p>What makes one chemical process greener than another?</p></div>
+    <div class="bbox tyw" id="bTyw"><div class="bl"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg>Today you will</div>
+      <ol><li>See what Year 12 Chemistry covers.</li><li>Decide which of two ways to make ibuprofen is greener.</li><li>Use green chemistry principles and the SDGs to map the year ahead.</li></ol>
+      <div class="bsc" id="bSc" hidden><b>Success criteria</b><span>I can name the seven green chemistry principles used in VCE Chemistry.</span><span>I can identify the principle at work in an example.</span><span>I can link a Units 3&amp;4 topic to an SDG in one sentence.</span></div>
+    </div>
+  </div>
+  <div class="bfoot"><button class="btn" type="button" id="bScBtn">Show success criteria</button><button class="btn primary" type="button" id="boardClose">Close</button></div>
+</div>
+
+<script>
+(function(){
+const KEY="12che-ori-green-chem-v1";
+let S={};try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{};}catch(e){S={};}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}};
+S.done=S.done||{};S.sort=S.sort||{};S.quiz=S.quiz||{};S.goals=S.goals||{};
+
+const PARTS=[["welcome","Welcome",10],["engage","Engage",8],["explore","Explore",12],["explain","Explain",10],["elaborate","Elaborate",13],["evaluate","Evaluate",7]];
+const tabs=document.getElementById("tabs");
+tabs.innerHTML=PARTS.map(([id,l,m])=>`<button class="tab" role="tab" type="button" id="t-${id}" aria-controls="p-${id}" data-part="${id}"><b>${l}</b><span>${m} min</span></button>`).join("");
+function show(id){
+  PARTS.forEach(([p])=>{document.getElementById("p-"+p).hidden=p!==id;const t=document.getElementById("t-"+p);t.setAttribute("aria-selected",p===id);t.classList.toggle("done",!!S.done[p]);});
+  S.cur=id;save();
+}
+function progress(){
+  const n=PARTS.filter(([p])=>S.done[p]).length;
+  const left=PARTS.filter(([p])=>!S.done[p]).reduce((a,[,,m])=>a+m,0);
+  document.getElementById("pfill").style.width=(100*n/PARTS.length)+"%";
+  document.getElementById("pdone").textContent=`${n} of ${PARTS.length} parts done`;
+  document.getElementById("pleft").textContent=left?`About ${left} min to go (Core work)`:"All parts done";
+}
+tabs.addEventListener("click",e=>{const b=e.target.closest(".tab");if(b){show(b.dataset.part);window.scrollTo({top:0});}});
+document.querySelectorAll("[data-finish]").forEach(b=>b.addEventListener("click",()=>{
+  const id=b.dataset.finish;S.done[id]=true;save();progress();
+  const i=PARTS.findIndex(([p])=>p===id);const nxt=PARTS[i+1];
+  if(nxt){show(nxt[0]);document.getElementById("t-"+nxt[0]).scrollIntoView({block:"nearest",inline:"center"});window.scrollTo({top:0});}
+  else{show(id);b.textContent="Lesson complete";}
+}));
+
+const pa=document.getElementById("pickA"),pb=document.getElementById("pickB"),reason=document.getElementById("engReason");
+function setPick(p){S.pick=p;save();pa.setAttribute("aria-pressed",p==="A");pb.setAttribute("aria-pressed",p==="B");
+  document.getElementById("routeA").classList.toggle("pick",p==="A");document.getElementById("routeB").classList.toggle("pick",p==="B");
+  document.getElementById("engNote").hidden=!p;renderPick();}
+pa.onclick=()=>setPick("A");pb.onclick=()=>setPick("B");
+reason.value=S.reason||"";reason.oninput=()=>{S.reason=reason.value;save();};
+
+const PR=["Atom economy","Catalysis","Design for degradation","Design for energy efficiency","Designing safer chemicals","Prevention of wastes","Use of renewable feedstocks"];
+const CARDS=[
+ ["c1","Bioethanol is made by fermenting sugarcane, instead of making petrol from crude oil.","1B Biofuels",6,"Sugarcane regrows each year. Crude oil took millions of years to form."],
+ ["c2","A hydrogen fuel cell car turns about twice as much of its fuel's chemical energy into useful energy as a petrol engine does.","3E Fuel cells",3,"Less of the fuel's energy is lost as heat, so the car is more energy efficient."],
+ ["c3","An iron catalyst lets the Haber process make ammonia quickly without using an even higher temperature.","5D Compromise equilibrium",1,"The catalyst lowers the activation energy, so the reaction is fast enough at a lower temperature."],
+ ["c4","Ethanol is made by adding water to ethene. Every reactant atom ends up in the ethanol.","8A Organic reactions",0,"All the reactant atoms end up in the product, so the atom economy is 100%."],
+ ["c5","Making hydrogen by splitting water gives only oxygen as a by-product, so there is no CO₂ to capture or treat.","6D Green hydrogen",5,"No harmful by-product forms in the first place, so there is nothing to clean up."],
+ ["c6","A medicine is sold as just one mirror-image form of its molecule, because the other form can cause side effects.","11 Medicines",4,"The product still does its job, but with less risk of harm to the patient."],
+ ["c7","Cutlery made from the bioplastic PLA breaks down in industrial compost after it is used.","Year 11 polymers",2,"The product is designed to break down into harmless substances after use."],
+ ["c8","Biodiesel is made from used cooking oil collected from restaurants.","8A Biodiesel",6,"The oil comes from plants, so it is renewable. Using a waste oil is a bonus."],
+ ["c9","Artificial photosynthesis uses catalysts to split water into hydrogen and oxygen using sunlight.","6D Green hydrogen",1,"Catalysts make the water-splitting reactions happen fast enough to be useful."]
+];
+const cardsEl=document.getElementById("cards");
+cardsEl.innerHTML=CARDS.map(([id,t,w])=>`<div class="card" id="card-${id}"><p>${t}</p><span class="where">Where you meet it: ${w}</span>
+<label class="note" for="sel-${id}">Principle</label><select id="sel-${id}" data-id="${id}"><option value="">Choose a principle</option>${PR.map((p,i)=>`<option value="${i}">${p}</option>`).join("")}</select><div class="why" hidden></div></div>`).join("");
+cardsEl.querySelectorAll("select").forEach(s=>{if(S.sort[s.dataset.id]!==undefined)s.value=S.sort[s.dataset.id];
+  s.onchange=()=>{S.sort[s.dataset.id]=s.value;save();const c=document.getElementById("card-"+s.dataset.id);c.classList.remove("ok","no");c.querySelector(".why").hidden=true;};});
+document.getElementById("checkSort").onclick=()=>{
+  let right=0,answered=0;
+  CARDS.forEach(([id,,,ans,why])=>{const s=document.getElementById("sel-"+id),c=document.getElementById("card-"+id),w=c.querySelector(".why");
+    c.classList.remove("ok","no");
+    if(s.value===""){w.hidden=true;return;}
+    answered++;const ok=+s.value===ans;if(ok)right++;
+    c.classList.add(ok?"ok":"no");w.hidden=false;
+    w.innerHTML=ok?`<b>Correct.</b> ${why}`:`<b>Not quite.</b> Best answer: ${PR[ans]}. ${why}`;});
+  document.getElementById("sortScore").textContent=answered?`${right} of ${CARDS.length} correct${answered<CARDS.length?` (${CARDS.length-answered} not answered yet)`:""}.`:"Choose a principle for at least one card first.";
+};
+const se=document.getElementById("sortExtend");se.value=S.sortExt||"";se.oninput=()=>{S.sortExt=se.value;save();};
+
+const steps=[...document.querySelectorAll(".step")],dots=document.getElementById("dots");
+dots.innerHTML=steps.map(()=>"<i></i>").join("");
+let st=Math.min(S.step||0,steps.length-1);
+function showStep(i){st=i;S.step=i;save();steps.forEach((s,j)=>s.hidden=j!==i);[...dots.children].forEach((d,j)=>d.classList.toggle("on",j===i));
+  document.getElementById("stepBack").disabled=i===0;const n=document.getElementById("stepNext");n.disabled=i===steps.length-1;}
+document.getElementById("stepBack").onclick=()=>showStep(Math.max(0,st-1));
+document.getElementById("stepNext").onclick=()=>showStep(Math.min(steps.length-1,st+1));
+showStep(st);
+const AE=[
+ "Molar mass of ibuprofen, C<sub>13</sub>H<sub>18</sub>O<sub>2</sub> = (13 × 12.0) + (18 × 1.0) + (2 × 16.0) = 206.0 g mol<sup>−1</sup>",
+ "Reactants: C<sub>10</sub>H<sub>14</sub> = 134.0, C<sub>4</sub>H<sub>6</sub>O<sub>3</sub> = 102.0, H<sub>2</sub> = 2.0, CO = 28.0. Total = 266.0 g mol<sup>−1</sup>",
+ `Atom economy = <span class="frac"><span>206.0</span><span>266.0</span></span> × 100% = 77.4%`,
+ "This matches the 77% on the Route B card. The missing 22.6% is the acetic acid by-product."
+];
+let ae=0;const aeEl=document.getElementById("aeSteps"),aeBtn=document.getElementById("aeNext");
+aeBtn.onclick=()=>{if(ae<AE.length){aeEl.insertAdjacentHTML("beforeend",`<div class="worked"><div class="line">${AE[ae]}</div></div>`);ae++;}if(ae>=AE.length)aeBtn.hidden=true;};
+
+const GOALS=[[2,"Zero hunger"],[6,"Clean water and sanitation"],[7,"Affordable and clean energy"],[9,"Industry, innovation and infrastructure"],[11,"Sustainable cities and communities"],[12,"Responsible consumption and production"],[13,"Climate action"],[14,"Life below water"],[15,"Life on land"]];
+const TOPICS=[
+ ["fc","Fuel cells (3E)","Fuel cells turn the chemical energy of hydrogen straight into electricity. The only product is water.",
+  [[7,"they make electricity from hydrogen with water as the only product."],[13,"no CO₂ is released where the energy is used."],[11,"fuel cell buses give cleaner air in cities."]]],
+ ["gh","Green hydrogen (6D)","Green hydrogen is made by splitting water using electricity from solar or wind.",
+  [[7,"it stores solar and wind energy as a clean fuel."],[13,"making it releases no CO₂, unlike hydrogen made from natural gas."],[9,"it needs new electrolysers, pipelines and industries."]]],
+ ["hb","Haber process (5D)","The Haber process makes ammonia, which is used to make most of the world's fertiliser.",
+  [[2,"fertiliser made from ammonia helps farms grow enough food."],[12,"a catalyst and a compromise temperature cut the energy used."],[13,"less energy used means less CO₂ from burning fuel."]]],
+ ["bd","Biodiesel (8A)","Biodiesel is made from plant oils, including used cooking oil, by transesterification.",
+  [[12,"a waste oil becomes a useful fuel."],[13,"it replaces some diesel made from crude oil."],[7,"it gives another fuel option for vehicles and machines."]]],
+ ["rc","Rechargeable batteries (6C)","Secondary cells can be discharged and recharged many times.",
+  [[7,"they store solar and wind energy for later use."],[12,"one battery is reused many times instead of thrown away."],[11,"electric vehicles cut noise and air pollution in cities."]]],
+ ["an","Analysing water and products (9–10)","Titrations, spectroscopy and chromatography tell chemists what is in a sample and how pure it is.",
+  [[6,"testing water samples shows whether water is safe to drink."],[14,"it detects pollutants before they harm life in rivers and oceans."],[12,"checking purity means less product is wasted or recalled."]]]
+];
+const topicsEl=document.getElementById("topics"),tb=document.getElementById("topicBody"),goalsEl=document.getElementById("goals"),sent=document.getElementById("sdgSentence");
+topicsEl.innerHTML=TOPICS.map(([id,l])=>`<button class="topic" type="button" data-t="${id}" aria-pressed="false">${l}</button>`).join("");
+function pickTopic(id){S.topic=id;save();const T=TOPICS.find(t=>t[0]===id);
+  topicsEl.querySelectorAll(".topic").forEach(b=>b.setAttribute("aria-pressed",b.dataset.t===id));
+  tb.hidden=false;document.getElementById("topicDesc").textContent=T[2];
+  const g=S.goals[id]||[];
+  goalsEl.innerHTML=GOALS.map(([n,l])=>`<label><input type="checkbox" id="g-${id}-${n}" value="${n}" ${g.includes(n)?"checked":""}> Goal ${n} ${l}</label>`).join("")+`<label><input type="checkbox" id="g-${id}-other" value="0" ${g.includes(0)?"checked":""}> Another goal</label>`;
+  goalsEl.querySelectorAll("input").forEach(c=>c.onchange=()=>{S.goals[id]=[...goalsEl.querySelectorAll("input:checked")].map(x=>+x.value);save();});
+  document.getElementById("topicLinks").innerHTML=T[3].map(([n,why])=>`<p><span class="sdgchip">Goal ${n}</span> ${GOALS.find(g=>g[0]===n)[1]}, because ${why}</p>`).join("");
+  sent.value=(S.sent||{})[id]||"";
+}
+topicsEl.onclick=e=>{const b=e.target.closest(".topic");if(b)pickTopic(b.dataset.t);};
+sent.oninput=()=>{S.sent=S.sent||{};S.sent[S.topic]=sent.value;save();};
+if(S.topic)pickTopic(S.topic);
+const sx=document.getElementById("sdgExtend");sx.value=S.sdgExt||"";sx.oninput=()=>{S.sdgExt=sx.value;save();};
+
+const Q=[
+ {id:"q1",q:"Which principle is the strongest reason Route B is greener?",o:["Atom economy","Design for degradation","Use of renewable feedstocks"],a:0,
+  why:"77% of reactant atoms end up in ibuprofen, compared with 40% for Route A. Catalysis and prevention of wastes also favour Route B."},
+ {id:"q2",q:"Which principle counts against Route B?",o:["Catalysis","Designing safer chemicals","Design for energy efficiency"],a:1,
+  why:"Hydrogen fluoride is very toxic. It is kept in a closed system and reused, so most chemists still judge Route B greener overall."},
+ {id:"q3",q:"A shampoo bottle is made from polyethene that comes from sugarcane, not crude oil. Which principle is this?",o:["Prevention of wastes","Use of renewable feedstocks","Atom economy"],a:1,
+  why:"Sugarcane is a plant, so it is a renewable feedstock."},
+ {id:"q4",q:"A factory uses heat from one reaction to warm the reactants for the next batch. Which principle is this?",o:["Design for energy efficiency","Catalysis","Designing safer chemicals"],a:0,
+  why:"Reusing heat means less extra energy is needed."},
+ {id:"q5",q:"Which SDG best matches making fertiliser so farms can grow more crops?",o:["Goal 6 Clean water and sanitation","Goal 2 Zero hunger","Goal 14 Life below water"],a:1,
+  why:"More crops means more food, which supports Goal 2."}
+];
+const quiz=document.getElementById("quiz");
+quiz.innerHTML=Q.map((x,i)=>`<div class="q" id="${x.id}"><b>${i+1}. ${x.q}</b><div class="opts">${x.o.map((o,j)=>`<button class="opt" type="button" data-q="${x.id}" data-j="${j}" aria-pressed="false">${o}</button>`).join("")}</div><div class="fb" hidden></div></div>`).join("");
+function mark(id,j){const x=Q.find(q=>q.id===id),box=document.getElementById(id);S.quiz[id]=j;save();
+  box.querySelectorAll(".opt").forEach(b=>{const k=+b.dataset.j;b.setAttribute("aria-pressed",k===j);b.classList.toggle("right",k===x.a&&j===x.a);b.classList.toggle("wrong",k===j&&j!==x.a);});
+  const f=box.querySelector(".fb");f.hidden=false;f.className="fb "+(j===x.a?"ok":"no");
+  f.innerHTML=j===x.a?`<b>Correct.</b> ${x.why}`:`<b>Not quite.</b> The answer is ${x.o[x.a]}. ${x.why}`;}
+quiz.onclick=e=>{const b=e.target.closest(".opt");if(b)mark(b.dataset.q,+b.dataset.j);};
+Object.entries(S.quiz).forEach(([id,j])=>{if(Q.find(q=>q.id===id))mark(id,j);});
+function renderPick(){const y=document.getElementById("yourPick");
+  y.textContent=S.pick?`In Engage you chose Route ${S.pick}. Answer the questions below, then decide whether you would change your choice.`:"Answer the questions below, then decide which route you think is greener.";}
+const er=document.getElementById("evalReason");er.value=S.evalR||"";er.oninput=()=>{S.evalR=er.value;save();};
+if(S.pick)setPick(S.pick);else renderPick();
+
+const dr=document.getElementById("drawer"),sc=document.getElementById("scrim");
+const openD=o=>{dr.hidden=!o;sc.hidden=!o;if(o)document.getElementById("kwClose").focus();};
+document.getElementById("kwBtn").onclick=()=>openD(true);
+document.getElementById("kwClose").onclick=()=>openD(false);sc.onclick=()=>openD(false);
+
+const bd=document.getElementById("board"),bsc=document.getElementById("bSc"),bscBtn=document.getElementById("bScBtn");
+const openB=o=>{bd.hidden=!o;document.body.style.overflow=o?"hidden":"";if(o)document.getElementById("boardClose").focus();};
+document.getElementById("boardBtn").onclick=()=>openB(true);
+document.getElementById("boardClose").onclick=()=>openB(false);
+bscBtn.onclick=()=>{bsc.hidden=!bsc.hidden;bscBtn.textContent=bsc.hidden?"Show success criteria":"Hide success criteria";};
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(!bd.hidden)openB(false);else if(!dr.hidden)openD(false);}});
+
+progress();
+const first=PARTS.find(([p])=>!S.done[p]);
+show(S.cur&&!S.done[S.cur]?S.cur:(first?first[0]:"evaluate"));
+})();
+</script>
+</body></html>
