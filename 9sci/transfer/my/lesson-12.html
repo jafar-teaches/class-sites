@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 12: Chapter 9 summary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<style>
+:root{
+  --bg:#eef3f1;--surface:#ffffff;--ink:#1c2b3a;--muted:#51616f;--line:#cfdad6;--soft:#e3ebe8;
+  --focus:#d99a00;--good:#2d7a46;--bad:#b3261e;--book:#fff4d6;--bookline:#d99a00;
+  --hot:#cf4a1f;--cold:#2f6fb0;--cond:#7a4fb0;--conv:#0f7d74;--rad:#b0336e;
+  --display:"Bricolage Grotesque",system-ui,sans-serif;--body:"Atkinson Hyperlegible",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141d24;--surface:#1c2832;--ink:#e4ecf0;--muted:#9fb0bc;--line:#2d3d49;--soft:#24323d;
+  --focus:#f2bf3a;--good:#7cc596;--bad:#f08a80;--book:#2d2710;--bookline:#f2bf3a;
+  --hot:#ff7a4d;--cold:#6aa7e8;--cond:#b892ee;--conv:#4cc2b6;--rad:#ee7fb0;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141d24;--surface:#1c2832;--ink:#e4ecf0;--muted:#9fb0bc;--line:#2d3d49;--soft:#24323d;
+  --focus:#f2bf3a;--good:#7cc596;--bad:#f08a80;--book:#2d2710;--bookline:#f2bf3a;
+  --hot:#ff7a4d;--cold:#6aa7e8;--cond:#b892ee;--conv:#4cc2b6;--rad:#ee7fb0;color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:20px/1.5 var(--body)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.wrap{max-width:900px;margin:0 auto;padding:18px 16px 36px}
+.back{display:inline-block;font:700 1rem var(--body);color:var(--ink);text-decoration:underline;text-underline-offset:3px;padding:8px 0}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.top .t{font:800 1.3rem var(--display)}
+.prog{display:flex;gap:6px;align-items:center;font-size:.95rem;color:var(--muted)}
+.bar{width:160px;height:10px;border-radius:99px;background:var(--soft);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ink);border-radius:99px;transition:width .3s}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px 24px}
+.part{font:700 .85rem var(--body);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 4px}
+h1{font:800 clamp(1.8rem,4vw,2.4rem)/1.1 var(--display);margin:0 0 12px}
+h2{font:800 1.6rem/1.2 var(--display);margin:0 0 12px}
+p{margin:0 0 12px}
+.big{font-size:1.15rem}
+.defn{border:3px solid var(--mc,var(--ink));border-radius:14px;padding:12px 16px;margin:0 0 14px;font-size:1.1rem}
+.defn b{color:var(--mc,var(--ink))}
+ul.pts{margin:0 0 12px;padding-left:22px}
+ul.pts li{margin-bottom:6px}
+.scene{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:8px;margin:0 0 12px}
+.scene svg{display:block;width:100%;height:auto;max-height:340px}
+.btn{font:700 1.05rem var(--body);color:var(--ink);background:var(--surface);border:2px solid var(--ink);border-radius:999px;min-height:48px;padding:8px 20px;cursor:pointer}
+.btn.primary{background:var(--ink);color:var(--surface)}
+.btn:disabled{opacity:.4;cursor:default}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.scene .row{margin:8px 4px 4px}
+.look{font-size:1rem;color:var(--muted)}
+.rule{background:var(--book);border:2px solid var(--bookline);border-radius:14px;padding:12px 16px;font-weight:700}
+.book{display:flex;gap:12px;align-items:flex-start;background:var(--book);border:2px dashed var(--bookline);border-radius:14px;padding:12px 16px;margin-top:16px}
+.book .ic{font-size:1.5rem;line-height:1}
+.book .h{font-weight:700;display:block}
+.choices{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 4px}
+.choice{font:700 1.05rem var(--body);color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:14px;min-height:52px;padding:10px 18px;cursor:pointer}
+.choice[aria-pressed="true"]{border-color:var(--ink);background:var(--surface)}
+.choice.ok{border-color:var(--good);box-shadow:inset 0 0 0 2px var(--good)}
+.choice.no{border-color:var(--bad)}
+.fb{margin:8px 0 0;font-size:1.05rem}
+.fb.ok b{color:var(--good)}.fb.no b{color:var(--bad)}
+.fill .sent{font-size:1.2rem;line-height:2.4;margin:0 0 6px}
+.blank{display:inline-block;min-width:120px;min-height:44px;vertical-align:middle;border:none;border-bottom:3px solid var(--ink);background:var(--soft);border-radius:8px 8px 0 0;font:700 1.1rem var(--body);color:var(--ink);padding:4px 12px;cursor:pointer;text-align:center}
+.blank.ok{border-bottom-color:var(--good);color:var(--good)}
+.blank.no{border-bottom-color:var(--bad);color:var(--bad)}
+.bank{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
+.bank .lab{width:100%;font-size:.95rem;color:var(--muted)}
+.chip{font:700 1.05rem var(--body);background:var(--surface);color:var(--ink);border:2px solid var(--ink);border-radius:12px;min-height:48px;padding:6px 18px;cursor:pointer}
+.chip:disabled{opacity:.3}
+.match{display:grid;gap:12px}
+.match .m{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:var(--bg)}
+.match .m p{margin:0 0 4px;font-weight:700}
+.reveal{margin-top:12px}
+.reveal>summary{display:inline-flex;gap:6px;list-style:none;cursor:pointer;font:700 .9rem var(--body);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 14px;min-height:38px;align-items:center}
+.reveal>summary::-webkit-details-marker{display:none}
+.reveal>summary::before{content:"▸"}.reveal[open]>summary::before{content:"▾"}
+.reveal .body{margin-top:8px;padding:8px 14px;border-left:3px solid var(--line);font-size:1.05rem}
+.checklist{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:6px}
+.checklist label{display:flex;gap:12px;align-items:flex-start;cursor:pointer;min-height:48px;padding:6px 0;font-size:1.1rem}
+.checklist input{width:26px;height:26px;margin-top:3px;accent-color:var(--good);flex:none}
+.pager{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+footer{margin-top:24px;color:var(--muted);font-size:.9rem;text-align:center}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 12px}
+.two .defn{margin:0}
+@media (max-width:600px){.two{grid-template-columns:1fr}}
+.tbl{width:100%;border-collapse:collapse;margin:0 0 12px;font-size:1.05rem}
+.tbl th,.tbl td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.tbl th{background:var(--soft)}
+.formula{font:800 1.6rem var(--display);text-align:center;margin:6px 0 12px}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 4px;line-height:1.15}
+.frac>span:first-child{border-bottom:2px solid currentColor;padding:0 4px}
+.frac>span:last-child{padding:0 4px}
+
+.card a{color:var(--ink);text-underline-offset:3px;font-weight:700}
+.kw{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.kw span{border:2px solid var(--mc,var(--line));border-radius:999px;padding:2px 14px;font-size:1rem;font-weight:700;background:var(--bg)}
+.check{border-top:2px dashed var(--line);padding-top:12px;margin-top:6px}
+.rate{display:grid;gap:10px}
+.rate .m{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:14px;padding:10px 14px;background:var(--bg)}
+.rate .m p{margin:0;font-weight:700}
+.rate .choices{margin:0}
+.rate .choice[data-v="r"][aria-pressed="true"]{border-color:var(--bad);box-shadow:inset 0 0 0 2px var(--bad)}
+.rate .choice[data-v="a"][aria-pressed="true"]{border-color:var(--focus);box-shadow:inset 0 0 0 2px var(--focus)}
+.rate .choice[data-v="g"][aria-pressed="true"]{border-color:var(--good);box-shadow:inset 0 0 0 2px var(--good)}
+.rate .choice{min-height:46px;padding:8px 14px;font-size:1rem}
+.sumline{font-weight:700;margin-top:12px}
+</style>
+</head>
+<body data-key="y9et-m12-v1">
+<div class="wrap">
+  <a class="back" href="./">← My lessons</a>
+  <div class="top">
+    <span class="t">Lesson 12: Chapter 9 summary</span>
+    <span class="prog"><span id="pn">Step 1 of 15</span><span class="bar"><i id="pb"></i></span></span>
+  </div>
+<section class="step">
+<div class="card">
+<h1>Lesson 12: Chapter 9 summary</h1>
+<p class="big"><b>My goal:</b> I can remember the key ideas from Lessons 1 to 11.</p>
+<p>There is one step for each lesson. Each step has:</p>
+<ul class="pts">
+<li>the key ideas from that lesson</li>
+<li>the key words</li>
+<li>one quick question</li>
+</ul>
+<p>Read the key ideas. Then answer the quick question.</p>
+<p class="rule">Write every answer in your book. Ticking on the screen is not enough.</p>
+<p>Press <b>Next</b> to start.</p>
+</div>
+</section>
+<section class="step" hidden>
+<div class="card">
+<p class="part">The whole chapter</p>
+<h2>The big ideas</h2>
+<ul class="pts">
+<li>Energy can move from place to place. Heat moves by conduction, convection and radiation.</li>
+<li>A wave carries <b>energy</b> from one place to another. The particles stay in place.</li>
+<li>Sound is a wave that needs a medium. Light is a wave that does not need a medium.</li>
+<li>Your ears and eyes change wave energy into <b>electrical signals</b> for your brain.</li>
+<li>Doctors use sound waves to see inside the body.</li>
+</ul>
+<p><b>Which of these does a wave carry from one place to another?</b></p><div class="pick" data-correct="1" data-ok="A wave carries energy. The particles only move a little, then come back." data-no="Not quite. Think about the particles. Do they travel along with the wave?"><div class="choices"><button class="choice" type="button">Particles</button><button class="choice" type="button">Energy</button><button class="choice" type="button">Water</button></div><p class="fb" hidden></p></div><div class="book"><span class="ic">✎</span><span><span class="h">Write in your book</span>A wave carries ______ from one place to another.</span></div>
+</div>
+</section>
+<section class="step" hidden>
+<div class="card" style="--mc:var(--hot)">
+<p class="part">Lesson 1</p>
+<h2>Heat transfer</h2>
+<ul class="pts">
+<li>Heat always moves from <b>hot</b> to <b>cold</b>.</li>
+<li><b>Conduction</b> is heat moving through a solid, from particle to particle.</li>
+<li><b>Convection</b> is heat moving when a hot liquid or gas rises, cools and sinks. This makes a loop called a convection current.</li>
+<li><b>Radiation</b> is heat moving as invisible waves. It does not need particles, so it can cross empty space.</li>
+</ul>
+<div class="kw"><span>conduction</span><span>convection</span><span>radiation</span></div>
+<div class="check"><p><b>Quick check: how does heat from the Sun reach Earth?</b></p><div class="pick" data-correct="2" data-ok="Space is empty. Radiation does not need particles, so it can cross space." data-no="Not quite. Space has no particles. Which way does not need particles?"><div class="choices"><button class="choice" type="button">Conduction</button><button class="choice" type="button">Convection</button><button class="choice" type="button">Radiation</button></div><p class="fb" hidden></p></div></div><div class="book"><span class="ic">✎</span><span><span class="h">Write in your book</span>Heat from the Sun reaches Earth by ______. Write one example of each way heat moves.</span></div>
+</div>
+</section>
+<section class="step" hidden>
+<div class="card" style="--mc:var(--cond)">
+<p class="part">Lesson 2</p>
+<h2>Waves</h2>
+<ul class="pts">
+<li>A wave carries energy. The particles stay in place.</li>
+<li>The <b>medium</b> is the stuff a wave travels through, such as air, water or rock.</li>
+<li>In a <b>transverse</b> wave, the particles move across the way the wave moves (up and down).</li>
+<li>In a <b>longitudinal</b> wave, the particles move along the way the wave moves (back and forth). Squashed together is a compression. Spread out is a rarefaction.</li>
+<li>Mechanical waves, like sound, need a medium. Electromagnetic waves, like light, do not.</li>
+</ul>
+<div class="kw"><span>medium</span><span>transverse</span><span>longitudinal</span><span>compression</span><span>rarefaction</span></div>
+<div class="check"><p><b>Quick check: you shake a rope up and down. What kind of wave is this?</b></p><div class="pick" data-correct="0" data-ok="The rope moves up and down, across the way the wave moves. That is a transverse wave." data-no="Not quite. Does the rope move across the way the wave moves, or along it?"><div class="choices"><button class="choice" type="button">Transverse</button><button class="choice" type="button">Longitudinal</button></div><p class="fb" hidden></p></div></div><div class="book"><span class="ic">✎</span><span><span class="h">Write in your book</span>Draw a transverse wave and a longitudinal wave. Label each one.</span></div>
+</div>
+</section>
+<section class="step" hidden>
+<div class="card" style="--mc:var(--cold)">
+<p class="part">Lesson 3</p>
+<h2>Features of waves</h2>
+<div class="scene"><svg viewBox="0 0 540 230" role="img" aria-label="A wave. The crest is the top. The trough is the bottom. The amplitude is the height from the rest line to a crest. The wavelength is the distance from one crest to the next crest.">
+<line x1="30" y1="120" x2="510" y2="120" style="stroke:var(--muted)" stroke-width="2" stroke-dasharray="7 6"/>
+<path d="M40.0 120.0 L43.0 114.4 L46.0 108.8 L49.0 103.3 L52.0 97.9 L55.0 92.8 L58.0 87.9 L61.0 83.2 L64.0 78.9 L67.0 75.0 L70.0 71.5 L73.0 68.4 L76.0 65.7 L79.0 63.5 L82.0 61.9 L85.0 60.7 L88.0 60.1 L91.0 60.0 L94.0 60.5 L97.0 61.4 L100.0 62.9 L103.0 64.9 L106.0 67.4 L109.0 70.4 L112.0 73.8 L115.0 77.6 L118.0 81.8 L121.0 86.3 L124.0 91.1 L127.0 96.2 L130.0 101.5 L133.0 106.9 L136.0 112.5 L139.0 118.1 L142.0 123.8 L145.0 129.4 L148.0 134.9 L151.0 140.3 L154.0 145.5 L157.0 150.5 L160.0 155.3 L163.0 159.7 L166.0 163.7 L169.0 167.4 L172.0 170.7 L175.0 173.5 L178.0 175.8 L181.0 177.6 L184.0 178.9 L187.0 179.7 L190.0 180.0 L193.0 179.7 L196.0 178.9 L199.0 177.6 L202.0 175.8 L205.0 173.5 L208.0 170.7 L211.0 167.4 L214.0 163.7 L217.0 159.7 L220.0 155.3 L223.0 150.5 L226.0 145.5 L229.0 140.3 L232.0 134.9 L235.0 129.4 L238.0 123.8 L241.0 118.1 L244.0 112.5 L247.0 106.9 L250.0 101.5 L253.0 96.2 L256.0 91.1 L259.0 86.3 L262.0 81.8 L265.0 77.6 L268.0 73.8 L271.0 70.4 L274.0 67.4 L277.0 64.9 L280.0 62.9 L283.0 61.4 L286.0 60.5 L289.0 60.0 L292.0 60.1 L295.0 60.7 L298.0 61.9 L301.0 63.5 L304.0 65.7 L307.0 68.4 L310.0 71.5 L313.0 75.0 L316.0 78.9 L319.0 83.2 L322.0 87.9 L325.0 92.8 L328.0 97.9 L331.0 103.3 L334.0 108.8 L337.0 114.4 L340.0 120.0 L343.0 125.6 L346.0 131.2 L349.0 136.7 L352.0 142.1 L355.0 147.2 L358.0 152.1 L361.0 156.8 L364.0 161.1 L367.0 165.0 L370.0 168.5 L373.0 171.6 L376.0 174.3 L379.0 176.5 L382.0 178.1 L385.0 179.3 L388.0 179.9 L391.0 180.0 L394.0 179.5 L397.0 178.6 L400.0 177.1 L403.0 175.1 L406.0 172.6 L409.0 169.6 L412.0 166.2 L415.0 162.4 L418.0 158.2 L421.0 153.7 L424.0 148.9 L427.0 143.8 L430.0 138.5 L433.0 133.1 L436.0 127.5 L439.0 121.9 L442.0 116.2 L445.0 110.6 L448.0 105.1 L451.0 99.7 L454.0 94.5 L457.0 89.5 L460.0 84.7 L463.0 80.3 L466.0 76.3 L469.0 72.6 L472.0 69.3 L475.0 66.5 L478.0 64.2 L481.0 62.4 L484.0 61.1 L487.0 60.3 L490.0 60.0 L493.0 60.3 L496.0 61.1 L499.0 62.4" fill="none" style="stroke:var(--cold)" stroke-width="4"/>
+<circle cx="90.0" cy="60" r="6" style="fill:var(--hot)"/>
+<circle cx="190.0" cy="180" r="6" style="fill:var(--hot)"/>
+<line x1="290.0" y1="120" x2="290.0" y2="66" style="stroke:var(--rad)" stroke-width="3"/>
+<path d="M290.0 60 l-7 12 h14z" style="fill:var(--rad)"/>
+<line x1="90.0" y1="38" x2="290.0" y2="38" style="stroke:var(--conv)" stroke-width="3"/>
+<path d="M90.0 38 l12 -7 v14z M290.0 38 l-12 -7 v14z" style="fill:var(--conv)"/>
+<g font-family="Atkinson Hyperlegible, system-ui, sans-serif" font-size="17" font-weight="700" style="fill:var(--ink);paint-order:stroke;stroke:var(--bg);stroke-width:7px;stroke-linejoin:round">
+<text x="76.0" y="64" text-anchor="end">Crest</text>
+<text x="190.0" y="208" text-anchor="middle">Trough</text>
+<text x="304.0" y="96.0" text-anchor="start">Amplitude</text>
+<text x="190.0" y="28" text-anchor="middle">Wavelength (λ)</text>
+<text x="34" y="140" font-size="14" style="fill:var(--muted)">rest line</text>
+</g></svg></div>
+<ul class="pts">
+<li>The <b>amplitude</b> is the height from the rest line to a crest. A bigger amplitude carries more energy.</li>
+<li>The <b>wavelength</b> (λ) is the distance from one crest to the next crest. It is measured in metres (m).</li>
+<li>The <b>frequency</b> (f) is how many waves pass a point each second. It is measured in hertz (Hz).</li>
+<li>A higher frequency makes the wavelength shorter.</li>
+</ul>
+<div class="check"><p><b>Quick check: what is measured in hertz (Hz)?</b></p><div class="pick" data-correct="2" data-ok="Frequency is how many waves pass each second. It is measured in hertz." data-no="Not quite. Hertz counts how many waves pass each second."><div class="choices"><button class="choice" type="button">Amplitude</button><button class="choice" type="button">Wavelength</button><button class="choice" type="button">Frequency</button></div><p class="fb" hidden></p></div></div><div class="book"><span class="ic">✎</span><span><span class="h">Write in your book</span>Copy the wave diagram. Label the crest, trough, amplitude and wavelength.</span></div>
+</div>
+</section>
+<section class="step" hidden>
+<div class="card" style="--mc:var(--cold)">
+<p class="part">Lesson 3</p>
+<h2>The wave equation</h2>
+<p class="formula">v = f × λ</p>
+<table class="tbl">
+<tr><th>Symbol</th><th>What it means</th><th>Unit</th></tr>
+<tr><td><b>v</b></td><td>wave speed</td><td>metres per second (m/s)</td></tr>
+<tr><td><b>f</b></td><td>frequency</td><td>hertz (Hz)</td></tr>
+<tr><td><b>λ</b></td><td>wavelength</td><td>metres (m)</td></tr>
+</table>
+<div class="two">
+<div class="defn"><b>To find f:</b> f = <span class="frac"><span>v</span><span>λ</span></span></div>
+<div class="defn"><b>To find λ:</b> λ = <span class="frac"><span>v</span><span>f</span></span></div>
+</div>
+<div class="rule">Worked example. A wave has f = 10 Hz and λ = 4 m. Find v.<br>v = f × λ = 10 × 4 = 40 m/s</div>
+<div class="check"><p><b>Quick check: a wave has f = 5 Hz and λ = 6 m. What is its speed?</b></p><div class="pick" data-correct="1" data-ok="v = f × λ = 5 × 6 = 30 m/s." data-no="Not quite. Multiply the frequency by the wavelength."><div class="choices"><button class="choice" type="button">11 m/s</button><button class="choice" type="button">30 m/s</button><button class="choice" type="button">1.2 m/s</button></div><p class="fb" hidden></p></div></div><div class="book"><span class="ic">✎</span><span><span class="h">Write in your book</span>Copy the three forms of the wave equation. Then write the working for the quick check: v = 5 × 6 = ______ m/s.</span></div>
+</div>
+</section>
+<section class="step" hidden>
+<div class="card" style="--mc:var(--conv)">
+<p class="part">Lesson 4</p>
+<h2>Sound energy</h2>
+<ul class="pts">
+<li>Sound is energy carried by <b>vibrating</b> particles. A vibration is a fast back and forth movement.</li>
+<li>Sound is a longitudinal wave of compressions and rarefactions.</li>
+<li><b>Volume</b> is how loud a sound is. It depends on the amplitude. It is measured in decibels (dB).</li>
+<li><b>Pitch</b> is how high or low a sound is. It depends on the frequency.</li>
+<li>Sound is fastest in solids and slowest in gases. Sound cannot travel through a vacuum (empty space).</li>
+</ul>
+<div class="kw"><span>vibration</span><span>volume</span><span>pitch</span><span>decibels (dB)</span></div>
+<div class="check"><p><b>Quick check: you turn the volume up. What gets bigger?</b></p><div class="pick" data-correct="0" data-ok="A louder sound has a bigger amplitude. The waves are taller." data-no="Not quite. Volume is how loud a sound is. Which feature sets the volume?"><div class="choices"><button class="choice" type="button">The amplitude</button><button class="choice" type="button">The frequency</button><button class="choice" type="button">The speed</button></div><p class="fb" hidden></p></div></div><div class="book"><span class="ic">✎</span><span><span class="h">Write in your book</span>Volume depends on the ______. Pitch depends on the ______.</span></div>
+</div>
+</section>
+<section class="step" hidden>
+<div class="card" style="--mc:var(--rad)">
+<p class="part">Lesson 5</p>
+<h2>The Doppler effect</h2>
+<ul class="pts">
+<li>The <b>Doppler effect</b> is a change in the frequency you hear when the source of a sound moves towards you or away from you.</li>
+<li>The source is the thing that makes the sound. The observer is the person who hears it.</li>
+<li>Moving towards you: you hear a higher pitch. Moving away from you: you hear a lower pitch.</li>
+<li>The source itself never changes its note.</li>
+<li>Police radar guns use the Doppler effect to measure the speed of cars.</li>
+</ul>
+<div class="kw"><span>Doppler effect</span><span>source</span><span>observer</span></div>
+<div class="check"><p><b>Quick check: a car beeps its horn as it drives away from you. What do you hear?</b></p><div class="pick" data-correct="1" data-ok="Behind a moving source the waves are spread out, so you hear a lower pitch." data-no="Not quite. The car is moving away. Are the waves behind it bunched up or spread out?"><div class="choices"><button class="choice" type="button">A higher pitch</button><button class="choice" type="button">A lower pitch</button><button class="choice" type="button">The same pitch</button></div><p class="fb" hidden></p></div></div><div class="book"><span class="ic">✎</span><span><span class="h">Write in your book</span>A source moving away from you sounds ______. The source ______ change its own note.</span></div>
+</div>
+</section>
+<section class="step" hidden>
+<div class="card" style="--mc:var(--conv)">
+<p class="part">Lesson 6</p>
+<h2>How we hear</h2>
+<ul class="pts">
+<li>People can hear sounds from about 20 Hz to 20 000 Hz. Lower is <b>infrasound</b>. Higher is <b>ultrasound</b>.</li>
+<li>The ear has three sections: the outer ear (pinna and ear canal), the middle ear (eardrum and ossicles) and the inner ear (cochlea).</li>
+<li>The <b>ossicles</b> are three tiny bones. They make the vibrations stronger.</li>
+<li>Hair cells in the <b>cochlea</b> change the vibrations into electrical signals. The <b>auditory nerve</b> carries them to the brain.</li>
+<li>Very loud sounds damage the hair cells. They do not grow back. Earmuffs and earplugs protect your ears.</li>
+</ul>
+<div class="kw"><span>eardrum</span><span>ossicles</span><span>cochlea</span><span>auditory nerve</span></div>
+<div class="check"><p><b>Quick check: which part is in the middle ear?</b></p><div class="pick" data-correct="1" data-ok="The middle ear has the eardrum and the ossicles." data-no="Not quite. The pinna is in the outer ear. The cochlea is in the inner ear."><div class="choices"><button class="choice" type="button">The pinna</button><button class="choice" type="button">The ossicles</button><button class="choice" type="button">The cochlea</button></div><p class="fb" hidden></p></div></div><div class="book"><span class="ic">✎</span><span><span class="h">Write in your book</span>Draw three boxes: outer ear, middle ear, inner ear. Write the parts in each box.</span></div>
+</div>
+</section>
+<section class="step" hidden>
+<div class="card" style="--mc:var(--hot)">
+<p class="part">Lesson 7</p>
+<h2>First Nations peoples’ use of sound</h2>
+<ul class="pts">
+<li>An <b>idiophone</b> vibrates itself when it is hit or shaken, such as clapsticks.</li>
+<li>A <b>membranophone</b> has a stretched sheet that vibrates, such as a drum.</li>
+<li>An <b>aerophone</b> makes the air vibrate, such as the didjeridu.</li>
+<li>A longer tube makes a lower frequency. It sounds deeper.</li>
+<li>Knowledge of how to make and play instruments has been passed on over many generations. Each Nation has its own instruments, names and ways of doing things.</li>
+</ul>
+<div class="kw"><span>idiophone</span><span>membranophone</span><span>aerophone</span><span>bore</span></div>
+<div class="check"><p><b>Quick check: clapsticks are hit together and the sticks vibrate. What type of instrument are they?</b></p><div class="pick" data-correct="0" data-ok="The sticks themselves vibrate, so clapsticks are an idiophone." data-no="Not quite. What vibrates: the instrument itself, a stretched sheet, or air?"><div class="choices"><button class="choice" type="button">Idiophone</button><button class="choice" type="button">Membranophone</button><button class="choice" type="button">Aerophone</button></div><p class="fb" hidden></p></div></div><div class="book"><span class="ic">✎</span><span><span class="h">Write in your book</span>Write the three types of instrument. Give one example of each.</span></div>
+</div>
+</section>
+<section class="step" hidden>
+<div class="card" style="--mc:var(--cond)">
+<p class="part">Lesson 8</p>
+<h2>The electromagnetic spectrum</h2>
+<div class="scene"><svg viewBox="0 0 510 150" role="img" aria-label="The electromagnetic spectrum in order: radio waves, microwaves, infrared, visible light, ultraviolet, X-rays and gamma rays. From radio to gamma, the wavelength gets shorter and the energy gets higher.">
+<g font-family="Atkinson Hyperlegible, system-ui, sans-serif" font-size="14" font-weight="700" style="fill:var(--ink)"><rect x="25" y="40" width="62" height="54" rx="8" style="fill:var(--cold)" opacity=".35"/><text x="56.0" y="72.0" text-anchor="middle">Radio</text><rect x="91" y="40" width="62" height="54" rx="8" style="fill:var(--conv)" opacity=".35"/><text x="122.0" y="63.5" text-anchor="middle">Micro-</text><text x="122.0" y="80.5" text-anchor="middle">waves</text><rect x="157" y="40" width="62" height="54" rx="8" style="fill:var(--hot)" opacity=".35"/><text x="188.0" y="72.0" text-anchor="middle">Infrared</text><rect x="223" y="40" width="62" height="54" rx="8" style="fill:var(--focus)" opacity=".35"/><text x="254.0" y="72.0" text-anchor="middle">Visible</text><rect x="289" y="40" width="62" height="54" rx="8" style="fill:var(--cond)" opacity=".35"/><text x="320.0" y="72.0" text-anchor="middle">UV</text><rect x="355" y="40" width="62" height="54" rx="8" style="fill:var(--rad)" opacity=".35"/><text x="386.0" y="72.0" text-anchor="middle">X-rays</text><rect x="421" y="40" width="62" height="54" rx="8" style="fill:var(--bad)" opacity=".35"/><text x="452.0" y="72.0" text-anchor="middle">Gamma</text>
+<line x1="30" y1="118" x2="480" y2="118" style="stroke:var(--ink)" stroke-width="3"/><path d="M482 118 l-12 -7 v14z" style="fill:var(--ink)"/>
+<text x="30" y="142" font-size="14">Longest wavelength</text><text x="480" y="142" text-anchor="end" font-size="14">More energy</text>
+</g></svg></div>
+<ul class="pts">
+<li>The <b>electromagnetic spectrum</b> has seven kinds of waves, in order of wavelength.</li>
+<li>Shorter wavelength means higher frequency and more energy.</li>
+<li>All electromagnetic waves travel at the same speed in a vacuum: about 300 000 km/s.</li>
+<li>UV, X-rays and gamma rays carry a lot of energy. They can damage cells, so we need to take care with them.</li>
+</ul>
+<div class="check"><p><b>Quick check: which of these has the longest wavelength?</b></p><div class="pick" data-correct="0" data-ok="Radio waves are at the long-wavelength end of the spectrum." data-no="Not quite. Look at the order on the spectrum above."><div class="choices"><button class="choice" type="button">Radio waves</button><button class="choice" type="button">Visible light</button><button class="choice" type="button">Gamma rays</button></div><p class="fb" hidden></p></div></div><div class="book"><span class="ic">✎</span><span><span class="h">Write in your book</span>Write the seven kinds of electromagnetic waves in order, from radio waves to gamma rays.</span></div>
+</div>
+</section>
+<section class="step" hidden>
+<div class="card" style="--mc:var(--rad)">
+<p class="part">Lesson 9</p>
+<h2>Light waves</h2>
+<ul class="pts">
+<li><b>Reflection</b> is when light bounces off a surface. The angle of incidence equals the angle of reflection. Both are measured from the <b>normal</b>.</li>
+<li><b>Refraction</b> is when light bends as it goes from one material into another.</li>
+<li>Light can also be <b>absorbed</b> (taken in) or <b>scattered</b> (sent off in many directions).</li>
+<li>A <b>convex</b> lens brings rays together. A <b>concave</b> lens spreads rays apart.</li>
+</ul>
+<div class="kw"><span>reflection</span><span>refraction</span><span>normal</span><span>absorption</span><span>scattering</span></div>
+<div class="check"><p><b>Quick check: light bounces off a shiny spoon. What is this called?</b></p><div class="pick" data-correct="0" data-ok="Light bouncing off a surface is reflection." data-no="Not quite. Is the light bouncing off, bending, or being taken in?"><div class="choices"><button class="choice" type="button">Reflection</button><button class="choice" type="button">Refraction</button><button class="choice" type="button">Absorption</button></div><p class="fb" hidden></p></div></div><div class="book"><span class="ic">✎</span><span><span class="h">Write in your book</span>Reflection is when light ______. Refraction is when light ______.</span></div>
+</div>
+</section>
+<section class="step" hidden>
+<div class="card" style="--mc:var(--cold)">
+<p class="part">Lesson 10</p>
+<h2>How we see</h2>
+<ul class="pts">
+<li>Light comes into the eye from the object. Nothing comes out of the eye.</li>
+<li>The <b>iris</b> makes the pupil bigger in dim light and smaller in bright light.</li>
+<li>The <b>cornea</b> and the <b>lens</b> bend light to focus it. The lens changes shape for near and far objects.</li>
+<li>The <b>retina</b> changes light into electrical signals. The <b>optic nerve</b> carries them to the brain.</li>
+<li><b>Rods</b> work in dim light and see grey. <b>Cones</b> need bright light and see colour.</li>
+</ul>
+<div class="kw"><span>cornea</span><span>lens</span><span>pupil</span><span>iris</span><span>retina</span><span>optic nerve</span></div>
+<div class="check"><p><b>Quick check: you walk into a dark room. What does your pupil do?</b></p><div class="pick" data-correct="0" data-ok="In dim light the pupil gets bigger so more light gets in." data-no="Not quite. In the dark you need more light to get into your eye."><div class="choices"><button class="choice" type="button">Gets bigger</button><button class="choice" type="button">Gets smaller</button><button class="choice" type="button">Stays the same</button></div><p class="fb" hidden></p></div></div><div class="book"><span class="ic">✎</span><span><span class="h">Write in your book</span>In dim light the pupil gets ______. Rods see ______. Cones see ______.</span></div>
+</div>
+</section>
+<section class="step" hidden>
+<div class="card" style="--mc:var(--cond)">
+<p class="part">Lesson 11</p>
+<h2>Medical uses of sound</h2>
+<ul class="pts">
+<li><b>Ultrasound</b> is sound above 20 000 Hz. It is too high for humans to hear.</li>
+<li>A probe sends out ultrasound. <b>Echoes</b> bounce back from inside the body. A computer uses them to make a picture.</li>
+<li>Ultrasound carries low energy, so it is safe for scanning an unborn baby.</li>
+<li><b>Diagnostic</b> uses find out what is wrong. <b>Therapeutic</b> uses treat or heal.</li>
+</ul>
+<div class="kw"><span>ultrasound</span><span>echo</span><span>diagnostic</span><span>therapeutic</span></div>
+<div class="check"><p><b>Quick check: why is gel put on the skin before a scan?</b></p><div class="pick" data-correct="1" data-ok="Air reflects most of the sound. The gel fills the gap so the sound can get into the body." data-no="Not quite. Think about the air between the probe and the skin."><div class="choices"><button class="choice" type="button">To keep the skin cool</button><button class="choice" type="button">To fill the air gap so the sound gets in</button><button class="choice" type="button">To make the picture brighter</button></div><p class="fb" hidden></p></div></div><div class="book"><span class="ic">✎</span><span><span class="h">Write in your book</span>Ultrasound is sound above ______ Hz. Write one diagnostic use and one therapeutic use.</span></div>
+</div>
+</section>
+<section class="step" hidden>
+<div class="card">
+<h2>Well done!</h2>
+<p>Tick each one you can do now.</p>
+<ul class="checklist">
+<li><label><input type="checkbox"> I can name the three ways heat moves.</label></li>
+<li><label><input type="checkbox"> I can label the parts of a wave and use v = f × λ.</label></li>
+<li><label><input type="checkbox"> I can say what sets the volume and the pitch of a sound.</label></li>
+<li><label><input type="checkbox"> I can name the parts of the ear and the eye.</label></li>
+<li><label><input type="checkbox"> I can list the electromagnetic spectrum in order.</label></li>
+<li><label><input type="checkbox"> I can say how ultrasound is used in medicine.</label></li>
+</ul>
+<p>Next, do <a href="lesson-13.html">Lesson 13: Getting ready for the test</a>.</p>
+<p class="rule">Show your teacher your book.</p>
+</div>
+</section>
+
+  <div class="pager">
+    <button class="btn" type="button" id="prev">← Back</button>
+    <button class="btn primary" type="button" id="next">Next →</button>
+  </div>
+  <footer>Year 9 Science · Energy transfer · Lesson 12</footer>
+</div>
+<script>(function(){const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];const NS="http://www.w3.org/2000/svg";const reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;const KEY=document.body.dataset.key;const store={get(k){try{return JSON.parse(localStorage.getItem(KEY+k))}catch(e){return null}},set(k,v){try{localStorage.setItem(KEY+k,JSON.stringify(v))}catch(e){}}};function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim()}function hex(h){h=h.replace("#","");if(h.length===3)h=h.split("").map(c=>c+c).join("");return[0,2,4].map(i=>parseInt(h.substr(i,2),16))}function mix(a,b,t){const pa=hex(a),pb=hex(b);return"rgb("+pa.map((x,i)=>Math.round(x+(pb[i]-x)*t)).join(",")+")"}function label(svg,x,y,t,anchor,fill,size){const e=el("text",{x:x,y:y,"text-anchor":anchor||"middle","font-family":"Atkinson Hyperlegible, system-ui, sans-serif","font-size":size||15,"font-weight":700,fill:fill||css("--ink")},svg);e.textContent=t;return e}function anim(fn){let raf=null,last=null;function loop(ts){const now=ts/1e3,dt=Math.min(.05,now-(last||now));last=now;fn(dt,now);raf=requestAnimationFrame(loop)}return{start(){if(reduce){fn(0,0);return}if(!raf){last=null;raf=requestAnimationFrame(loop)}},stop(){if(raf){cancelAnimationFrame(raf);raf=null}},get on(){return!!raf}}}window.K={$,$$,el,css,mix,label,anim,reduce};const steps=$$(".step");let cur=0;function go(i){cur=Math.max(0,Math.min(steps.length-1,i));steps.forEach((s,j)=>s.hidden=j!==cur);$("#pn").textContent="Step "+(cur+1)+" of "+steps.length;$("#pb").style.width=(cur+1)/steps.length*100+"%";$("#prev").disabled=cur===0;$("#next").hidden=cur===steps.length-1;store.set("step",cur);window.scrollTo({top:0,behavior:"auto"});document.dispatchEvent(new CustomEvent("stepchange",{detail:cur}))}$("#prev").onclick=()=>go(cur-1);$("#next").onclick=()=>go(cur+1);$$(".pick").forEach(box=>{const btns=[...box.querySelectorAll(":scope > .choices .choice")],fb=box.querySelector(":scope > .fb"),ok=+box.dataset.correct;btns.forEach((b,i)=>b.onclick=()=>{btns.forEach((x,j)=>{x.setAttribute("aria-pressed",j===i);x.classList.remove("ok","no")});b.classList.add(i===ok?"ok":"no");fb.hidden=false;fb.className="fb "+(i===ok?"ok":"no");fb.innerHTML=i===ok?"<b>✓ Yes!</b> "+box.dataset.ok:"<b>✗</b> "+box.dataset.no})});$$(".fill").forEach(box=>{const blanks=[...box.querySelectorAll(".blank")],chips=[...box.querySelectorAll(".chip")],fb=box.querySelector(".fb");function sync(){chips.forEach((c,i)=>{c.disabled=blanks.some(b=>b.dataset.src===String(i))})}function empty(b){b.textContent="";delete b.dataset.src;b.classList.remove("ok","no")}chips.forEach((c,i)=>c.onclick=()=>{const e=blanks.find(b=>!b.textContent);if(!e)return;e.textContent=c.textContent;e.dataset.src=i;e.classList.remove("ok","no");fb.hidden=true;sync()});blanks.forEach(b=>b.onclick=()=>{empty(b);fb.hidden=true;sync()});box.querySelector("[data-clear]").onclick=()=>{blanks.forEach(empty);fb.hidden=true;sync()};box.querySelector("[data-check]").onclick=()=>{if(blanks.some(b=>!b.textContent)){fb.hidden=false;fb.className="fb no";fb.innerHTML="<b>Fill every gap first.</b> Tap a word below.";return}let all=true;blanks.forEach(b=>{const r=b.textContent===b.dataset.answer;b.classList.toggle("ok",r);b.classList.toggle("no",!r);if(!r)all=false});fb.hidden=false;fb.className="fb "+(all?"ok":"no");fb.innerHTML=all?"<b>✓ All correct!</b> Now write it in your book.":"<b>✗ Not yet.</b> Tap a red word to take it out, then try again."}});window.addEventListener("load",()=>{const sv=store.get("step");go(typeof sv==="number"?sv:0)})})();</script>
+
+</body>
+</html>
