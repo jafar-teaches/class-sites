@@ -95,6 +95,18 @@ footer{margin-top:24px;color:var(--muted);font-size:.9rem;text-align:center}
 .frac>span:first-child{border-bottom:2px solid currentColor;padding:0 4px}
 .frac>span:last-child{padding:0 4px}
 
+.jump{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:8px 14px;margin:0 0 12px}
+.jump>summary{cursor:pointer;font:700 1rem var(--body);list-style:none;display:flex;align-items:center;gap:8px;min-height:40px}
+.jump>summary::-webkit-details-marker{display:none}
+.jump>summary::before{content:"▸";transition:transform .2s}.jump[open]>summary::before{transform:rotate(90deg)}
+.stepnav{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
+.sn{font:700 .92rem var(--body);color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:999px;min-height:40px;padding:4px 14px;cursor:pointer}
+.sn:hover{border-color:var(--ink)}
+.sn.seen{border-color:var(--good)}
+.sn.seen::before{content:"✓ ";color:var(--good)}
+.sn.on{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.jumpother{margin:6px 0 2px;font-size:.95rem}
+.jumpother a{color:var(--ink);font-weight:700;text-underline-offset:3px}
 .card a{color:var(--ink);text-underline-offset:3px;font-weight:700}
 .kw{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
 .kw span{border:2px solid var(--mc,var(--line));border-radius:999px;padding:2px 14px;font-size:1rem;font-weight:700;background:var(--bg)}
@@ -131,6 +143,8 @@ footer{margin-top:24px;color:var(--muted);font-size:.9rem;text-align:center}
     <span class="t">Lesson 12: Chapter 9 summary</span>
     <span class="prog"><span id="pn">Step 1 of 15</span><span class="bar"><i id="pb"></i></span></span>
   </div>
+  <details class="jump" id="jump" open><summary>Jump to a step</summary><div class="stepnav" id="stepNav"></div>
+  <p class="jumpother">When you finish, go to <a href="lesson-13.html">Lesson 13: Getting ready for the test →</a></p></details>
 <section class="step">
 <div class="card">
 <h1>Lesson 12: Chapter 9 summary</h1>
@@ -516,6 +530,16 @@ build();return{start(){t=0;if(reduce){t=9;draw();fin();return}a.start()},stop(){
 const inst=[];$$("[data-anim]").forEach(svg=>{const f=A[svg.dataset.anim];if(!f)return;const o=f(svg);inst.push(o);const sc=svg.closest(".scene");if(sc)sc.querySelectorAll("[data-act]").forEach(b=>{b.onclick=()=>{const k=b.dataset.act;if(k==="stop")o.stop();else if(k==="set")o.set(b.dataset.v);else if(o[k])o[k]()}})});
 $$("[data-act=inst]").forEach(b=>b.onclick=()=>{const r=b.closest(".scene").querySelector(".insts");r.classList.toggle("play");b.textContent=r.classList.contains("play")?"Stop":"Make them play"});
 document.addEventListener("stepchange",()=>{inst.forEach(o=>o.stop());$$(".insts.play").forEach(r=>{r.classList.remove("play");const b=r.closest(".scene").querySelector("[data-act=inst]");if(b)b.textContent="Make them play"})});
+})();
+</script>
+<script>const NAV=["Start", "Big ideas", "1 Heat", "2 Waves", "3 Wave parts", "3 Wave equation", "4 Sound", "5 Doppler", "6 Hearing", "7 Instruments", "8 EM spectrum", "9 Light", "10 Seeing", "11 Ultrasound", "Finish"];(function(){const steps=[...document.querySelectorAll(".step")],box=document.getElementById("stepNav"),KS=document.body.dataset.key+"seen",KO=document.body.dataset.key+"navopen",det=document.getElementById("jump");let seen={};try{seen=JSON.parse(localStorage.getItem(KS)||"{}")||{}}catch(e){}
+try{if(localStorage.getItem(KO)==="0")det.open=false}catch(e){}det.addEventListener("toggle",()=>{try{localStorage.setItem(KO,det.open?"1":"0")}catch(e){}});
+const btns=NAV.map((t,i)=>{const b=document.createElement("button");b.type="button";b.className="sn";b.textContent=t;b.onclick=()=>jump(i);box.appendChild(b);return b});
+function cur(){return steps.findIndex(s=>!s.hidden)}
+let jumping=false;function jump(i){let c=cur(),g=0;jumping=true;while(c!==i&&g<80){document.getElementById(c<i?"next":"prev").click();c=cur();g++}jumping=false;mark()}
+function mark(){if(jumping)return;const c=cur();if(c<0)return;seen[c]=1;try{localStorage.setItem(KS,JSON.stringify(seen))}catch(e){}btns.forEach((b,i)=>{b.classList.toggle("on",i===c);b.classList.toggle("seen",!!seen[i]&&i!==c);b.setAttribute("aria-current",i===c?"step":"false")})}
+document.addEventListener("stepchange",mark);window.addEventListener("load",()=>setTimeout(mark,0));
+document.addEventListener("keydown",e=>{const t=(document.activeElement||{}).tagName||"";if(/INPUT|TEXTAREA|SELECT/.test(t))return;const n=document.getElementById("next"),p=document.getElementById("prev");if(e.key==="ArrowRight"&&!n.hidden)n.click();if(e.key==="ArrowLeft"&&!p.disabled)p.click()});
 })();
 </script>
 
