@@ -153,7 +153,7 @@ footer{margin-top:34px;color:var(--soft);font-size:.9rem}
 </div>
 <section class="test" aria-labelledby="th">
 <h2 id="th"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="4" width="22" height="25" rx="3" fill="var(--sunwash)" stroke="currentColor" stroke-width="2"/><rect x="11" y="2" width="10" height="5" rx="2" fill="var(--card)" stroke="currentColor" stroke-width="2"/><path d="M10 14l3 3 6-6M10 23h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>The post-test</h2>
-<p class="when">Thursday 26 November · P2 (9:51 am) · Room D19</p>
+<p class="when">Friday 27 November · P3 (11:21 am) · Room E19</p>
 <dl class="facts">
 <dt>Marks</dt><dd>40 marks in total</dd>
 <dt>Section A</dt><dd>8 multiple-choice questions (8 marks), answered on a separate answer sheet</dd>
@@ -209,7 +209,7 @@ footer{margin-top:34px;color:var(--soft);font-size:.9rem}
 <div class="dhead"><span class="badge b3">Revision 3</span><span class="state"></span></div>
 <h3>Sit a practice test</h3>
 <p class="slot">Tuesday 24 November · P2 (9:51 am) · Room E08</p>
-<p class="kq">Am I ready for Thursday's post-test?</p>
+<p class="kq">Am I ready for Friday's post-test?</p>
 <ol class="tyw">
 <li><span>Choose a <a href="#res" data-go="res">practice test</a>: A (Easy), B (Medium) or C (Harder). Sit it in 55 minutes, with only a calculator.</span></li>
 <li><span>Mark it with its marking guide. Write the topic beside every mark you lost.</span></li>
@@ -318,7 +318,7 @@ days.forEach(function(el){var d=el.getAttribute("data-date"),s=el.querySelector(
 if(d<T){el.classList.add("done");s.textContent="Done"}
 else if(!marked){el.classList.add("now");s.textContent=d===T?"Today":"Next";marked=true}
 else{s.textContent="Coming up"}});
-var test=new Date(2026,10,26),now=new Date();now.setHours(0,0,0,0);
+var test=new Date(2026,10,27),now=new Date();now.setHours(0,0,0,0);
 var left=Math.round((test-now)/86400000),c=document.getElementById("count");
 c.textContent=left>1?left+" days to go":left===1?"Tomorrow":left===0?"Today":"The test is finished";
 
