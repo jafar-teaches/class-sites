@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Energy revision pack · 8SCIC</title>
+<style>
+:root{--bg:#ffffff;--card:#f6f7f5;--ink:#16222f;--muted:#52606c;--line:#d4dad6;--accent:#b4531a;--accentwash:#fbeee5;--warm:#8a5a12;--warmwash:#f7eedd}
+@media (prefers-color-scheme:dark){:root{--bg:#11161c;--card:#192028;--ink:#e5e9ed;--muted:#a2adb8;--line:#2d3843;--accent:#f0a06b;--accentwash:#33231a;--warm:#e2b266;--warmwash:#2e2616}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:820px;margin:0 auto;padding:28px 16px 48px}
+.back{font-size:15px;font-weight:600;color:var(--accent);text-decoration:none}
+.eyebrow{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:14px}
+h1{margin:4px 0 8px;font-size:clamp(26px,5vw,34px);line-height:1.15}
+.lede{color:var(--muted);margin:0 0 6px;max-width:62ch}
+.when{background:var(--accentwash);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:10px 14px;margin:16px 0 4px}
+h2{font-size:20px;margin:30px 0 4px}
+h2 span{color:var(--accent);margin-right:6px}
+.hint{color:var(--muted);font-size:15px;margin:0 0 10px}
+.item{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:8px}
+.item .d{flex:1 1 260px;min-width:0}
+.item b{display:block}
+.item small{color:var(--muted);font-size:14px}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--accent);background:var(--accent);color:#fff;border-radius:8px;padding:7px 13px;font:inherit;font-size:15px;font-weight:600;text-decoration:none;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--accent)}
+.gate{flex-basis:100%;background:var(--warmwash);border-left:4px solid var(--warm);border-radius:0 8px 8px 0;padding:10px 14px}
+.gate p{margin:0 0 8px;font-size:15px}
+.gate[hidden]{display:none}
+.hero{margin:22px 0 8px;border:2px solid var(--accent);border-radius:14px;padding:18px 16px 16px;background:var(--bg)}
+.hero .tag{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent)}
+.hero h2{margin:4px 0 6px;font-size:clamp(21px,4vw,25px)}
+.hero .intro{margin:0 0 14px;max-width:62ch}
+.prob{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:0 0 12px}
+.prob b{display:block;font-size:14px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.steps{display:grid;gap:8px;margin:0 0 12px;padding:0;list-style:none;counter-reset:s}
+.steps li{display:grid;grid-template-columns:30px 1fr;gap:4px 10px;align-items:start;counter-increment:s}
+.steps li::before{content:counter(s);display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:15px}
+.steps .w{font-variant-numeric:tabular-nums}
+.steps .w strong{display:block}
+.steps .why{grid-column:2;color:var(--muted);font-size:15px}
+.ans{display:inline-block;font-weight:700;border:2px solid var(--ink);border-radius:6px;padding:0 8px;margin-left:2px}
+.slip{background:var(--warmwash);border-left:4px solid var(--warm);border-radius:0 8px 8px 0;padding:10px 14px;margin:0 0 12px}
+.slip p{margin:0}
+.which{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin:0 0 4px}
+.which div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:15px}
+.which strong{display:block;font-size:16px}
+.try{margin-top:18px}
+.try h3{font-size:18px;margin:0 0 4px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:8px}
+.q .lvl{font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.q p{margin:2px 0 10px}
+.q .sol{margin-top:10px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.q .sol[hidden]{display:none}
+.q .sol ol{margin:0;padding-left:20px}
+.q .sol li{margin:2px 0;font-variant-numeric:tabular-nums}
+footer{margin-top:36px;color:var(--muted);font-size:14px;border-top:1px solid var(--line);padding-top:14px}
+</style>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png"><link rel="apple-touch-icon" href="../apple-touch-icon.png"></head>
+<body>
+<main>
+<a class="back" href="../">← 8SCIC class hub</a>
+<div class="eyebrow">8SCIC · Kai's Off-Grid Year · Energy</div>
+<h1>Energy revision pack</h1>
+<p class="lede">Everything for revising before the Energy post-test. Work through the four sets in order. Every file opens as a PDF you can print or write on.</p>
+<p class="when"><b>Post-test: Thursday 5 November.</b> Revision lessons are Friday 23, Monday 26 and Tuesday 27 October.</p>
+
+<section class="hero" aria-labelledby="we-title">
+<span class="tag">Worked example</span>
+<h2 id="we-title">Working backwards from efficiency</h2>
+<p class="intro">Sometimes you know the useful energy out and the efficiency, and you need to work backwards to find the total energy in.</p>
+
+<div class="prob"><b>The problem</b>A phone charger is 80% efficient. To charge a phone, 36,000&nbsp;J of useful energy must be stored in its battery. How much electrical energy does the charger take from the wall?</div>
+
+<ol class="steps">
+<li><div class="w"><strong>Write what you know.</strong>Useful energy out = 36,000&nbsp;J. Efficiency = 80% = 0.80</div><div class="why">Change the percentage to a decimal by dividing by 100.</div></li>
+<li><div class="w"><strong>Rearrange the formula.</strong>Total energy in = <span style=display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;margin-left:.15em;margin-right:.15em><span style=border-bottom-style:solid;border-bottom-width:1.5px;border-bottom-color:currentColor;padding-left:.25em;padding-right:.25em>useful energy out</span><span style=padding-left:.25em;padding-right:.25em>efficiency</span></span></div><div class="why">Useful out = efficiency × energy in. To undo the ×, divide by the efficiency.</div></li>
+<li><div class="w"><strong>Substitute.</strong>Total energy in = <span style=display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;margin-left:.15em;margin-right:.15em><span style=border-bottom-style:solid;border-bottom-width:1.5px;border-bottom-color:currentColor;padding-left:.25em;padding-right:.25em>36,000</span><span style=padding-left:.25em;padding-right:.25em>0.80</span></span></div></li>
+<li><div class="w"><strong>Answer with a unit.</strong>Total energy in = <span class="ans">45,000&nbsp;J</span></div></li>
+<li><div class="w"><strong>Check it makes sense.</strong>45,000&nbsp;J is bigger than 36,000&nbsp;J, so the answer makes sense.</div><div class="why">Some energy is always wasted. So the energy in is always bigger than the useful energy out.</div></li>
+</ol>
+
+<div class="slip"><p><b>Common slip:</b> 36,000 × 0.80 = 28,800&nbsp;J. That is smaller than the useful energy, which is impossible. If your energy in comes out smaller, you multiplied instead of divided.</p></div>
+
+<div class="which">
+<div><strong>You know the energy in.</strong>Find the useful energy out by multiplying: energy in × efficiency.</div>
+<div><strong>You know the useful energy out.</strong>Find the energy in by dividing: <span style=display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;margin-left:.15em;margin-right:.15em><span style=border-bottom-style:solid;border-bottom-width:1.5px;border-bottom-color:currentColor;padding-left:.25em;padding-right:.25em>useful out</span><span style=padding-left:.25em;padding-right:.25em>efficiency</span></span>.</div>
+</div>
+
+<div class="try">
+<h3>Your turn</h3>
+<p class="hint">Try these three questions. Write your working on paper first, then check one question at a time.</p>
+
+<div class="q"><span class="lvl">Easy</span>
+<p>An electric scooter's motor is 90% efficient. To get up to speed, the scooter needs 5,400&nbsp;J of kinetic energy. How much electrical energy does the battery give the motor?</p>
+<button class="btn ghost" data-gate="t1">Check my answer</button>
+<div class="sol" id="t1" hidden><ol>
+<li>Useful energy out = 5,400&nbsp;J. Efficiency = 90% = 0.90</li>
+<li>Energy in = <span style=display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;margin-left:.15em;margin-right:.15em><span style=border-bottom-style:solid;border-bottom-width:1.5px;border-bottom-color:currentColor;padding-left:.25em;padding-right:.25em>useful out</span><span style=padding-left:.25em;padding-right:.25em>efficiency</span></span> = <span style=display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;margin-left:.15em;margin-right:.15em><span style=border-bottom-style:solid;border-bottom-width:1.5px;border-bottom-color:currentColor;padding-left:.25em;padding-right:.25em>5,400</span><span style=padding-left:.25em;padding-right:.25em>0.90</span></span></li>
+<li>Energy in = <b>6,000&nbsp;J</b></li>
+<li>Check: 6,000&nbsp;J is bigger than 5,400&nbsp;J.</li>
+</ol></div></div>
+
+<div class="q"><span class="lvl">Medium</span>
+<p>A small hydro power station is 85% efficient. Each second, falling water gives it 4,000,000&nbsp;J of kinetic energy. How much electrical energy does it produce each second? Decide whether to multiply or divide.</p>
+<button class="btn ghost" data-gate="t2">Check my answer</button>
+<div class="sol" id="t2" hidden><ol>
+<li>This time you know the energy in (4,000,000&nbsp;J), so multiply.</li>
+<li>Useful energy out = energy in × efficiency = 4,000,000 × 0.85</li>
+<li>Useful energy out = <b>3,400,000&nbsp;J</b> each second</li>
+<li>Check: 3,400,000&nbsp;J is smaller than 4,000,000&nbsp;J. Useful energy out is always smaller than energy in.</li>
+</ol></div></div>
+
+<div class="q"><span class="lvl">Hard</span>
+<p>A blender is 70% efficient. In one use, it loses 2,700&nbsp;J to heat and sound. How much electrical energy did it take in?</p>
+<button class="btn ghost" data-gate="t3">Check my answer</button>
+<div class="sol" id="t3" hidden><ol>
+<li>70% is useful, so 100% − 70% = 30% is wasted. 30% = 0.30</li>
+<li>The wasted energy is 30% of the energy in, so energy in = <span style=display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;margin-left:.15em;margin-right:.15em><span style=border-bottom-style:solid;border-bottom-width:1.5px;border-bottom-color:currentColor;padding-left:.25em;padding-right:.25em>2,700</span><span style=padding-left:.25em;padding-right:.25em>0.30</span></span></li>
+<li>Energy in = <b>9,000&nbsp;J</b></li>
+<li>Check: useful out = 9,000 × 0.70 = 6,300&nbsp;J, and 6,300 + 2,700 = 9,000&nbsp;J.</li>
+</ol></div></div>
+</div>
+</section>
+
+<h2><span>1</span>Checklist and key words</h2>
+<p class="hint">Do the checklist first and be honest. It shows you which topics to spend time on.</p>
+<div class="item"><div class="d"><b>"I can" checklist</b><small>Every skill the unit covers. Tick what you can already do.</small></div><a class="btn" href="files/1-i-can-checklist.pdf" target="_blank" rel="noopener">Open ↗</a></div>
+<div class="item"><div class="d"><b>Key words and formulas</b><small>One page of the words and formulas to learn.</small></div><a class="btn" href="files/1-key-words-and-formulas.pdf" target="_blank" rel="noopener">Open ↗</a></div>
+<div class="item"><div class="d"><b>Myth or fact quick-check</b><small>Common mix-ups about energy. Can you spot the myths?</small></div><a class="btn" href="files/1-myth-or-fact.pdf" target="_blank" rel="noopener">Open ↗</a></div>
+
+<h2><span>2</span>Calculation practice (Lessons 1–7)</h2>
+<p class="hint">Show your working, then check with the solutions.</p>
+<div class="item"><div class="d"><b>Calculation worksheet</b><small>Kinetic and potential energy, efficiency and Sankey diagrams, power and running cost.</small></div><a class="btn" href="files/2-calculation-worksheet.pdf" target="_blank" rel="noopener">Open ↗</a></div>
+<div class="item"><div class="d"><b>Calculation worksheet: solutions</b><small>Try it first.</small></div><button class="btn ghost" data-gate="g2">Show solutions</button>
+<div class="gate" id="g2" hidden><p><b>Only open this after you've finished your own attempt.</b> Then use it to mark your work, one question at a time.</p><a class="btn" href="files/2-calculation-worksheet-solutions.pdf" target="_blank" rel="noopener">I've finished: open the solutions ↗</a></div></div>
+
+<h2><span>3</span>Revision worksheet (Lessons 2–9)</h2>
+<p class="hint">Questions across the whole unit.</p>
+<div class="item"><div class="d"><b>Revision worksheet</b><small>Mixed questions on every lesson.</small></div><a class="btn" href="files/3-revision-worksheet.pdf" target="_blank" rel="noopener">Open ↗</a></div>
+<div class="item"><div class="d"><b>Revision worksheet: worked solutions</b><small>Try it first.</small></div><button class="btn ghost" data-gate="g3">Show solutions</button>
+<div class="gate" id="g3" hidden><p><b>Only open this after you've finished your own attempt.</b> Then use it to mark your work, one question at a time.</p><a class="btn" href="files/3-revision-worksheet-solutions.pdf" target="_blank" rel="noopener">I've finished: open the solutions ↗</a></div></div>
+
+<h2><span>4</span>Practice tests</h2>
+<p class="hint">There are three tests: easy, medium and hard. Do one in 55 minutes with no notes, then mark it with its marking guide.</p>
+<div class="item"><div class="d"><b>Practice test: easy</b></div><a class="btn" href="files/4-practice-test-easy.pdf" target="_blank" rel="noopener">Open ↗</a><button class="btn ghost" data-gate="g4e">Marking guide</button>
+<div class="gate" id="g4e" hidden><p><b>Only open this after you've finished the test.</b></p><a class="btn" href="files/4-practice-test-easy-marking-guide.pdf" target="_blank" rel="noopener">I've finished: open the marking guide ↗</a></div></div>
+<div class="item"><div class="d"><b>Practice test: medium</b></div><a class="btn" href="files/4-practice-test-medium.pdf" target="_blank" rel="noopener">Open ↗</a><button class="btn ghost" data-gate="g4m">Marking guide</button>
+<div class="gate" id="g4m" hidden><p><b>Only open this after you've finished the test.</b></p><a class="btn" href="files/4-practice-test-medium-marking-guide.pdf" target="_blank" rel="noopener">I've finished: open the marking guide ↗</a></div></div>
+<div class="item"><div class="d"><b>Practice test: hard</b></div><a class="btn" href="files/4-practice-test-hard.pdf" target="_blank" rel="noopener">Open ↗</a><button class="btn ghost" data-gate="g4h">Marking guide</button>
+<div class="gate" id="g4h" hidden><p><b>Only open this after you've finished the test.</b></p><a class="btn" href="files/4-practice-test-hard-marking-guide.pdf" target="_blank" rel="noopener">I've finished: open the marking guide ↗</a></div></div>
+
+<footer>Year 8 SEAL Science · Kai's Off-Grid Year. Ask in class if a file won't open.</footer>
+</main>
+<script>document.querySelectorAll("[data-gate]").forEach(function(b){b.addEventListener("click",function(){var g=document.getElementById(b.dataset.gate);g.hidden=!g.hidden})});</script>
+</body>
+</html>

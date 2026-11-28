@@ -10,3 +10,4 @@ Class pages for Year 8 Science, Year 9 Science and VCE Chemistry.
 - `9sci/transfer/` · Year 9 Science: Energy transfer lessons
 - `11che2/` · Year 11 Chemistry class hub
 - `11che2/exam-revision/` · Unit 2 exam revision
+- `portfolio/8scic/` · Portfolio copy of the Year 8 hub for job applications (OneNote link removed, date frozen on 12 Nov)

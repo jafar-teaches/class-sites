@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wired revision · 8SCIC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,700..900&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F6F3EC;--card:#FFFFFF;--ink:#17222D;--soft:#56636E;--line:#DDD7CB;
+--wire:#22466A;--wirewash:#E4ECF5;--sun:#E8A900;--sunwash:#FFF3CC;--leaf:#1C7C53;--leafwash:#E0F2E8;
+--coral:#C4502B;--coralwash:#FBE6DE;--plum:#7A3E8F;--plumwash:#F1E5F5;--teal:#0F7C86;--tealwash:#DDF1F2;
+--disp:'Archivo','Arial Narrow',system-ui,sans-serif;--body:'Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#121A2E;--card:#1B2540;--ink:#EEF1F7;--soft:#AEB8CC;--line:#34406A;
+--wire:#8DB8F0;--wirewash:#1E2C4D;--sun:#F7C744;--sunwash:#3A3014;--leaf:#5AD39A;--leafwash:#123327;
+--coral:#FF9A73;--coralwash:#3E2018;--plum:#D49BEA;--plumwash:#33213F;--teal:#5CD3DC;--tealwash:#123438;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#121A2E;--card:#1B2540;--ink:#EEF1F7;--soft:#AEB8CC;--line:#34406A;
+--wire:#8DB8F0;--wirewash:#1E2C4D;--sun:#F7C744;--sunwash:#3A3014;--leaf:#5AD39A;--leafwash:#123327;
+--coral:#FF9A73;--coralwash:#3E2018;--plum:#D49BEA;--plumwash:#33213F;--teal:#5CD3DC;--tealwash:#123438;color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.55;padding:0 20px}
+main{max-width:1060px;margin:0 auto;padding:6px 0 64px}
+h1,h2,h3{font-family:var(--disp);line-height:1.15;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:900;font-stretch:118%}
+h2{font-size:1.5rem;font-weight:800;font-stretch:108%;margin-bottom:.35em}
+h3{font-size:1.15rem;font-weight:750;margin-bottom:.35em}
+p{margin:0 0 .7em;max-width:68ch}
+a{color:var(--wire);text-underline-offset:3px}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px;border-radius:6px}
+[hidden]{display:none!important}
+.soft{color:var(--soft)}
+.crumbs{padding-top:18px;font-size:.95rem;color:var(--soft)}
+.crumbs a{font-weight:700}
+.top{display:grid;grid-template-columns:1.4fr 1fr;gap:22px;align-items:start;margin:14px 0 18px}
+.eyebrow{font-weight:700;color:var(--soft);margin:6px 0 4px}
+.lede{font-size:1.06rem;margin-top:10px}
+.test{background:var(--card);border:2px solid var(--wire);border-radius:18px;padding:16px 18px;position:relative;overflow:hidden}
+.test::after{content:"";position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;background:var(--sunwash)}
+.test>*{position:relative;z-index:1}
+.test h2{font-size:1.25rem;display:flex;align-items:center;gap:10px}
+.test .when{font-weight:700;margin:2px 0 10px}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0;font-size:.98rem}
+.facts dt{font-weight:700}
+.facts dd{margin:0}
+.count{display:inline-block;margin-top:10px;background:var(--sunwash);color:var(--ink);border-radius:999px;padding:4px 12px;font-weight:700;font-size:.95rem}
+.ico{width:26px;height:26px;flex:none}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 18px;padding:0;list-style:none}
+.tabs button{border:2px solid var(--line);background:var(--card);border-radius:999px;padding:8px 16px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:44px}
+.tabs button[aria-selected="true"]{background:var(--wire);border-color:var(--wire);color:var(--paper)}
+.tabs .dot{width:12px;height:12px;border-radius:50%}
+.panel{animation:fade .2s ease}
+@keyframes fade{from{opacity:.4}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.panel{animation:none}}
+.intro{margin-bottom:14px}
+.days{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.day{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column}
+.day.now{border-color:var(--sun);box-shadow:0 0 0 4px var(--sunwash)}
+.day.done{opacity:.8}
+.dhead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+.badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 11px;font-weight:700;font-size:.85rem}
+.b1{background:var(--tealwash);color:var(--teal)}.b2{background:var(--plumwash);color:var(--plum)}.b3{background:var(--coralwash);color:var(--coral)}
+.state{font-size:.85rem;font-weight:700;color:var(--soft)}
+.day.now .state{color:var(--ink);background:var(--sunwash);border-radius:999px;padding:2px 10px}
+.slot{font-size:.95rem;color:var(--soft);margin:0 0 8px}
+.kq{font-weight:700;margin:0 0 10px}
+.tyw{margin:0 0 12px;padding:0;list-style:none;counter-reset:s;display:grid;gap:10px}
+.tyw li{display:grid;grid-template-columns:30px 1fr;gap:8px;counter-increment:s}
+.tyw li::before{content:counter(s);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--paper);background:var(--wire)}
+.day:nth-child(1) .tyw li::before{background:var(--teal)}
+.day:nth-child(2) .tyw li::before{background:var(--plum)}
+.day:nth-child(3) .tyw li::before{background:var(--coral)}
+.tyw a{font-weight:700}
+.li{background:var(--paper);border-radius:12px;padding:8px 12px;font-size:.95rem;margin-top:auto}
+.li b{display:block}
+.dfoot{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 15px;border-radius:12px;border:2px solid var(--wire);background:var(--wire);color:var(--paper);font-weight:700;text-decoration:none;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--wire)}
+.btn.sm{min-height:38px;padding:5px 12px;font-size:.92rem}
+.btn svg{width:18px;height:18px}
+.homework{margin-top:16px;background:var(--leafwash);border-radius:14px;padding:12px 16px}
+.homework b{color:var(--leaf)}
+.lessons{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.lcard{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px 16px}
+.lcard h3{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.lcount{font-family:var(--body);font-size:.85rem;font-weight:700;color:var(--soft);white-space:nowrap}
+.crit{list-style:none;margin:6px 0 10px;padding:0;display:grid;gap:6px}
+.crit label{display:grid;grid-template-columns:26px 1fr;gap:8px;align-items:start;cursor:pointer}
+.crit input{width:22px;height:22px;margin:2px 0 0;accent-color:var(--leaf)}
+.crit input:checked+span{color:var(--soft)}
+.prac{font-size:.93rem;background:var(--paper);border-radius:10px;padding:8px 12px}
+.prac b{color:var(--wire)}
+.tally{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:0 0 14px}
+.bar{flex:1 1 220px;height:14px;background:var(--line);border-radius:999px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--leaf);border-radius:999px;transition:width .3s}
+.code{margin-top:18px;background:var(--card);border:2px dashed var(--line);border-radius:16px;padding:14px 16px}
+.code input{font:inherit;padding:8px 10px;border:2px solid var(--line);border-radius:10px;background:var(--paper);min-width:12ch}
+.code .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+.msg{font-weight:700;color:var(--leaf);margin:6px 0 0}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.big{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.big .art{height:90px;border-radius:12px;display:flex;align-items:center;justify-content:center}
+.big .art svg{height:70px;width:auto}
+.big .btn{align-self:flex-start;margin-top:auto}
+.group{margin-bottom:22px}
+.group h2 .num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--wire);color:var(--paper);font-size:1.05rem;margin-right:8px}
+.item{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;justify-content:space-between;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:10px}
+.item .d{flex:1 1 300px;min-width:0}
+.item b{display:block}
+.item small{color:var(--soft);font-size:.92rem}
+.lvl{display:inline-block;border-radius:999px;padding:1px 9px;font-size:.8rem;font-weight:700;margin-left:6px;vertical-align:2px}
+.e{background:var(--leafwash);color:var(--leaf)}.m{background:var(--sunwash);color:#8a6400}.h{background:var(--coralwash);color:var(--coral)}
+:root[data-theme="dark"] .m{color:var(--sun)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .m{color:var(--sun)}}
+.gate{flex-basis:100%;background:var(--sunwash);border-radius:12px;padding:10px 14px}
+.gate p{margin:0 0 8px}
+.tips{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.tip{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px 16px;border-top:6px solid var(--teal)}
+.tip:nth-child(2){border-top-color:var(--plum)}.tip:nth-child(3){border-top-color:var(--coral)}.tip:nth-child(4){border-top-color:var(--sun)}.tip:nth-child(5){border-top-color:var(--leaf)}.tip:nth-child(6){border-top-color:var(--wire)}
+.tip p:last-child{margin-bottom:0}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.1;margin:0 2px;font-size:.92em}
+.frac .fn{border-bottom:1.5px solid currentColor;padding:0 3px}
+.frac .fd{padding:0 3px}
+.ex{background:var(--paper);border-radius:10px;padding:8px 12px;margin:6px 0 0}
+footer{margin-top:34px;color:var(--soft);font-size:.9rem}
+.theme{background:none;border:2px solid var(--line);border-radius:999px;padding:4px 12px;cursor:pointer;font-weight:700;font-size:.9rem}
+.board{position:fixed;inset:0;z-index:50;background:var(--paper);display:flex;flex-direction:column;padding:3vh 4vw;gap:2.2vh}
+.board .bclose{position:absolute;top:2vh;right:2vw}
+.board h2{font-size:clamp(1.6rem,5.2vh,3.4rem);font-stretch:115%;margin:0}
+.board .bdate{font-size:clamp(1rem,2.6vh,1.5rem);color:var(--soft);margin:0}
+.bbox{border-radius:18px;padding:1.6vh 1.6vw;display:grid;grid-template-columns:auto 1fr;gap:1.4vw;align-items:center;font-size:clamp(1.05rem,3.1vh,2rem);line-height:1.3}
+.bbox svg{width:clamp(36px,6vh,64px);height:clamp(36px,6vh,64px)}
+.bbox b{display:block;font-size:.62em;text-transform:none;color:var(--soft);font-family:var(--body)}
+.bli{background:var(--tealwash)}.bkq{background:var(--plumwash)}.bty{background:var(--sunwash)}
+.bty ol{margin:0;padding-left:1.2em}
+@media (max-width:860px){.top,.days,.lessons,.cards,.tips{grid-template-columns:1fr}}
+@media print{.tabs,.theme,.dfoot,.code,.crumbs{display:none}.panel[hidden]{display:block!important}body{background:#fff}}
+</style>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png"><link rel="apple-touch-icon" href="../../apple-touch-icon.png"></head>
+<body>
+<main>
+<div class="crumbs"><a href="../">← Wired lessons</a> · <a href="../../">8SCIC class hub</a></div>
+
+<div class="top">
+<div>
+<p class="eyebrow">Year 8 SEAL Science · Electricity</p>
+<h1>Wired revision</h1>
+<p class="lede">Everything you need to get ready for the Electricity post-test, in one place. There are three revision lessons. Each one has its own plan below.</p>
+<button class="theme" id="theme" type="button">Dark mode</button>
+</div>
+<section class="test" aria-labelledby="th">
+<h2 id="th"><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="4" width="22" height="25" rx="3" fill="var(--sunwash)" stroke="currentColor" stroke-width="2"/><rect x="11" y="2" width="10" height="5" rx="2" fill="var(--card)" stroke="currentColor" stroke-width="2"/><path d="M10 14l3 3 6-6M10 23h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>The post-test</h2>
+<p class="when">Friday 27 November · P3 (11:21 am) · Room E19</p>
+<dl class="facts">
+<dt>Marks</dt><dd>40 marks in total</dd>
+<dt>Section A</dt><dd>8 multiple-choice questions (8 marks), answered on a separate answer sheet</dd>
+<dt>Section B</dt><dd>6 short-answer questions (32 marks)</dd>
+<dt>Time</dt><dd>5 minutes reading time, then 55 minutes writing time</dd>
+<dt>Bring</dt><dd>A calculator, pens and a ruler. You get a formula sheet.</dd>
+</dl>
+<span class="count" id="count"></span>
+</section>
+</div>
+
+<div class="tabs" role="tablist" aria-label="Revision hub sections">
+<button role="tab" id="t-plan" aria-controls="p-plan" aria-selected="true"><span class="dot" style="background:var(--teal)"></span>The three days</button>
+<button role="tab" id="t-check" aria-controls="p-check" aria-selected="false"><span class="dot" style="background:var(--leaf)"></span>Checklist</button>
+<button role="tab" id="t-prac" aria-controls="p-prac" aria-selected="false"><span class="dot" style="background:var(--plum)"></span>Practise online</button>
+<button role="tab" id="t-res" aria-controls="p-res" aria-selected="false"><span class="dot" style="background:var(--coral)"></span>Worksheets and tests</button>
+<button role="tab" id="t-tips" aria-controls="p-tips" aria-selected="false"><span class="dot" style="background:var(--sun)"></span>Test tips</button>
+</div>
+
+<section class="panel" id="p-plan" role="tabpanel" aria-labelledby="t-plan">
+<p class="intro">Work through the three revision lessons in order. Each lesson uses what you found out in the one before, so your time goes to the topics you need most.</p>
+<div class="days">
+
+<article class="day" data-date="2026-11-19" data-n="1">
+<div class="dhead"><span class="badge b1">Revision 1</span><span class="state"></span></div>
+<h3>Find your gaps</h3>
+<p class="slot">Thursday 19 November · P2 (9:51 am) · Room D19</p>
+<p class="kq">What do I already know well, and what do I need to work on?</p>
+<ol class="tyw">
+<li><span>Go through the <a href="#check" data-go="check">checklist</a>. Tick each "I can" statement you can do now, without notes.</span></li>
+<li><span>Do the <a href="files/1-key-words-and-formulas.pdf" target="_blank" rel="noopener">key words and formulas sheet</a>, then the <a href="files/1-myth-or-fact.pdf" target="_blank" rel="noopener">myth or fact quick-check</a>.</span></li>
+<li><span>Start the <a href="files/2-revision-worksheet.pdf" target="_blank" rel="noopener">revision worksheet</a>. Do the Easy and Medium questions for the topics you didn't tick.</span></li>
+</ol>
+<div class="li"><b>Learning intention</b>To understand which ideas from the Wired unit I know well and which I still need to revise.</div>
+<div class="dfoot"><button class="btn ghost sm" data-board="1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Show on the board</button></div>
+</article>
+
+<article class="day" data-date="2026-11-20" data-n="2">
+<div class="dhead"><span class="badge b2">Revision 2</span><span class="state"></span></div>
+<h3>Practise the calculations</h3>
+<p class="slot">Friday 20 November · P5 (1:55 pm) · Room D19</p>
+<p class="kq">Can I solve circuit problems with V = I × R and the series and parallel rules, on my own?</p>
+<ol class="tyw">
+<li><span>Work through the <a href="../practice-vir.html">V, I and R practice</a>. Start at the first worksheet you can't do easily.</span></li>
+<li><span>Do the Hard questions on the <a href="files/2-revision-worksheet.pdf" target="_blank" rel="noopener">revision worksheet</a> for your weakest topics.</span></li>
+<li><span>Mark your worksheet with the <a href="#res" data-go="res">worked solutions</a>. Write down one mistake you won't make again.</span></li>
+</ol>
+<div class="li"><b>Learning intention</b>To understand how voltage, current and resistance are linked in series and parallel circuits.</div>
+<div class="dfoot"><button class="btn ghost sm" data-board="2" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Show on the board</button></div>
+</article>
+
+<article class="day" data-date="2026-11-24" data-n="3">
+<div class="dhead"><span class="badge b3">Revision 3</span><span class="state"></span></div>
+<h3>Sit a practice test</h3>
+<p class="slot">Tuesday 24 November · P2 (9:51 am) · Room E08</p>
+<p class="kq">Am I ready for Friday's post-test?</p>
+<ol class="tyw">
+<li><span>Choose a <a href="#res" data-go="res">practice test</a>: A (Easy), B (Medium) or C (Harder). Sit it in 55 minutes, with only a calculator.</span></li>
+<li><span>Mark it with its marking guide. Write the topic beside every mark you lost.</span></li>
+<li><span>Fix your weakest topic with the <a href="../#rev">Wired revision questions</a>, then retick your <a href="#check" data-go="check">checklist</a>.</span></li>
+</ol>
+<div class="li"><b>Learning intention</b>To understand how the post-test is set out and what a full-mark answer looks like.</div>
+<div class="dfoot"><button class="btn ghost sm" data-board="3" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Show on the board</button></div>
+</article>
+</div>
+<div class="homework"><b>At home before the test:</b> sit one more practice test you haven't done yet, and mark it. Then read the <a href="#tips" data-go="tips">test tips</a>.</div>
+</section>
+
+<section class="panel" id="p-check" role="tabpanel" aria-labelledby="t-check" hidden>
+<p class="intro">Tick each "I can" statement only when you can do it without notes. Under each lesson it tells you where to practise it. Your ticks save in this browser.</p>
+<div class="tally"><b id="tallyText">0 of 0 ticked</b><div class="bar" aria-hidden="true"><i id="tallyBar"></i></div></div>
+<div class="lessons" id="lessons"></div>
+<div class="code">
+<h3>Save my progress</h3>
+<p>Your ticks only save in this browser. To keep them on another device, get a progress code and write it in your book. Paste it here later to get your ticks back.</p>
+<div class="row"><button class="btn sm" id="getCode" type="button">Get my progress code</button><input id="codeOut" readonly aria-label="Your progress code"></div>
+<div class="row"><input id="codeIn" aria-label="Paste a progress code" placeholder="Paste a code"><button class="btn ghost sm" id="useCode" type="button">Get my ticks back</button></div>
+<p class="msg" id="codeMsg" hidden></p>
+</div>
+</section>
+
+<section class="panel" id="p-prac" role="tabpanel" aria-labelledby="t-prac" hidden>
+<p class="intro">These two pages are on the Wired site. Both show the answers when you need them.</p>
+<div class="cards">
+<article class="big">
+<div class="art" style="background:var(--plumwash)"><svg viewBox="0 0 120 70" aria-hidden="true"><rect x="10" y="8" width="44" height="54" rx="6" fill="var(--card)" stroke="var(--plum)" stroke-width="3"/><path d="M20 22h24M20 32h24M20 42h16" stroke="var(--plum)" stroke-width="3" stroke-linecap="round"/><circle cx="84" cy="35" r="22" fill="var(--card)" stroke="var(--plum)" stroke-width="3"/><path d="M76 30a8 8 0 1 1 9 8v5M85 51v1" fill="none" stroke="var(--plum)" stroke-width="3.5" stroke-linecap="round"/></svg></div>
+<h3>Wired revision questions</h3>
+<p>The Revision lesson on the Wired site. It has the "I can" list for every lesson, the rules and formulas, and about 30 mixed practice questions with hints and answers.</p>
+<a class="btn" href="../#rev">Open the revision questions</a>
+</article>
+<article class="big">
+<div class="art" style="background:var(--tealwash)"><svg viewBox="0 0 120 70" aria-hidden="true"><path d="M14 20h28M62 20h44v30H14V20" fill="none" stroke="var(--teal)" stroke-width="3" stroke-linejoin="round"/><path d="M42 20l3-6 5 12 5-12 5 12 2-6" fill="none" stroke="var(--teal)" stroke-width="3" stroke-linejoin="round"/><circle cx="60" cy="50" r="10" fill="var(--card)" stroke="var(--teal)" stroke-width="3"/><text x="60" y="55" text-anchor="middle" font-size="14" font-weight="700" fill="var(--teal)">A</text><path d="M14 14v12M20 17v6" stroke="var(--teal)" stroke-width="3"/></svg></div>
+<h3>V, I and R practice</h3>
+<p>Six short worksheets on V = I × R in series, parallel and mixed circuits, with worked answers. Worksheet F is the Challenge set.</p>
+<a class="btn" href="../practice-vir.html">Open the worksheets</a>
+</article>
+</div>
+<div class="homework" style="background:var(--wirewash)"><b style="color:var(--wire)">Need to look something up?</b> Go back to the lesson: <a href="../#l1">Lesson 1</a> · <a href="../#l2">Lesson 2</a> · <a href="../#l3">Lesson 3</a> · <a href="../#l4">Lesson 4</a> · <a href="../#l5">Lesson 5</a> · <a href="../#l6">Lesson 6</a> · <a href="../#l7">Lesson 7</a> · <a href="../#h2">Home safety</a></div>
+</section>
+
+<section class="panel" id="p-res" role="tabpanel" aria-labelledby="t-res" hidden>
+<p class="intro">Every file opens as a PDF you can print or write on. Do each task first, then check it with its answers.</p>
+<div class="group">
+<h2><span class="num">1</span>Start here</h2>
+<div class="item"><div class="d"><b>Key words and formulas</b><small>Every key word, formula and series and parallel rule from the unit, on two pages.</small></div><a class="btn" href="files/1-key-words-and-formulas.pdf" target="_blank" rel="noopener">Open</a></div>
+<div class="item"><div class="d"><b>Myth or fact quick-check</b><small>16 statements to sort. The answers are on the last page.</small></div><a class="btn" href="files/1-myth-or-fact.pdf" target="_blank" rel="noopener">Open</a></div>
+</div>
+<div class="group">
+<h2><span class="num">2</span>Revision worksheet</h2>
+<div class="item"><div class="d"><b>Revision worksheet</b><small>30 questions on 9 topics. Each topic has an <span class="lvl e">Easy</span> <span class="lvl m">Medium</span> and <span class="lvl h">Hard</span> question.</small></div><a class="btn" href="files/2-revision-worksheet.pdf" target="_blank" rel="noopener">Open</a></div>
+<div class="item"><div class="d"><b>Revision worksheet: worked solutions</b><small>The worksheet with every answer written in. Try the questions first.</small></div><button class="btn ghost" type="button" data-gate="g1">Show solutions</button>
+<div class="gate" id="g1" hidden><p><b>Only open this after you've finished your own attempt.</b> Then mark your work one question at a time.</p><a class="btn" href="files/2-revision-worksheet-solutions.pdf" target="_blank" rel="noopener">I've finished: open the solutions</a></div></div>
+</div>
+<div class="group">
+<h2><span class="num">3</span>Practice tests</h2>
+<p class="soft">Each test is set out like the real post-test: 40 marks, 8 multiple-choice and 32 marks of short answer, 55 minutes.</p>
+<div class="item"><div class="d"><b>Practice test A <span class="lvl e">Easy</span></b><small>A good first test if you ticked fewer than half of your checklist.</small></div><a class="btn" href="files/3-practice-test-a.pdf" target="_blank" rel="noopener">Open</a><button class="btn ghost" type="button" data-gate="g2">Marking guide</button>
+<div class="gate" id="g2" hidden><p><b>Sit the test first, in 55 minutes.</b> Then mark it with the guide.</p><a class="btn" href="files/3-practice-test-a-marking-guide.pdf" target="_blank" rel="noopener">I've finished: open the marking guide</a></div></div>
+<div class="item"><div class="d"><b>Practice test B <span class="lvl m">Medium</span></b><small>Closest in difficulty to the real test.</small></div><a class="btn" href="files/3-practice-test-b.pdf" target="_blank" rel="noopener">Open</a><button class="btn ghost" type="button" data-gate="g3">Marking guide</button>
+<div class="gate" id="g3" hidden><p><b>Sit the test first, in 55 minutes.</b> Then mark it with the guide.</p><a class="btn" href="files/3-practice-test-b-marking-guide.pdf" target="_blank" rel="noopener">I've finished: open the marking guide</a></div></div>
+<div class="item"><div class="d"><b>Practice test C <span class="lvl h">Harder</span></b><small>A step up from test B, for when B feels comfortable: mixed circuits, working backwards with 1/R, and finding faults. No questions on electricity in the home.</small></div><a class="btn" href="files/3-practice-test-c.pdf" target="_blank" rel="noopener">Open</a><button class="btn ghost" type="button" data-gate="g4">Marking guide</button>
+<div class="gate" id="g4" hidden><p><b>Sit the test first, in 55 minutes.</b> Then mark it with the guide.</p><a class="btn" href="files/3-practice-test-c-marking-guide.pdf" target="_blank" rel="noopener">I've finished: open the marking guide</a></div></div>
+</div>
+</section>
+
+<section class="panel" id="p-tips" role="tabpanel" aria-labelledby="t-tips" hidden>
+<p class="intro">Habits that earn marks in any science test.</p>
+<div class="tips">
+<div class="tip"><h3>Read the command word</h3><p>"State" or "identify" needs one short answer. "Explain" needs a reason, so use "because". "Evaluate" needs a judgement and a reason, using the data.</p></div>
+<div class="tip"><h3>Set out every calculation</h3><p>Write the formula, put in the numbers, then give the answer with a unit. Marks are given for each step, even if your final answer is wrong.</p><p class="ex">I = <span class="frac"><span class="fn">V</span><span class="fd">R</span></span> = <span class="frac"><span class="fn">9</span><span class="fd">3</span></span> = 3 A</p></div>
+<div class="tip"><h3>Change mA to A first</h3><p>A formula needs amps, so change milliamps before you use it. Divide by 1,000, which moves the decimal point three places left.</p><p class="ex">150 mA = 0.15 A</p></div>
+<div class="tip"><h3>Quote the data</h3><p>When a question says "use the data", copy the actual numbers into your answer. "It went up from 0.2 A to 0.4 A" earns the mark; "it went up" does not.</p></div>
+<div class="tip"><h3>Answer every multiple-choice question</h3><p>Section A goes on the separate answer sheet. Wrong answers lose no marks, so never leave one blank. Work out your answer before you look at the options.</p></div>
+<div class="tip"><h3>Pace yourself</h3><p>You have a bit more than a minute per mark: about 10 minutes for Section A and 45 for Section B. If a part is taking too long, move on and come back to it.</p></div>
+</div>
+</section>
+
+<footer>Wired revision · 8SCIC. Your ticks are saved only in this browser on this device, and nobody else can see them.</footer>
+</main>
+
+<div class="board" id="board" hidden role="dialog" aria-modal="true" aria-labelledby="bt">
+<button class="btn bclose" id="bclose" type="button">Close</button>
+<h2 id="bt"></h2>
+<p class="bdate" id="bd"></p>
+<div class="bbox bli"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="var(--teal)" stroke-width="4"/><circle cx="24" cy="24" r="12" fill="none" stroke="var(--teal)" stroke-width="4"/><circle cx="24" cy="24" r="4" fill="var(--teal)"/></svg><div><b>Learning intention</b><span id="bli"></span></div></div>
+<div class="bbox bkq"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="var(--plum)" stroke-width="4"/><path d="M18 19a6 6 0 1 1 7 6v4M25 35v1" fill="none" stroke="var(--plum)" stroke-width="4" stroke-linecap="round"/></svg><div><b>Key question</b><span id="bkq"></span></div></div>
+<div class="bbox bty"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M18 12h22M18 24h22M18 36h22" stroke="#B07D00" stroke-width="4" stroke-linecap="round"/><circle cx="9" cy="12" r="3" fill="#B07D00"/><circle cx="9" cy="24" r="3" fill="#B07D00"/><circle cx="9" cy="36" r="3" fill="#B07D00"/></svg><div><b>Today you will</b><ol id="bty"></ol></div></div>
+</div>
+
+<script>
+(function(){
+var store={get:function(k){try{return localStorage.getItem("wiredrev:"+k)}catch(e){return null}},set:function(k,v){try{localStorage.setItem("wiredrev:"+k,v)}catch(e){}}};
+var root=document.documentElement,tb=document.getElementById("theme");
+function setTheme(t){if(t){root.setAttribute("data-theme",t)}else{root.removeAttribute("data-theme")}var dark=t==="dark"||(!t&&window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches);tb.textContent=dark?"Light mode":"Dark mode"}
+setTheme(store.get("theme"));
+tb.addEventListener("click",function(){var dark=tb.textContent==="Light mode";var t=dark?"light":"dark";store.set("theme",t);setTheme(t)});
+
+function today(){var d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+var T=today();
+var days=[].slice.call(document.querySelectorAll(".day")),marked=false;
+days.forEach(function(el){var d=el.getAttribute("data-date"),s=el.querySelector(".state");
+if(d<T){el.classList.add("done");s.textContent="Done"}
+else if(!marked){el.classList.add("now");s.textContent=d===T?"Today":"Next";marked=true}
+else{s.textContent="Coming up"}});
+var test=new Date(2026,10,27),now=new Date();now.setHours(0,0,0,0);
+var left=Math.round((test-now)/86400000),c=document.getElementById("count");
+c.textContent=left>1?left+" days to go":left===1?"Tomorrow":left===0?"Today":"The test is finished";
+
+var tabs=[].slice.call(document.querySelectorAll('[role="tab"]'));
+function show(id,focus){tabs.forEach(function(t){var on=t.id==="t-"+id;t.setAttribute("aria-selected",on?"true":"false");t.tabIndex=on?0:-1;document.getElementById(t.getAttribute("aria-controls")).hidden=!on;if(on&&focus)t.focus()});store.set("tab",id)}
+tabs.forEach(function(t,i){t.addEventListener("click",function(){show(t.id.slice(2))});
+t.addEventListener("keydown",function(e){if(e.key==="ArrowRight"||e.key==="ArrowLeft"){var n=tabs[(i+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length];show(n.id.slice(2),true);e.preventDefault()}})});
+document.querySelectorAll("[data-go]").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();show(a.getAttribute("data-go"));window.scrollTo({top:document.querySelector(".tabs").offsetTop-10,behavior:"smooth"})})});
+var h=(location.hash||"").slice(1);show(["plan","check","prac","res","tips"].indexOf(h)>=0?h:(store.get("tab")||"plan"));
+
+document.querySelectorAll("[data-gate]").forEach(function(b){b.addEventListener("click",function(){var g=document.getElementById(b.getAttribute("data-gate"));g.hidden=!g.hidden})});
+
+var L=[
+{t:"Lesson 1: Static electricity and fields",go:"../#l1",c:["I can explain fields in terms of indirect forces.","I can identify charged or neutral objects.","I can explain why objects have a charge.","I can describe when the electrostatic forces of charged or neutral objects will interact with each other.","I can describe how charged particles move to cause a charge on objects.","I can describe how electrostatically charged and neutral objects interact."],p:"Worksheet Q1 to Q6 (static charge and electric fields)."},
+{t:"Lesson 2: Circuits, current and voltage",go:"../#l2",c:["I can identify the key features of circuits.","I can describe energy transfer and energy transformation in circuits.","I can sketch diagrams to represent electric circuits.","I can define 'voltage', 'current' and 'resistance'.","I can explain how voltage, current and resistance behave in a circuit."],p:"Worksheet Q7 to Q10 (circuits and meters)."},
+{t:"Lessons 3 and 4: Resistance, Ohm's law and Practical 1",go:"../#l3",c:["I can describe the relationship between voltage, current and resistance.","I can calculate relationships using Ohm's law.","I can measure current and voltage, and graph them to test Ohm's law."],p:"Worksheet Q11 to Q13, and V, I and R practice worksheet A. Data skills: worksheet Q27 to Q30."},
+{t:"Lessons 5 and 6: Series and parallel",go:"../#l5",c:["I can construct simple series and parallel circuits.","I can compare the features of series and parallel circuits.","I can use V = I × R for one part of a series or parallel circuit.","I can add resistances in series, and use the 1/R rule for resistances in parallel."],p:"Worksheet Q17 to Q23, and V, I and R practice worksheets B to F."},
+{t:"Lesson 7: Electromagnetism",go:"../#l7",c:["I can outline how forces, magnetism and electricity are connected.","I can name three ways to make an electromagnet stronger."],p:"Worksheet Q24 to Q26."},
+{t:"Homework: Electricity in the home and safety",go:"../#h2",c:["I can describe household circuit design, including the components required for delivering household electricity.","I can describe how household circuits are designed to keep people safe."],p:"Worksheet Q14 to Q16 (power and electricity at home)."}];
+var box=document.getElementById("lessons"),all=[],n=0;
+var saved=store.get("ticks")||"";
+L.forEach(function(l,li){var card=document.createElement("article");card.className="lcard";
+var h3=document.createElement("h3");var a=document.createElement("a");a.href=l.go;a.textContent=l.t;h3.appendChild(a);var cnt=document.createElement("span");cnt.className="lcount";h3.appendChild(cnt);card.appendChild(h3);
+var ul=document.createElement("ul");ul.className="crit";
+l.c.forEach(function(txt){var i=n++;var liEl=document.createElement("li");var lab=document.createElement("label");var cb=document.createElement("input");cb.type="checkbox";cb.checked=saved.charAt(i)==="1";
+var sp=document.createElement("span");sp.textContent=txt;lab.appendChild(cb);lab.appendChild(sp);liEl.appendChild(lab);ul.appendChild(liEl);all.push(cb);
+cb.addEventListener("change",update);cb._card=cnt;cb._group=li});
+card.appendChild(ul);var pr=document.createElement("p");pr.className="prac";pr.innerHTML="<b>Practise this:</b> ";pr.appendChild(document.createTextNode(l.p));card.appendChild(pr);box.appendChild(card)});
+function update(){var s="",k=0,per={};all.forEach(function(cb){s+=cb.checked?"1":"0";if(cb.checked)k++;per[cb._group]=per[cb._group]||[0,0,cb._card];per[cb._group][1]++;if(cb.checked)per[cb._group][0]++});
+store.set("ticks",s);document.getElementById("tallyText").textContent=k+" of "+all.length+" ticked";document.getElementById("tallyBar").style.width=(100*k/all.length)+"%";
+Object.keys(per).forEach(function(g){per[g][2].textContent=per[g][0]+" of "+per[g][1]})}
+update();
+function toCode(){var s=all.map(function(cb){return cb.checked?"1":"0"}).join("");return "W"+parseInt("1"+s,2).toString(36).toUpperCase()}
+document.getElementById("getCode").addEventListener("click",function(){var o=document.getElementById("codeOut");o.value=toCode();o.select()});
+document.getElementById("useCode").addEventListener("click",function(){var v=document.getElementById("codeIn").value.trim().toUpperCase(),m=document.getElementById("codeMsg");m.hidden=false;
+if(!/^W[0-9A-Z]+$/.test(v)){m.textContent="That code doesn't look right. Check each letter and try again.";return}
+var b=parseInt(v.slice(1),36).toString(2);if(b.length!==all.length+1){m.textContent="That code doesn't look right. Check each letter and try again.";return}
+b=b.slice(1);all.forEach(function(cb,i){cb.checked=b.charAt(i)==="1"});update();m.textContent="Your ticks are back."});
+
+var B={1:{t:"Revision 1: Find your gaps",d:"Thursday 19 November · P2 · Room D19"},2:{t:"Revision 2: Practise the calculations",d:"Friday 20 November · P5 · Room D19"},3:{t:"Revision 3: Sit a practice test",d:"Tuesday 24 November · P2 · Room E08"}};
+var board=document.getElementById("board"),last=null;
+document.querySelectorAll("[data-board]").forEach(function(btn){btn.addEventListener("click",function(){var k=btn.getAttribute("data-board"),day=document.querySelector('.day[data-n="'+k+'"]');last=btn;
+document.getElementById("bt").textContent=B[k].t;document.getElementById("bd").textContent=B[k].d;
+document.getElementById("bli").textContent=day.querySelector(".li").lastChild.textContent;document.getElementById("bkq").textContent=day.querySelector(".kq").textContent;
+var ol=document.getElementById("bty");ol.innerHTML="";day.querySelectorAll(".tyw li span").forEach(function(s){var li=document.createElement("li");li.textContent=s.textContent;ol.appendChild(li)});
+board.hidden=false;document.getElementById("bclose").focus()})});
+function closeB(){board.hidden=true;if(last)last.focus()}
+document.getElementById("bclose").addEventListener("click",closeB);
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!board.hidden)closeB()});
+})();
+</script>
+</body>
+</html>
